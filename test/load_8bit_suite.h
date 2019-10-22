@@ -1,0 +1,15 @@
+#ifndef __LOAD_8BIT_SUITE_H
+#define __LOAD_8BIT_SUITE_H
+
+int init_load_8bit_suite(void);
+int clean_load_8bit_suite(void);
+
+void ld_r_r_test(void);
+void ld_r_n_test(void);
+void ld_r_hl_test(void);
+void ld_r_IX_IY_d_test(void);
+void ld_hl_r_test(void);
+void ld_IX_IY_d_r_test(void);
+void ld_hl_n_test(void);
+void ld_IX_IY_d_n_test(void);
+#endif
