@@ -17,9 +17,47 @@ typedef union {
 	
 } word_t;
 
+// SPECIAL FLAG 16 BIT WORD REGISTER
+typedef union {
+	uint16_t word;
+	
+	struct {
+		#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+		uint8_t l, h;
+		#else
+		uint8_t h, l;
+		#endif
+	};
+	
+	struct {
+		#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+		uint8_t f_c : 1;
+		uint8_t f_n : 1;
+		uint8_t f_pv : 1;
+		uint8_t _f_x1 : 1;
+		uint8_t f_h : 1;
+		uint8_t _f_x2 : 1;
+		uint8_t f_z : 1;
+		uint8_t f_s : 1;
+		uint8_t _rest : 8;
+		#else
+		uint8_t _rest : 8;
+		uint8_t f_s : 1;
+		uint8_t f_z : 1;
+		uint8_t _f_x2 : 1;
+		uint8_t f_h : 1;
+		uint8_t _f_x1 : 1;
+		uint8_t f_pv : 1;
+		uint8_t f_n : 1;
+		uint8_t f_c : 1;
+		#endif
+	};
+} flag_word_t;
+
 // GENERAL PURPOSE REGISTERS
 typedef struct {
-	word_t af, bc, de, hl;
+	flag_word_t af;
+	word_t bc, de, hl;
 } gpreg_t;
 
 // CPU REGISTERS
@@ -49,6 +87,7 @@ typedef struct {
 
 extern cpu_t* cpu;
 
+// Main registers
 #define A		cpu->regs.af.h
 #define F		cpu->regs.af.l
 #define B		cpu->regs.bc.h
@@ -62,6 +101,14 @@ extern cpu_t* cpu;
 #define BC		cpu->regs.bc.word
 #define DE		cpu->regs.de.word
 #define HL		cpu->regs.hl.word
+
+// F Flags
+#define FLAG_C	cpu->regs.af.f_c
+#define FLAG_N	cpu->regs.af.f_n
+#define FLAG_PV	cpu->regs.af.f_pv
+#define FLAG_H	cpu->regs.af.f_h
+#define FLAG_Z	cpu->regs.af.f_z
+#define FLAG_S	cpu->regs.af.f_s
 
 #define I		cpu->i
 #define R		cpu->r
