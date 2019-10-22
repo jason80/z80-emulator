@@ -161,3 +161,17 @@ void ld_IX_IY_d_n_test(void) {
 	CU_ASSERT(cpu->mem[0xA950] == 0x97);
 	
 }
+
+void ld_a_bc_test(void) {
+	cpu_reset();
+	BC = 0x4747;
+	cpu->mem[0x4747] = 0x12;
+	
+	cpu->mem[0] = 0x0A;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x12);
+}
+

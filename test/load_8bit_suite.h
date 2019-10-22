@@ -6,10 +6,15 @@ int clean_load_8bit_suite(void);
 
 void ld_r_r_test(void);
 void ld_r_n_test(void);
+
 void ld_r_hl_test(void);
 void ld_r_IX_IY_d_test(void);
+
 void ld_hl_r_test(void);
 void ld_IX_IY_d_r_test(void);
+
 void ld_hl_n_test(void);
 void ld_IX_IY_d_n_test(void);
+
+void ld_a_bc_test(void);
 #endif
