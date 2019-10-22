@@ -230,3 +230,17 @@ void ld_de_a_test(void) {
 	
 	CU_ASSERT(cpu->mem[0x1128] == 0xA0);
 }
+
+void ld_nn_a_test(void) {
+	cpu_reset();
+	A = 0xD7;
+	
+	cpu->mem[0] = 0x32; // LD (0x3141), A
+	cpu->mem[1] = 0x41;
+	cpu->mem[2] = 0x31;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x3141] == 0xD7);
+}
