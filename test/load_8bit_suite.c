@@ -188,3 +188,17 @@ void ld_a_de_test(void) {
 	CU_ASSERT(A == 0x22);
 }
 
+void ld_a_nn_test(void) {
+	cpu_reset();
+	
+	cpu->mem[0x8832] = 0x04;
+	
+	cpu->mem[0] = 0x3A;
+	cpu->mem[1] = 0x32;
+	cpu->mem[2] = 0x88;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x04);
+}
