@@ -175,3 +175,16 @@ void ld_a_bc_test(void) {
 	CU_ASSERT(A == 0x12);
 }
 
+void ld_a_de_test(void) {
+	cpu_reset();
+	DE = 0x30A2;
+	cpu->mem[0x30A2] = 0x22;
+	
+	cpu->mem[0] = 0x1A;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x22);
+}
+

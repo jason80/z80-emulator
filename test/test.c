@@ -45,7 +45,8 @@ int main(void) {
 			(NULL == CU_add_test(load_8bit_suite, "LD (IX + d), r / LD (IY + d), r", ld_IX_IY_d_r_test)) ||
 			(NULL == CU_add_test(load_8bit_suite, "LD (HL), n", ld_hl_n_test))	||
 			(NULL == CU_add_test(load_8bit_suite, "LD (IX + d), n / LD (IY + d), n", ld_IX_IY_d_n_test)) ||
-			(NULL == CU_add_test(load_8bit_suite, "LD A, (BC)", ld_a_bc_test))
+			(NULL == CU_add_test(load_8bit_suite, "LD A, (BC)", ld_a_bc_test)) ||
+			(NULL == CU_add_test(load_8bit_suite, "LD A, (DE)", ld_a_de_test))
 
 		) {
 		CU_cleanup_registry();
