@@ -202,3 +202,18 @@ void ld_a_nn_test(void) {
 	
 	CU_ASSERT(A == 0x04);
 }
+
+void ld_bc_a_test(void) {
+	cpu_reset();
+	
+	A = 0x7A;
+	BC = 0x1212;
+	
+	cpu->mem[0] = 0x02;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x1212] == 0x7A);
+
+}
