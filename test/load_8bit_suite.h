@@ -21,4 +21,5 @@ void ld_a_de_test(void);
 void ld_a_nn_test(void);
 
 void ld_bc_a_test(void);
+void ld_de_a_test(void);
 #endif

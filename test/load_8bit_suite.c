@@ -215,5 +215,18 @@ void ld_bc_a_test(void) {
 	cpu_execute();
 	
 	CU_ASSERT(cpu->mem[0x1212] == 0x7A);
+}
 
+void ld_de_a_test(void) {
+	cpu_reset();
+	
+	A = 0xA0;
+	DE = 0x1128;
+	
+	cpu->mem[0] = 0x12;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x1128] == 0xA0);
 }
