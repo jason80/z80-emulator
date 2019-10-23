@@ -66,3 +66,20 @@ void ld_hl_nn_ind_test(void) {
 	
 	CU_ASSERT(HL == 0xA137);
 }
+
+void ld_dd_nn_ind_test(void) {
+	cpu_reset();
+	
+	cpu->mem[0x2130] = 0x65;
+	cpu->mem[0x2131] = 0x78;
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x4B; // LD BC, (2130h)
+	cpu->mem[2] = 0x30;
+	cpu->mem[3] = 0x21;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(BC == 0x7865);
+}

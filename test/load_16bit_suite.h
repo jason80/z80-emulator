@@ -8,5 +8,6 @@ void ld_rr_nn_test(void);
 void ld_IX_IY_nn(void);
 
 void ld_hl_nn_ind_test(void);
+void ld_dd_nn_ind_test(void);
 
 #endif
