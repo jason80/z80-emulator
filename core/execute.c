@@ -64,8 +64,13 @@ void execute_x0(opcode_t opcode) {
 		break;
 	case 1: // z = 1
 		switch (opcode.q) {
-			case 0:		// LD rp[p], nn
-				ld_16bit_nn(table_rp(opcode.p));
+			case 0:
+				if (cpu->prefix == 0xDD)
+					ld_16bit_nn(&IX);
+				else if (cpu->prefix == 0xFD)
+					ld_16bit_nn(&IY);
+				else
+					ld_16bit_nn(table_rp(opcode.p)); // LD rp[p], nn
 				break;
 			case 1:		// ADD HL, rp[p]
 				break;
