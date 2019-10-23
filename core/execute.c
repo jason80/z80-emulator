@@ -94,7 +94,7 @@ void execute_x0(opcode_t opcode) {
 					break;
 				case 3: // p = 3
 					// LD (nn), A
-					ld_indirect_nn_8bit(&A);
+					ld_indirect_nn_8bit(&A);	
 					break;
 				}
 				break;
@@ -109,8 +109,12 @@ void execute_x0(opcode_t opcode) {
 					ld_8bit_indirect(&A, DE);
 					break;
 				case 2: // p = 2
-					// LD HL, (nn)
-					ld_16bit_indirect_nn(&HL);
+					if (cpu->prefix == 0xDD)
+						ld_16bit_indirect_nn(&IX);
+					else if (cpu->prefix == 0xFD)
+						ld_16bit_indirect_nn(&IY);
+					else
+						ld_16bit_indirect_nn(&HL); // LD HL, (nn)
 					break;
 				case 3: // p = 3
 					// LD A, (nn)
