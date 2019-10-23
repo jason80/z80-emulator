@@ -46,7 +46,9 @@ void ld_indirect_relative_n(uint16_t adr) {
 
 void ld_16bit_nn(uint16_t* reg16) { //////////////
 	cpu_fetch(); cpu_fetch();
-	*reg16 = BR; cpu->ts = 10;
+	*reg16 = BR; 
+	if (reg16 == &IX || reg16 == &IY) cpu->ts = 14;
+	else cpu->ts = 10;
 }
 
 void ld_indirect_8bit(uint16_t adr, uint8_t* reg8) { /////
