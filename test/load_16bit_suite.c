@@ -35,10 +35,18 @@ void ld_IX_IY_nn(void) {
 	cpu->mem[1] = 0x21; // LD IX, 45A2h
 	cpu->mem[2] = 0xA2;
 	cpu->mem[3] = 0x45;
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0x21; // LD IY, 3040h
+	cpu->mem[6] = 0x40;
+	cpu->mem[7] = 0x30;
+	
+	cpu_fetch();
+	cpu_execute();
 	
 	cpu_fetch();
 	cpu_execute();
 	
 	CU_ASSERT(IX == 0x45A2);
+	CU_ASSERT(IY == 0x3040);
 	
 }
