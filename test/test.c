@@ -69,7 +69,8 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(load_16bit_suite, "LD rr, nn", ld_rr_nn_test))		
+	if (	(NULL == CU_add_test(load_16bit_suite, "LD rr, nn", ld_rr_nn_test))		||
+			(NULL == CU_add_test(load_16bit_suite, "LD IX, nn / LD IY, nn", ld_IX_IY_nn))
 
 		) {
 		CU_cleanup_registry();

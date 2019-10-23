@@ -27,3 +27,18 @@ void ld_rr_nn_test(void) {
 	
 	CU_ASSERT(HL == 0x5432);
 }
+
+void ld_IX_IY_nn(void) {
+	cpu_reset();
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x21; // LD IX, 45A2h
+	cpu->mem[2] = 0xA2;
+	cpu->mem[3] = 0x45;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(IX == 0x45A2);
+	
+}
