@@ -269,3 +269,24 @@ void ld_a_i_r_test(void) {
 	CU_ASSERT(FLAG_S == 1);
 	CU_ASSERT(FLAG_Z == 0);
 }
+
+void ld_i_r_a_test(void) {
+	cpu_reset();
+	A = 0xBB;
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x47; // LD I, A
+	cpu->mem[2] = 0xED;
+	cpu->mem[3] = 0x4F; // LD R, A
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	A = 0x34;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(I == 0xBB);
+	CU_ASSERT(R == 0x34);
+}
