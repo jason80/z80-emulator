@@ -97,7 +97,17 @@ void ld_8bit_indirect_nn(uint8_t* reg8) { //////
 
 void ld_8bit_8bit(uint8_t* reg1, uint8_t* reg2) { //////
 	*reg1 = *reg2; cpu->ts = 4;
-	if (reg1 == &I || reg1 == &R || reg2 == &I || reg2 == &R) cpu->ts = 9;
+	if (reg2 == &I || reg2 == &R) { // LD A, R or LD A, I
+		FLAG_S = (*reg2 & 0x80) ? 1 : 0;
+		FLAG_Z = (*reg2 == 0) ? 1 : 0;
+		FLAG_H = 0;
+		// TODO: P/V contains contents of IFF2
+		FLAG_N = 0;
+		
+		cpu->ts = 9;
+	} else if (reg2 == &I || reg2 == &R) { // LD R, A or LD I, A
+		cpu->ts = 9;
+	}
 }
 
 void ld_sp_hl(void) {
