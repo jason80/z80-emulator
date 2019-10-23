@@ -259,9 +259,13 @@ void ld_a_i_r_test(void) {
 	cpu_execute();
 	
 	CU_ASSERT(A == 0x43);
+	CU_ASSERT(FLAG_S == 0);
+	CU_ASSERT(FLAG_Z == 0);
 	
 	cpu_fetch();
 	cpu_execute();
 	
 	CU_ASSERT(A == 0x9A);
+	CU_ASSERT(FLAG_S == 1);
+	CU_ASSERT(FLAG_Z == 0);
 }
