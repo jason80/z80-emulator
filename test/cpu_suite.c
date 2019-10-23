@@ -67,3 +67,22 @@ void fetch_test(void) {
 	CU_ASSERT(BR == 0xBBAA);
 	CU_ASSERT(PC == 3);
 }
+
+void flags_test(void) {
+	cpu_reset();
+	F = 0x95; // 1001 0101
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(FLAG_N == 0);
+	CU_ASSERT(FLAG_PV == 1);
+	CU_ASSERT(FLAG_H == 1);
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_S == 1);
+	
+	FLAG_PV = 0;
+	FLAG_H = 0;
+	A = 0x22;
+	
+	CU_ASSERT(F == 0x81);
+	CU_ASSERT(AF = 0x2281);
+}

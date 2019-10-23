@@ -23,7 +23,8 @@ int main(void) {
 	
 	if (	(NULL == CU_add_test(cpu_suite, "Endian", endian_test))			||
 			(NULL == CU_add_test(cpu_suite, "Register", register_test))		||
-			(NULL == CU_add_test(cpu_suite, "Fetch", fetch_test))
+			(NULL == CU_add_test(cpu_suite, "Fetch", fetch_test))			||
+			(NULL == CU_add_test(cpu_suite, "Flags", flags_test))
 		
 		) {
 		CU_cleanup_registry();

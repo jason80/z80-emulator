@@ -9,4 +9,6 @@ void register_test(void);
 
 void fetch_test(void);
 
+void flags_test(void);
+
 #endif
