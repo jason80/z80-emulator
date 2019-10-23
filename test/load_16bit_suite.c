@@ -50,3 +50,19 @@ void ld_IX_IY_nn(void) {
 	CU_ASSERT(IY == 0x3040);
 	
 }
+
+void ld_hl_nn_ind_test(void) {
+	cpu_reset();
+	
+	cpu->mem[0x4545] = 0x37;
+	cpu->mem[0x4546] = 0xA1;
+	
+	cpu->mem[0] = 0x2A; // LD HL, (4545h)
+	cpu->mem[1] = 0x45;
+	cpu->mem[2] = 0x45;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(HL == 0xA137);
+}
