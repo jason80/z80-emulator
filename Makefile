@@ -8,7 +8,8 @@ CORE_OBJ =		core/cpu.o \
 
 TEST_OBJ =		test/test.o \
 				test/cpu_suite.o \
-				test/load_8bit_suite.o
+				test/load_8bit_suite.o \
+				test/load_16bit_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test

@@ -4,12 +4,13 @@
 
 #include "cpu_suite.h"
 #include "load_8bit_suite.h"
+#include "load_16bit_suite.h"
 
 int main(void) {
 	
 	CU_pSuite cpu_suite = NULL;
 	CU_pSuite load_8bit_suite = NULL;
-	//CU_pSuite ex_suite = NULL;*/
+	CU_pSuite load_16bit_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -32,7 +33,7 @@ int main(void) {
 	}
 	
 	// LOAD 8 BIT SUITE ----------------------------------------------------------
-	load_8bit_suite = CU_add_suite("LD", init_load_8bit_suite, clean_load_8bit_suite);
+	load_8bit_suite = CU_add_suite("8 bit load", init_load_8bit_suite, clean_load_8bit_suite);
 	if (NULL == load_8bit_suite) {
 		CU_cleanup_registry();
 		return CU_get_error();
@@ -57,6 +58,13 @@ int main(void) {
 			
 
 		) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	// LOAD 16 BIT SUITE
+	load_16bit_suite = CU_add_suite("16 bit load", init_load_16bit_suite, clean_load_16bit_suite);
+	if (NULL == load_16bit_suite) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
