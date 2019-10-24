@@ -111,3 +111,20 @@ void ld_IX_IY_nn_ind_test(void) {
 	CU_ASSERT(IX == 0xDA92);
 	CU_ASSERT(IY == 0xAB32);
 }
+
+void ld_nn_ind_hl_test(void) {
+	cpu_reset();
+	
+	HL = 0x483A;
+	
+	cpu->mem[0] = 0x22; // LD (B229), HL
+	cpu->mem[1] = 0x29;
+	cpu->mem[2] = 0xB2;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0xB229] == 0x3A);
+	CU_ASSERT(cpu->mem[0xB22A] == 0x48);
+	
+}

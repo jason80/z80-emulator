@@ -73,7 +73,8 @@ int main(void) {
 			(NULL == CU_add_test(load_16bit_suite, "LD IX, nn / LD IY, nn", ld_IX_IY_nn_test))	||
 			(NULL == CU_add_test(load_16bit_suite, "LD HL, (nn)", ld_hl_nn_ind_test))			||
 			(NULL == CU_add_test(load_16bit_suite, "LD dd, (nn)", ld_dd_nn_ind_test))			||
-			(NULL == CU_add_test(load_16bit_suite, "LD IX, (nn) / LD IY, (nn)", ld_IX_IY_nn_ind_test))
+			(NULL == CU_add_test(load_16bit_suite, "LD IX, (nn) / LD IY, (nn)", ld_IX_IY_nn_ind_test)) ||
+			(NULL == CU_add_test(load_16bit_suite, "LD (nn), HL", ld_nn_ind_hl_test))
 
 		) {
 		CU_cleanup_registry();
