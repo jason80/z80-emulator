@@ -144,3 +144,33 @@ void ld_nn_ind_dd_test(void) {
 	CU_ASSERT(cpu->mem[0x1000] == 0x44);
 	CU_ASSERT(cpu->mem[0x1001] == 0x46);
 }
+
+void ld_nn_ind_IX_IY_test(void) {
+	cpu_reset();
+	
+	IX = 0x5A30;
+	IY = 0x4174;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x22; // LD (4392h), IX
+	cpu->mem[2] = 0x92;
+	cpu->mem[3] = 0x43;
+	
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0x22; // LD (4392h), IX
+	cpu->mem[6] = 0x38;
+	cpu->mem[7] = 0x88;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x4392] == 0x30);
+	CU_ASSERT(cpu->mem[0x4393] == 0x5A);
+	
+	CU_ASSERT(cpu->mem[0x8838] == 0x74);
+	CU_ASSERT(cpu->mem[0x8839] == 0x41);
+	
+}
