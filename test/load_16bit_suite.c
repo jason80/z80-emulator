@@ -174,3 +174,32 @@ void ld_nn_ind_IX_IY_test(void) {
 	CU_ASSERT(cpu->mem[0x8839] == 0x41);
 	
 }
+
+void ld_sp_hl_IX_IY_test(void) {
+	cpu_reset();
+	
+	HL = 0x442E;
+	IX = 0x98DA;
+	IY = 0xA227;
+	
+	cpu->mem[0] = 0xF9;
+	cpu->mem[1] = 0xDD;
+	cpu->mem[2] = 0xF9;
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0xF9;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(SP == 0x442E);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(SP == 0x98DA);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(SP == 0xA227);
+}
