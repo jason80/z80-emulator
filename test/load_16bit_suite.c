@@ -203,3 +203,37 @@ void ld_sp_hl_IX_IY_test(void) {
 	
 	CU_ASSERT(SP == 0xA227);
 }
+
+void push_test(void) {
+	cpu_reset();
+	
+	AF = 0x2233;
+	IX = 0xAABB;
+	IY = 0xCCDD;
+	SP = 0x1007;
+	
+	cpu->mem[0] = 0xF5; // PUSH AF
+	cpu->mem[1] = 0xDD;
+	cpu->mem[2] = 0xE5; // PUSH IX
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0xE5; // PUSH IY
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x1006] == 0x22);
+	CU_ASSERT(cpu->mem[0x1005] == 0x33);
+	
+	CU_ASSERT(cpu->mem[0x1004] == 0xAA);
+	CU_ASSERT(cpu->mem[0x1003] == 0xBB);
+	
+	CU_ASSERT(cpu->mem[0x1002] == 0xCC);
+	CU_ASSERT(cpu->mem[0x1001] == 0xDD);
+	CU_ASSERT(SP == 0x1001);
+}
