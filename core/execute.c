@@ -167,10 +167,14 @@ void execute_x3(opcode_t opcode) {
 	switch (opcode.z) {
 	case 1: // z = 1
 		if (opcode.q == 0) { // q = 0
-			// POP rp2[p]
-			pop(table_rp2(opcode.p));
+			if (cpu->prefix == 0xDD)
+				pop(&IX);						// POP IX
+			else if (cpu->prefix == 0xFD)
+				pop(&IY);						// POP IY
+			else
+				pop(table_rp2(opcode.p));		// POP rp2[p]
 		}
-		else { // q = 1
+		else {				// q = 1
 			switch (opcode.p) {
 			case 0: // p = 0
 				break;

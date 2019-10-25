@@ -149,6 +149,7 @@ void pop(uint16_t* reg16) {
 	
 	*reg16 = h | l;
 	
-	cpu->ts = 10;
+	if (reg16 == &IX || reg16 == &IY) cpu->ts = 14;
+	else cpu->ts = 10;
 }
 
