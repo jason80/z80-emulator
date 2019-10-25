@@ -25,6 +25,8 @@ void ld_indirect_nn_16bit(uint16_t* reg16);
 void ld_16bit_indirect_nn(uint16_t* reg16);
 
 void ld_sp_hl(void);
+void ld_sp_ix(void);
+void ld_sp_iy(void);
 
 void push(uint16_t* reg16);
 void pop(uint16_t* reg16);

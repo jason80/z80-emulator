@@ -180,7 +180,12 @@ void execute_x3(opcode_t opcode) {
 			case 2: // p = 2
 				break;
 			case 3: // p = 3
-				ld_sp_hl();		// LD SP, HL
+				if (cpu->prefix == 0xDD)
+					ld_sp_ix();		// LD SP, IX
+				else if (cpu->prefix == 0xFD)
+					ld_sp_iy();		// LD SP, IY
+				else
+					ld_sp_hl();		// LD SP, HL
 				break;
 			}
 		}

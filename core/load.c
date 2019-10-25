@@ -117,6 +117,16 @@ void ld_sp_hl(void) {
 	cpu->ts = 6;
 }
 
+void ld_sp_ix(void) {
+	SP = IX;
+	cpu->ts = 10;
+}
+
+void ld_sp_iy(void) {
+	SP = IY;
+	cpu->ts = 10;
+}
+
 void push(uint16_t* reg16) {
 	uint16_t h = *reg16 >> 8;
 	SP --;
