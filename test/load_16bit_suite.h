@@ -19,5 +19,6 @@ void ld_nn_ind_IX_IY_test(void);
 void ld_sp_hl_IX_IY_test(void);
 
 void push_test(void);
+void pop_test(void);
 
 #endif

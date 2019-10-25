@@ -237,3 +237,35 @@ void push_test(void) {
 	CU_ASSERT(cpu->mem[0x1001] == 0xDD);
 	CU_ASSERT(SP == 0x1001);
 }
+
+void pop_test(void) {
+	cpu_reset();
+	
+	SP = 0x1000;
+	cpu->mem[0x1000] = 0x55;
+	cpu->mem[0x1001] = 0x33;
+	cpu->mem[0x1002] = 0xFF;
+	cpu->mem[0x1003] = 0x45;
+	cpu->mem[0x1004] = 0x66;
+	cpu->mem[0x1005] = 0x77;
+	
+	cpu->mem[0] = 0xE1;	// POP HL
+	cpu->mem[1] = 0xDD;
+	cpu->mem[2] = 0xE1; // POP IX
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0xE1; // POP IY
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(HL == 0x3355);
+	CU_ASSERT(IX == 0x45FF);
+	CU_ASSERT(IY == 0x7766);
+	CU_ASSERT(SP == 0x1006);
+}
