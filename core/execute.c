@@ -213,10 +213,14 @@ void execute_x3(opcode_t opcode) {
 		}
 		break;
 	case 5: // z = 5
-		if (opcode.q == 0)	// q = 0
-			// PUSH rp2[p]
-			push(table_rp2(opcode.p));
-		else {				// q = 1
+		if (opcode.q == 0)	{	// q = 0
+			if (cpu->prefix == 0xDD)
+				push(&IX);					// PUSH IX
+			else if (cpu->prefix == 0xFD)
+				push(&IY);					// PUSH IY
+			else
+				push(table_rp2(opcode.p)); // PUSH rp2[p]
+		} else {				// q = 1
 			// CALL
 		}
 		break;

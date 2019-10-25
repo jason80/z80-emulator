@@ -133,7 +133,8 @@ void push(uint16_t* reg16) {
 	ADR = SP; DATA = (uint8_t) h;
 	SP --;
 	ADR = SP; DATA = *reg16 & 0xFF;
-	cpu->ts = 11;
+	if (reg16 == &IX || reg16 == &IY) cpu->ts = 15;
+	else cpu->ts = 11;
 }
 
 void pop(uint16_t* reg16) {
