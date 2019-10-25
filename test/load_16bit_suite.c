@@ -128,3 +128,19 @@ void ld_nn_ind_hl_test(void) {
 	CU_ASSERT(cpu->mem[0xB22A] == 0x48);
 	
 }
+
+void ld_nn_ind_dd_test(void) {
+	cpu_reset();
+	
+	BC = 0x4644;
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x43; // LD (nn), BC
+	cpu->mem[2] = 0x00;
+	cpu->mem[3] = 0x10;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x1000] == 0x44);
+	CU_ASSERT(cpu->mem[0x1001] == 0x46);
+}

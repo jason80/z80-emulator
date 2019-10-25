@@ -12,5 +12,6 @@ void ld_dd_nn_ind_test(void);
 void ld_IX_IY_nn_ind_test(void);
 
 void ld_nn_ind_hl_test(void);
+void ld_nn_ind_dd_test(void);
 
 #endif
