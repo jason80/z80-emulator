@@ -4,4 +4,7 @@
 int init_exchange_suite(void);
 int clean_exchange_suite(void);
 
+void ex_de_hl_test(void);
+void ex_af_af_test(void);
+
 #endif

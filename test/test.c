@@ -94,6 +94,13 @@ int main(void) {
 		return CU_get_error();
 	}
 	
+	if (	(NULL == CU_add_test(exchange_suite, "EX DE, HL", ex_de_hl_test))	||
+			(NULL == CU_add_test(exchange_suite, "EX AF, AF'", ex_af_af_test))
+	) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
 	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
