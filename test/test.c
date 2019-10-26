@@ -5,12 +5,14 @@
 #include "cpu_suite.h"
 #include "load_8bit_suite.h"
 #include "load_16bit_suite.h"
+#include "exchange_suite.h"
 
 int main(void) {
 	
 	CU_pSuite cpu_suite = NULL;
 	CU_pSuite load_8bit_suite = NULL;
 	CU_pSuite load_16bit_suite = NULL;
+	CU_pSuite exchange_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -85,20 +87,17 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	/*ex_suite = CU_add_suite("EX", init_ex_suite, clean_ex_suite);
-	if (NULL == ex_suite) {
+	// EXCHANGE SUITE
+	exchange_suite = CU_add_suite("Exchange", init_exchange_suite, clean_exchange_suite);
+	if (NULL == exchange_suite) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(ex_suite, "EX DE, HL", ex_de_hl_test))			||
-			(NULL == CU_add_test(ex_suite, "EX AF, AF'", ex_af_af_test))		||
-			(NULL == CU_add_test(ex_suite, "EXX", exx_test))					||
-			(NULL == CU_add_test(ex_suite, "EX (SP), HL", ex_sp_hl_test))
-		) {
-		CU_cleanup_registry();
-		return CU_get_error();
-	}*/
+	cpu_suite->fActive = CU_FALSE;
+	load_8bit_suite->fActive = CU_FALSE;
+	load_16bit_suite->fActive = CU_FALSE;
+	//exchange_suite->fActive = CU_FALSE;
 	
 	// RUN TESTS
 	
