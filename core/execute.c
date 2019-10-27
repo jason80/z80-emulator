@@ -205,7 +205,7 @@ void execute_x3(opcode_t opcode) {
 		case 3: // y = 3
 			break;
 		case 4: // y = 4		EX (SP), HL
-			ex_sp_hl();
+			ex_sp_rr(&HL);
 			break;
 		case 5: // y = 5		EX DE, HL
 			ex_de_hl();

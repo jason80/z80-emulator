@@ -10,19 +10,6 @@ void ex_de_hl(void) {
 	cpu->ts = 4;
 }
 
-void ex_sp_hl(void) {
-	word_t tmp;
-	tmp.l = cpu->mem[SP];
-	tmp.h = cpu->mem[SP + 1];
-	
-	cpu->mem[SP] = L;
-	cpu->mem[SP + 1] = H;
-	
-	HL = tmp.word;
-	
-	cpu->ts = 19;
-}
-
 void ex_af_af(void) {
 	uint16_t tmp;
 	tmp = AF;
@@ -49,4 +36,24 @@ void exx(void) {
 	cpu->alter.hl.word = tmp;
 	
 	cpu->ts = 4;
+}
+
+void ex_sp_rr(uint16_t* reg16) {
+	word_t tmp;
+	uint16_t reg_tmp;
+	tmp.l = cpu->mem[SP];
+	tmp.h = cpu->mem[SP + 1];
+	
+	//cpu->mem[SP] = L;
+	//cpu->mem[SP + 1] = H;
+	
+	reg_tmp = *reg16;
+	
+	cpu->mem[SP] = (uint8_t) (reg_tmp & 0x00FF);
+	reg_tmp >>= 8;
+	cpu->mem[SP + 1] = (uint8_t) (reg_tmp & 0x00FF);
+	
+	*reg16 = tmp.word;
+	
+	cpu->ts = 19;
 }
