@@ -82,3 +82,34 @@ void ex_sp_hl_test(void) {
 	CU_ASSERT(cpu->mem[0x8856] == 0x12);
 	CU_ASSERT(cpu->mem[0x8857] == 0x70);
 }
+
+void ex_sp_IX_IY_test(void) {
+	cpu_reset();
+	IX = 0x3988;
+	IY = 0x4567;
+	SP = 0x0100;
+	cpu->mem[0x0100] = 0x90;
+	cpu->mem[0x0101] = 0x48;
+	
+	cpu->mem[0xA100] = 0x90;
+	cpu->mem[0xA101] = 0x48;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xE3; // EX (SP), IX
+	cpu->mem[2] = 0xFD;
+	cpu->mem[3] = 0xE3; // EX (SP), IY
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	SP = 0xA100;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x0100] == 0x88);
+	CU_ASSERT(cpu->mem[0x0101] == 0x39);
+	CU_ASSERT(cpu->mem[0xA100] == 0x67);
+	CU_ASSERT(cpu->mem[0xA101] == 0x45);
+	
+}
