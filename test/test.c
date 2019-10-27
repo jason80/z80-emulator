@@ -6,6 +6,7 @@
 #include "load_8bit_suite.h"
 #include "load_16bit_suite.h"
 #include "exchange_suite.h"
+#include "block_suite.h"
 
 int main(void) {
 	
@@ -13,6 +14,7 @@ int main(void) {
 	CU_pSuite load_8bit_suite = NULL;
 	CU_pSuite load_16bit_suite = NULL;
 	CU_pSuite exchange_suite = NULL;
+	CU_pSuite block_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -104,10 +106,24 @@ int main(void) {
 		return CU_get_error();
 	}
 	
+	// BLOCK SUITE
+	block_suite = CU_add_suite("Block", init_block_suite, clean_block_suite);
+	if (NULL == block_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	if (	(NULL == CU_add_test(block_suite, "LDI", ldi_test))
+		) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
 	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
-	exchange_suite->fActive = CU_FALSE;*/
+	exchange_suite->fActive = CU_FALSE;
+	block_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	

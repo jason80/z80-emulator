@@ -4,13 +4,15 @@ CORE_OBJ =		core/cpu.o \
 				core/tables.o \
 				core/execute.o \
 				core/load.o \
-				core/exchange.o
+				core/exchange.o \
+				core/block_transfer.o
 
 TEST_OBJ =		test/test.o \
 				test/cpu_suite.o \
 				test/load_8bit_suite.o \
 				test/load_16bit_suite.o \
-				test/exchange_suite.o
+				test/exchange_suite.o \
+				test/block_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
