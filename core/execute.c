@@ -4,6 +4,7 @@
 #include "tables.h"
 #include "load.h"
 #include "exchange.h"
+#include "block_transfer.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -276,6 +277,14 @@ void ed_prefixed(void) {
 			}
 		}
 	} else if (opcode.x == 2) { //  x = 2
-		
+		switch (opcode.z) {
+		case 0: // z = 0
+			switch (opcode.y) {
+			case 4: // y = 4
+				ldi();			// LDI
+				break;
+			}
+			break;
+		}
 	}
 }
