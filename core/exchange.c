@@ -55,5 +55,6 @@ void ex_sp_rr(uint16_t* reg16) {
 	
 	*reg16 = tmp.word;
 	
-	cpu->ts = 19;
+	if (reg16 == &IX || reg16 == &IY) cpu->ts = 23;
+	else cpu->ts = 19;
 }

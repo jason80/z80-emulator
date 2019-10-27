@@ -204,8 +204,13 @@ void execute_x3(opcode_t opcode) {
 			break;
 		case 3: // y = 3
 			break;
-		case 4: // y = 4		EX (SP), HL
-			ex_sp_rr(&HL);
+		case 4: // y = 4
+			if (cpu->prefix == 0xDD)
+				ex_sp_rr(&IX);
+			else if (cpu->prefix == 0xFD)
+				ex_sp_rr(&IY);
+			else
+				ex_sp_rr(&HL); 				// EX (SP), HL
 			break;
 		case 5: // y = 5		EX DE, HL
 			ex_de_hl();
