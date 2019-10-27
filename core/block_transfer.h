@@ -2,6 +2,7 @@
 #define __BLOCK_TRANSFER_H
 
 void ldi(void);
+void ldir(void);
 
 #endif
 

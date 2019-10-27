@@ -15,6 +15,16 @@ void ldi(void) {
 	cpu->ts = 16;
 }
 
+void ldir(void) {
+	ldi();
+	if (BC == 0) {
+		cpu->ts = 16;
+	} else {
+		PC -= 2;
+		cpu->ts = 21;
+	}
+}
+
 void transfer_de_hl(void) {
 	cpu->mem[DE] = cpu->mem[HL];
 }
