@@ -96,7 +96,8 @@ int main(void) {
 	
 	if (	(NULL == CU_add_test(exchange_suite, "EX DE, HL", ex_de_hl_test))	||
 			(NULL == CU_add_test(exchange_suite, "EX AF, AF'", ex_af_af_test))	||
-			(NULL == CU_add_test(exchange_suite, "EXX", exx_test))
+			(NULL == CU_add_test(exchange_suite, "EXX", exx_test))				||
+			(NULL == CU_add_test(exchange_suite, "EX (SP), HL", ex_sp_hl_test))
 	) {
 		CU_cleanup_registry();
 		return CU_get_error();

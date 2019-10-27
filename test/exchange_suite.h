@@ -8,4 +8,6 @@ void ex_de_hl_test(void);
 void ex_af_af_test(void);
 void exx_test(void);
 
+void ex_sp_hl_test(void);
+
 #endif

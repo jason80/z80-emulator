@@ -66,3 +66,19 @@ void exx_test(void) {
 	CU_ASSERT(cpu->alter.de.word == 0x3DA2);
 	CU_ASSERT(cpu->alter.hl.word == 0x8859);
 }
+
+void ex_sp_hl_test(void) {
+	cpu_reset();
+	HL = 0x7012;
+	SP = 0x8856;
+	cpu->mem[0x8856] = 0x11;
+	cpu->mem[0x8857] = 0x22;
+	
+	cpu->mem[0] = 0xE3;	// EX (SP), HL
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x8856] == 0x12);
+	CU_ASSERT(cpu->mem[0x8857] == 0x70);
+}
