@@ -289,6 +289,9 @@ void ed_prefixed(void) {
 			case 6: // y = 6
 				ldir();			// LDIR
 				break;
+			case 7: // y = 7
+				lddr();			// LDDR
+				break;
 			}
 			break;
 		}

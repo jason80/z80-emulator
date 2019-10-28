@@ -4,6 +4,7 @@
 void ldi(void);
 void ldir(void);
 void ldd(void);
+void lddr(void);
 
 #endif
 
