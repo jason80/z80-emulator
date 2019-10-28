@@ -283,6 +283,9 @@ void ed_prefixed(void) {
 			case 4: // y = 4
 				ldi();			// LDI
 				break;
+			case 5: // y = 5
+				ldd();			// LDD
+				break;
 			case 6: // y = 6
 				ldir();			// LDIR
 				break;
