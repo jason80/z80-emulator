@@ -6,5 +6,6 @@ int clean_block_suite(void);
 
 void ldi_test(void);
 void ldir_test(void);
+void ldd_test(void);
 
 #endif

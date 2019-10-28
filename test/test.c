@@ -114,7 +114,9 @@ int main(void) {
 	}
 	
 	if (	(NULL == CU_add_test(block_suite, "LDI", ldi_test))				||
-			(NULL == CU_add_test(block_suite, "LDIR", ldir_test))
+			(NULL == CU_add_test(block_suite, "LDIR", ldir_test))			||
+			(NULL == CU_add_test(block_suite, "LDD", ldd_test))
+			
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
