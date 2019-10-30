@@ -13,7 +13,8 @@ TEST_OBJ =		test/test.o \
 				test/load_8bit_suite.o \
 				test/load_16bit_suite.o \
 				test/exchange_suite.o \
-				test/block_suite.o
+				test/block_suite.o \
+				test/search_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
