@@ -4,5 +4,7 @@
 int init_search_suite(void);
 int clean_search_suite(void);
 
+void cpi_test(void);
+
 #endif
 
