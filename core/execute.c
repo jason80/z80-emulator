@@ -5,6 +5,7 @@
 #include "load.h"
 #include "exchange.h"
 #include "block_transfer.h"
+#include "search.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -293,6 +294,11 @@ void ed_prefixed(void) {
 				lddr();			// LDDR
 				break;
 			}
+			break;
+		case 1: // z = 1
+			case 4: // y = 4
+				cpi();
+				break;
 			break;
 		}
 	}
