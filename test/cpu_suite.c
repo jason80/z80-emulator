@@ -69,6 +69,9 @@ void fetch_test(void) {
 }
 
 void flags_test(void) {
+	
+	uint8_t num1, num2;
+	
 	cpu_reset();
 	F = 0x95; // 1001 0101
 	
@@ -85,4 +88,21 @@ void flags_test(void) {
 	
 	CU_ASSERT(F == 0x81);
 	CU_ASSERT(AF = 0x2281);
+	
+	// 4BIT BORROW
+	A = 0x04; C = 0x06;
+	num1 = A & 0x0F;
+	num2 = C & 0x0F;
+	
+	FLAG_H = (num1 - num2) & 0x10 ? 1 : 0;
+	
+	CU_ASSERT(FLAG_H == 1);
+	
+	A = 0x0A; C = 0x05;
+	num1 = A & 0x0F;
+	num2 = C & 0x0F;
+	
+	FLAG_H = (num1 - num2) & 0x10 ? 1 : 0;
+	
+	CU_ASSERT(FLAG_H == 0);
 }
