@@ -28,6 +28,7 @@ void cpir(void) {
 	uint16_t result;
 	uint8_t num1, num2;
 	result = A - cpu->mem[HL];
+	
 	HL ++; BC --;
 	
 	FLAG_S = (result < 0) ? 1 : 0;
