@@ -4,5 +4,6 @@
 void cpi(void);
 void cpir(void);
 void cpd(void);
+void cpdr(void);
 
 #endif

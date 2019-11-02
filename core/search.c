@@ -24,6 +24,15 @@ void cpd(void) {
 	cpu->ts = 16;
 }
 
+void cpdr(void) {
+	if (compare(0) == 0 || BC == 0) {
+		cpu->ts = 16;
+	} else {
+		PC -= 2;
+		cpu->ts = 21;
+	}
+}
+
 uint16_t compare(int inc) {
 	uint16_t result;
 	uint8_t num1, num2;

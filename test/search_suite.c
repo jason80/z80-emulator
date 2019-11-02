@@ -80,5 +80,4 @@ void cpd_test(void) {
 	CU_ASSERT(FLAG_Z == 1);
 	CU_ASSERT(FLAG_PV == 0);
 	
-	
 }

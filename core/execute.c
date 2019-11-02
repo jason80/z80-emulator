@@ -306,6 +306,9 @@ void ed_prefixed(void) {
 			case 6: // y = 6
 				cpir();			// CPIR
 				break;
+			case 7: // y = 7
+				cpdr();			// CPDR
+				break;
 			}
 			break;
 		}
