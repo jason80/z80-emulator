@@ -300,6 +300,9 @@ void ed_prefixed(void) {
 			case 4: // y = 4
 				cpi();			// CPI
 				break;
+			case 5: // y = 5
+				cpd();			// CPD
+				break;
 			case 6: // y = 6
 				cpir();			// CPIR
 				break;

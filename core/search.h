@@ -3,5 +3,6 @@
 
 void cpi(void);
 void cpir(void);
+void cpd(void);
 
 #endif
