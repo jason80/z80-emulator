@@ -297,7 +297,10 @@ void ed_prefixed(void) {
 			break;
 		case 1: // z = 1
 			case 4: // y = 4
-				cpi();
+				cpi();			// CPI
+				break;
+			case 6: // y = 6
+				cpir();			// CPIR
 				break;
 			break;
 		}
