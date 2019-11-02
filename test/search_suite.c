@@ -81,3 +81,28 @@ void cpd_test(void) {
 	CU_ASSERT(FLAG_PV == 0);
 	
 }
+
+void cpdr_test(void) {
+	cpu_reset();
+	HL = 0x1118;
+	BC = 0x0007;
+	A = 0xF3;
+	
+	cpu->mem[0x1118] = 0x52;
+	cpu->mem[0x1117] = 0x00;
+	cpu->mem[0x1116] = 0xF3;
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0xB9;
+	
+	do {
+		cpu_fetch();
+		cpu_execute();
+	} while (FLAG_Z == 0);
+	
+	CU_ASSERT(HL == 0x1115);
+	CU_ASSERT(BC == 0x0004);
+	CU_ASSERT(FLAG_PV == 1);
+	CU_ASSERT(FLAG_Z == 1);
+	
+}
