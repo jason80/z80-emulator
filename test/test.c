@@ -132,7 +132,8 @@ int main(void) {
 	}
 	
 	if (	(NULL == CU_add_test(search_suite, "CPI", cpi_test))	||
-			(NULL == CU_add_test(search_suite, "CPIR", cpir_test))
+			(NULL == CU_add_test(search_suite, "CPIR", cpir_test))  ||
+			(NULL == CU_add_test(search_suite, "CPD", cpd_test))
 	
 		) {
 		CU_cleanup_registry();

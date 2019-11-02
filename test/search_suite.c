@@ -60,3 +60,25 @@ void cpir_test(void) {
 	CU_ASSERT(FLAG_Z = 1);
 	
 }
+
+void cpd_test(void) {
+	cpu_reset();
+	
+	HL = 0x1111;
+	BC = 0x0001;
+	A = 0x3B;
+	cpu->mem[0x1111] = 0x3B;
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0xA9;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(BC == 0);
+	CU_ASSERT(HL == 0x1110);
+	CU_ASSERT(FLAG_Z == 1);
+	CU_ASSERT(FLAG_PV == 0);
+	
+	
+}
