@@ -6,9 +6,11 @@
 #include "exchange.h"
 #include "block_transfer.h"
 #include "search.h"
+#include "alu.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
+void execute_x2(opcode_t); // alu
 void execute_x3(opcode_t);
 
 void ed_prefixed(void);
@@ -34,7 +36,8 @@ void cpu_execute(void) {
 		case 1: // x = 1
 			execute_x1(opcode);
 			break;
-		case 2:
+		case 2: // x = 2
+			execute_x2(opcode);
 			break;
 		case 3: // x = 3
 			execute_x3(opcode);
@@ -162,6 +165,10 @@ void execute_x1(opcode_t opcode) {
 				ld_indirect_relative_8bit(IY, table_r(opcode.z));
 		}
 	}
+}
+
+void execute_x2(opcode_t opcode) {
+	alu(opcode.y, table_r(opcode.z));	// ALU OPERATIONS
 }
 
 void execute_x3(opcode_t opcode) {

@@ -6,7 +6,8 @@ CORE_OBJ =		core/cpu.o \
 				core/load.o \
 				core/exchange.o \
 				core/block_transfer.o \
-				core/search.o
+				core/search.o \
+				core/alu.o
 
 TEST_OBJ =		test/test.o \
 				test/cpu_suite.o \
