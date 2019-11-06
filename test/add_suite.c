@@ -51,3 +51,16 @@ void add_A_r_test(void) {
 	CU_ASSERT(FLAG_PV == 1);
 	CU_ASSERT(FLAG_C == 1);
 }
+
+void add_A_n_test(void) {
+	cpu_reset();
+	A = 0x23;
+	
+	cpu->mem[0] = 0xC6;		// ADD A, 33h
+	cpu->mem[1] = 0x33;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x56);
+}
