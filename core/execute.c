@@ -169,6 +169,7 @@ void execute_x1(opcode_t opcode) {
 
 void execute_x2(opcode_t opcode) {
 	alu(opcode.y, table_r(opcode.z));	// ALU OPERATIONS
+	if (opcode.z == 6) cpu->ts = 7; // for ALU A, (HL)
 }
 
 void execute_x3(opcode_t opcode) {
