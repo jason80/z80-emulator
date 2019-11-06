@@ -150,8 +150,8 @@ int main(void) {
 	}
 	
 	if (	(NULL == CU_add_test(add_suite, "ADD A, r", add_A_r_test))		||
-			(NULL == CU_add_test(add_suite, "ADD A, n", add_A_n_test))
-	
+			(NULL == CU_add_test(add_suite, "ADD A, n", add_A_n_test))		||
+			(NULL == CU_add_test(add_suite, "ADD A, (HL)", add_A_HL_ref_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();

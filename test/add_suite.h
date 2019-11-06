@@ -6,5 +6,6 @@ int clean_add_suite();
 
 void add_A_r_test(void);
 void add_A_n_test(void);
+void add_A_HL_ref_test(void);
 
 #endif

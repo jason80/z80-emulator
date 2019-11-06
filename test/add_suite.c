@@ -64,3 +64,18 @@ void add_A_n_test(void) {
 	
 	CU_ASSERT(A == 0x56);
 }
+
+void add_A_HL_ref_test(void) {
+	cpu_reset();
+	A = 0xA0;
+	HL = 0x2323;
+	cpu->mem[0x2323] = 0x08;
+	
+	cpu->mem[0] = 0x86;	// ADD A, (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0xA8);
+	
+}
