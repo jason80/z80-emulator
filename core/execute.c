@@ -242,6 +242,9 @@ void execute_x3(opcode_t opcode) {
 			// CALL
 		}
 		break;
+	case 6: // z = 6
+		alu_n(opcode.y);		// ALU n OPERATIONS
+		break;
 	}
 }
 

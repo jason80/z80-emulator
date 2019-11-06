@@ -7,7 +7,32 @@ void add(uint8_t* reg8);
 void alu(uint8_t operation, uint8_t* reg8) {
 	switch(operation) {
 	case 0:		// ADD
-		add(reg8);
+		add(reg8); cpu->ts = 4;
+		break;
+	case 1:		// ADC
+		break;
+	case 2:		// SUB
+		break;
+	case 3:		// SBC
+		break;
+	case 4:		// AND
+		break;
+	case 5:		// XOR
+		break;
+	case 6:		// OR
+		break;
+	case 7:		// CP
+		break;
+	}
+}
+
+void alu_n(uint8_t operation) {
+	
+	cpu_fetch();	// Fetch n
+	
+	switch(operation) {
+	case 0:		// ADD
+		add(&BRL); cpu->ts = 7;
 		break;
 	case 1:		// ADC
 		break;
@@ -43,5 +68,4 @@ void add(uint8_t* reg8) {
 	FLAG_C = result & 0x100 ? 1 : 0;
 	
 	A = (uint8_t) result;
-	cpu->ts = 4;
 }
