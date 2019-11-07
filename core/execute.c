@@ -169,7 +169,14 @@ void execute_x1(opcode_t opcode) {
 
 void execute_x2(opcode_t opcode) {
 	alu(opcode.y, table_r(opcode.z));	// ALU OPERATIONS
-	if (opcode.z == 6) cpu->ts = 7; // for ALU A, (HL)
+	if (opcode.z == 6) {
+		if (cpu->prefix == 0xDD)
+			alu_indirect(opcode.y, &IX);	// ALU A, (IX + d)
+		else if (cpu->prefix == 0XFD)
+			alu_indirect(opcode.y, &IY);	// ALU A, (IY + d)
+		else
+			cpu->ts = 7; // for ALU A, (HL)
+	}
 }
 
 void execute_x3(opcode_t opcode) {

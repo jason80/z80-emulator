@@ -51,6 +51,30 @@ void alu_n(uint8_t operation) {
 	}
 }
 
+void alu_indirect(uint8_t operation, uint16_t* reg16) {
+	cpu_fetch();	// Fetch n
+	
+	switch(operation) {
+	case 0:		// ADD
+		add(&cpu->mem[*reg16 + BRL]); cpu->ts = 19;
+		break;
+	case 1:		// ADC
+		break;
+	case 2:		// SUB
+		break;
+	case 3:		// SBC
+		break;
+	case 4:		// AND
+		break;
+	case 5:		// XOR
+		break;
+	case 6:		// OR
+		break;
+	case 7:		// CP
+		break;
+	}
+}
+
 void add(uint8_t* reg8) {
 	uint16_t result = A + *reg8;
 	

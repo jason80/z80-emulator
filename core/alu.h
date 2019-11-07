@@ -5,6 +5,7 @@
 
 void alu(uint8_t operation, uint8_t* reg8);
 void alu_n(uint8_t operation);
+void alu_indirect(uint8_t operation, uint16_t* reg16);
 
 #endif
 
