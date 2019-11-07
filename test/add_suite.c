@@ -79,3 +79,20 @@ void add_A_HL_ref_test(void) {
 	CU_ASSERT(A == 0xA8);
 	
 }
+
+void add_A_IX_IY_ind_test(void) {
+	cpu_reset();
+	A = 0x11;
+	IX = 0x1000;
+	cpu->mem[0x1005] = 0x22;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x86;	// ADD A, (IX + 5h)
+	cpu->mem[2] = 0x05;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x33);
+	
+}
