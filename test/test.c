@@ -167,7 +167,9 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(adc_suite, "ADC A, (HL)", adc_A_HL_ref_test))
+	if (	(NULL == CU_add_test(adc_suite, "ADC A, (HL)", adc_A_HL_ref_test))	||
+			(NULL == CU_add_test(adc_suite, "ADC A, r", adc_A_r_test))	||
+			(NULL == CU_add_test(adc_suite, "ADC A, n", adc_A_n_test))
 	
 		) {
 		CU_cleanup_registry();
