@@ -80,7 +80,7 @@ void add_A_HL_ref_test(void) {
 	
 }
 
-void add_A_IX_IY_ind_test(void) {
+void add_A_IX_IY_relative_test(void) {
 	cpu_reset();
 	A = 0x11;
 	IX = 0x1000;

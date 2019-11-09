@@ -70,3 +70,32 @@ void adc_A_HL_ref_test(void) {
 	CU_ASSERT(A == 0x27);
 }
 
+void adc_A_IX_IY_relative_test(void) {
+	cpu_reset();
+	A = 0x11;
+	IX = 0x1000;
+	IY = 0x2000;
+	cpu->mem[0x1005] = 0x22;
+	cpu->mem[0x2009] = 0x40;
+	FLAG_C = 1;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x8E;	// ADC A, (IX + 5h)
+	cpu->mem[2] = 0x05;
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0x8E;	// ADC A, (IY + 9h)
+	cpu->mem[5] = 0x09;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x34);
+	CU_ASSERT(FLAG_C == 0);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x74);
+	CU_ASSERT(FLAG_C == 0);
+}
+

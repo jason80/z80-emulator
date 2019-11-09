@@ -154,7 +154,7 @@ int main(void) {
 	if (	(NULL == CU_add_test(add_suite, "ADD A, r", add_A_r_test))			||
 			(NULL == CU_add_test(add_suite, "ADD A, n", add_A_n_test))			||
 			(NULL == CU_add_test(add_suite, "ADD A, (HL)", add_A_HL_ref_test))	||
-			(NULL == CU_add_test(add_suite, "ADD A, (IX + d) / ADD A, (IY + d)", add_A_IX_IY_ind_test))
+			(NULL == CU_add_test(add_suite, "ADD A, (IX + d) / ADD A, (IY + d)", add_A_IX_IY_relative_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
@@ -168,8 +168,9 @@ int main(void) {
 	}
 	
 	if (	(NULL == CU_add_test(adc_suite, "ADC A, (HL)", adc_A_HL_ref_test))	||
-			(NULL == CU_add_test(adc_suite, "ADC A, r", adc_A_r_test))	||
-			(NULL == CU_add_test(adc_suite, "ADC A, n", adc_A_n_test))
+			(NULL == CU_add_test(adc_suite, "ADC A, r", adc_A_r_test))			||
+			(NULL == CU_add_test(adc_suite, "ADC A, n", adc_A_n_test))			||
+			(NULL == CU_add_test(adc_suite, "ADC A, (IX + d) / ADC A, (IY + d)", adc_A_IX_IY_relative_test))
 	
 		) {
 		CU_cleanup_registry();
