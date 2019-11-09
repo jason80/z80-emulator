@@ -3,6 +3,7 @@ CFLAGS = -Wall -g
 CORE_OBJ =		core/cpu.o \
 				core/tables.o \
 				core/execute.o \
+				core/mem_loader.o \
 				core/load.o \
 				core/exchange.o \
 				core/block_transfer.o \
