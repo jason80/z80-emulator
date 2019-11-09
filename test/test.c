@@ -10,6 +10,7 @@
 #include "search_suite.h"
 #include "add_suite.h"
 #include "adc_suite.h"
+#include "sub_suite.h"
 
 int main(void) {
 	
@@ -21,6 +22,7 @@ int main(void) {
 	CU_pSuite search_suite = NULL;
 	CU_pSuite add_suite = NULL;
 	CU_pSuite adc_suite = NULL;
+	CU_pSuite sub_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -177,6 +179,13 @@ int main(void) {
 			return CU_get_error();
 	}
 	
+	// SUB SUITE
+	sub_suite = CU_add_suite("SUB", init_sub_suite, clean_sub_suite);
+	if (NULL == sub_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
 	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
@@ -184,7 +193,8 @@ int main(void) {
 	block_suite->fActive = CU_FALSE;
 	search_suite->fActive = CU_FALSE;
 	add_suite->fActive = CU_FALSE;
-	//adc_suite->fActive = CU_FALSE;
+	adc_suite->fActive = CU_FALSE;
+	//sub_suite->fActive = CU_FALSE;
 	
 	// RUN TESTS
 	

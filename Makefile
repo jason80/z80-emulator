@@ -17,7 +17,8 @@ TEST_OBJ =		test/test.o \
 				test/block_suite.o \
 				test/search_suite.o \
 				test/add_suite.o \
-				test/adc_suite.o
+				test/adc_suite.o \
+				test/sub_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
