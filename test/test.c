@@ -176,12 +176,18 @@ int main(void) {
 	
 		) {
 		CU_cleanup_registry();
-			return CU_get_error();
+		return CU_get_error();
 	}
 	
 	// SUB SUITE
 	sub_suite = CU_add_suite("SUB", init_sub_suite, clean_sub_suite);
 	if (NULL == sub_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	if (	(NULL == CU_add_test(sub_suite, "SUB A, r", sub_A_r_test))
+		) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
