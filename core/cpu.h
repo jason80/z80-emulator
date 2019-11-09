@@ -74,7 +74,7 @@ typedef struct {
 	// Internal
 	word_t br;		// Buffer Register
 	uint8_t ir;		// Instruction Register
-	int prefix;
+	int prefix, halt;
 	
 	uint8_t	fetch_status;
 	

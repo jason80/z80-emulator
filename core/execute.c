@@ -147,7 +147,10 @@ void execute_x0(opcode_t opcode) {
 }
 
 void execute_x1(opcode_t opcode) {
-	if (opcode.z == 6 && opcode.y == 6) { /******** HALT *******/ }
+	if (opcode.z == 6 && opcode.y == 6) {
+		/******** HALT *******/
+		cpu->halt = 1;
+	}
 	else {
 		// LD r[y], r[z]
 		if (cpu->prefix == 0)

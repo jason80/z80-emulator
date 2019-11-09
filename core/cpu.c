@@ -33,6 +33,8 @@ void cpu_reset(void) {
 	for (i = 0; i < 0x10000; i ++) {
 		cpu->mem[i] = 0;
 	}
+	cpu->prefix = 0;
+	cpu->halt = 0;
 }
 
 void cpu_clean(void) {
