@@ -28,3 +28,33 @@ void sub_A_r_test(void) {
 	
 	CU_ASSERT(A == 0x18);
 }
+
+void sub_A_n_test(void) {
+	cpu_reset();
+	
+	A = 30;
+	cpu->mem[0] = 0xD6;
+	cpu->mem[1] = 30;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0);
+	CU_ASSERT(FLAG_Z == 1);
+}
+
+void sub_A_HL_ref_test(void) {
+	cpu_reset();
+	A = 127;
+	HL = 0x2323;
+	cpu->mem[0x2323] = 129;
+	
+	cpu->mem[0] = 0x96;	// ADD A, (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 254);
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(FLAG_PV == 1);
+}

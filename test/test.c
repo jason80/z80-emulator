@@ -186,7 +186,9 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(sub_suite, "SUB A, r", sub_A_r_test))
+	if (	(NULL == CU_add_test(sub_suite, "SUB r", sub_A_r_test))		||
+			(NULL == CU_add_test(sub_suite, "SUB n", sub_A_n_test))		||
+			(NULL == CU_add_test(sub_suite, "SUB (HL)", sub_A_HL_ref_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
