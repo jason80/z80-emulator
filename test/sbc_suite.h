@@ -4,4 +4,6 @@
 int init_sbc_suite(void);
 int clean_sbc_suite(void);
 
+void sbc_A_r_test();
+
 #endif

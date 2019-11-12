@@ -204,15 +204,22 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	//cpu_suite->fActive = CU_FALSE;
-	//load_8bit_suite->fActive = CU_FALSE;
-	//load_16bit_suite->fActive = CU_FALSE;
-	//exchange_suite->fActive = CU_FALSE;
-	//block_suite->fActive = CU_FALSE;
-	//search_suite->fActive = CU_FALSE;
-	//add_suite->fActive = CU_FALSE;
-	//adc_suite->fActive = CU_FALSE;
-	//sub_suite->fActive = CU_FALSE;
+	if (	(NULL == CU_add_test(sbc_suite, "SBC A, r", sbc_A_r_test))
+	
+		) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	cpu_suite->fActive = CU_FALSE;
+	load_8bit_suite->fActive = CU_FALSE;
+	load_16bit_suite->fActive = CU_FALSE;
+	exchange_suite->fActive = CU_FALSE;
+	block_suite->fActive = CU_FALSE;
+	search_suite->fActive = CU_FALSE;
+	add_suite->fActive = CU_FALSE;
+	adc_suite->fActive = CU_FALSE;
+	sub_suite->fActive = CU_FALSE;
 	//sbc_suite->fActive = CU_FALSE;
 	
 	// RUN TESTS
