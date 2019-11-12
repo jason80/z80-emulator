@@ -7,6 +7,9 @@ void adc(uint8_t* reg8);
 void sub(uint8_t* reg8);
 void sbc(uint8_t* reg8);
 
+void parity_check(uint8_t*);
+void logic_flag_check(uint8_t*);
+
 void alu(uint8_t operation, uint8_t* reg8) {
 	switch(operation) {
 	case 0:		// ADD
@@ -22,10 +25,19 @@ void alu(uint8_t operation, uint8_t* reg8) {
 		sbc(reg8); cpu->ts = 4;
 		break;
 	case 4:		// AND
+		A &= *reg8;
+		logic_flag_check(&A);
+		cpu->ts = 4;
 		break;
 	case 5:		// XOR
+		A ^= *reg8;
+		logic_flag_check(&A);
+		cpu->ts = 4;
 		break;
 	case 6:		// OR
+		A |= *reg8;
+		logic_flag_check(&A);
+		cpu->ts = 4;
 		break;
 	case 7:		// CP
 		break;
@@ -50,10 +62,19 @@ void alu_n(uint8_t operation) {
 		sbc(&BRL); cpu->ts = 7;
 		break;
 	case 4:		// AND
+		A &= BRL;
+		logic_flag_check(&A);
+		cpu->ts = 7;
 		break;
 	case 5:		// XOR
+		A ^= BRL;
+		logic_flag_check(&A);
+		cpu->ts = 7;
 		break;
 	case 6:		// OR
+		A |= BRL;
+		logic_flag_check(&A);
+		cpu->ts = 7;
 		break;
 	case 7:		// CP
 		break;
@@ -77,10 +98,19 @@ void alu_indirect(uint8_t operation, uint16_t* reg16) {
 		sbc(&cpu->mem[*reg16 + BRL]); cpu->ts = 19;
 		break;
 	case 4:		// AND
+		A &= cpu->mem[*reg16 + BRL];
+		logic_flag_check(&A);
+		cpu->ts = 19;
 		break;
 	case 5:		// XOR
+		A ^= cpu->mem[*reg16 + BRL];
+		logic_flag_check(&A);
+		cpu->ts = 19;
 		break;
 	case 6:		// OR
+		A |= cpu->mem[*reg16 + BRL];
+		logic_flag_check(&A);
+		cpu->ts = 19;
 		break;
 	case 7:		// CP
 		break;
@@ -161,4 +191,24 @@ void sbc(uint8_t* reg8) {
 	FLAG_C = result & 0x100 ? 1 : 0;
 	
 	A = (uint8_t) result;
+}
+
+void parity_check(uint8_t* reg8) {
+	uint16_t p;
+	uint8_t add = 0;
+	
+	for (p = 1; p <= 128; p *= 2) {
+		add += (*reg8 & p) ? 1 : 0;
+	}
+	
+	FLAG_PV = (add % 2 == 0) ? 0 : 1;
+}
+
+void logic_flag_check(uint8_t* reg8) {
+	FLAG_S = (*reg8 & 0x80) ? 1 : 0;
+	FLAG_Z = (*reg8 == 0) ? 1 : 0;
+	FLAG_H = 1;
+	parity_check(reg8);
+	FLAG_N = 0;
+	FLAG_C = 0;
 }
