@@ -58,3 +58,37 @@ void sub_A_HL_ref_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 	CU_ASSERT(FLAG_PV == 1);
 }
+
+void sub_A_IX_IY_relative_test(void) {
+	cpu_reset();
+	
+	IX = 0x3444;
+	IY = 0x4999;
+	A = 1;
+	cpu->mem[0x344A] = 127;
+	cpu->mem[0x499A] = 130;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x96;	// SUB (IX + 6)
+	cpu->mem[2] = 6;
+	
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0x96;	// SUB (IY + 1)
+	cpu->mem[5] = 1;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 130);
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(FLAG_PV == 0);
+	CU_ASSERT(FLAG_Z == 0);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0);
+	CU_ASSERT(FLAG_C == 0);
+	CU_ASSERT(FLAG_PV == 0);
+	CU_ASSERT(FLAG_Z == 1);
+}
