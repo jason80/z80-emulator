@@ -21,7 +21,7 @@ void sbc_A_r_test() {
 	A = 1;
 	L = 255; // -1
 	
-	cpu->mem[0] = 0x9D; // SBC, A, L
+	cpu->mem[0] = 0x9D; // SBC A, L
 	
 	cpu_fetch();
 	cpu_execute();
@@ -29,4 +29,21 @@ void sbc_A_r_test() {
 	CU_ASSERT(A == 2);
 	CU_ASSERT(FLAG_C == 1);
 	CU_ASSERT(FLAG_PV == 0);
+}
+
+void sbc_A_n_test() {
+	cpu_reset();
+	
+	A = 128;
+	FLAG_C = 1;
+	
+	cpu->mem[0] = 0xDE;	// SBC A, 1h
+	cpu->mem[1] = 1;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 126);
+	CU_ASSERT(FLAG_C == 0);
+	CU_ASSERT(FLAG_PV == 1);
 }

@@ -154,7 +154,7 @@ void sbc(uint8_t* reg8) {
 	
 	// Overflow pv
 	FLAG_PV = 0;
-	if ((A & 0x80) == (*reg8 & 0x80))
+	if ((A & 0x80) != (*reg8 & 0x80))
 		if ((A & 0x80) != (result & 0x80))
 			FLAG_PV = 1;
 	

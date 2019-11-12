@@ -204,8 +204,8 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(sbc_suite, "SBC A, r", sbc_A_r_test))
-	
+	if (	(NULL == CU_add_test(sbc_suite, "SBC A, r", sbc_A_r_test))		||
+			(NULL == CU_add_test(sbc_suite, "SBC A, n", sbc_A_n_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
