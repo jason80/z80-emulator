@@ -201,7 +201,7 @@ void parity_check(uint8_t* reg8) {
 		add += (*reg8 & p) ? 1 : 0;
 	}
 	
-	FLAG_PV = (add % 2 == 0) ? 0 : 1;
+	FLAG_PV = (add % 2 == 0) ? 1 : 0;
 }
 
 void logic_flag_check(uint8_t* reg8) {
