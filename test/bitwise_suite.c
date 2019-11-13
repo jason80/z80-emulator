@@ -22,8 +22,8 @@ void and_test(void) {
 	B = 0x7B; // 0111 1011
 	
 	cpu->mem[0] = 0xA0; // AND B
-	cpu->mem[1] = 0xA1; // AND 5Eh
-	cpu->mem[2] = 0x5E; // 1011 1100
+	cpu->mem[1] = 0xE6; // AND BCh
+	cpu->mem[2] = 0xBC; // 1011 1100
 	
 	cpu_fetch();
 	cpu_execute();
@@ -38,4 +38,21 @@ void and_test(void) {
 	CU_ASSERT(A == 0x00);
 	CU_ASSERT(FLAG_Z == 1);
 	CU_ASSERT(FLAG_PV == 1);
+}
+
+void xor_test(void) {
+	cpu_reset();
+	
+	A = 0x96; // 1001 0110
+	HL = 0x2333;
+	cpu->mem[0x2333] = 0x5D; // 0101 1101
+	
+	cpu->mem[0] = 0xAE; // OR (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0xCB); // 1100 1011
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_PV == 0);
 }

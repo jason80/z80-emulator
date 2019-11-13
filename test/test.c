@@ -220,7 +220,8 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(bitwise_suite, "AND", and_test))
+	if (	(NULL == CU_add_test(bitwise_suite, "AND", and_test)) ||
+			(NULL == CU_add_test(bitwise_suite, "XOR", xor_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();	
