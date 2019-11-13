@@ -56,3 +56,22 @@ void xor_test(void) {
 	CU_ASSERT(FLAG_Z == 0);
 	CU_ASSERT(FLAG_PV == 0);
 }
+
+void or_test(void) {
+	cpu_reset();
+	
+	A = 0x12; // 0001 0010
+	IX = 0x2457;
+	cpu->mem[0x245A] = 0x48; // 0100 1000
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xB6; // OR (IX + 3)
+	cpu->mem[2] = 0x03;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x5A); // 0101 1010
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_PV == 1);
+}

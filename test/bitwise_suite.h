@@ -6,5 +6,6 @@ int clean_bitwise_suite(void);
 
 void and_test(void);
 void xor_test(void);
+void or_test(void);
 
 #endif
