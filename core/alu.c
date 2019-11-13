@@ -7,6 +7,8 @@ void adc(uint8_t* reg8);
 void sub(uint8_t* reg8);
 void sbc(uint8_t* reg8);
 
+void cp(uint8_t* reg8);
+
 void parity_check(uint8_t*);
 void logic_flag_check(uint8_t*);
 
@@ -40,6 +42,7 @@ void alu(uint8_t operation, uint8_t* reg8) {
 		cpu->ts = 4;
 		break;
 	case 7:		// CP
+		cp(reg8); cpu->ts = 4;
 		break;
 	}
 }
@@ -77,6 +80,7 @@ void alu_n(uint8_t operation) {
 		cpu->ts = 7;
 		break;
 	case 7:		// CP
+		cp(&BRL); cpu->ts = 7;
 		break;
 	}
 }
@@ -113,6 +117,7 @@ void alu_indirect(uint8_t operation, uint16_t* reg16) {
 		cpu->ts = 19;
 		break;
 	case 7:		// CP
+		cp(&cpu->mem[*reg16 + BRL]); cpu->ts = 19;
 		break;
 	}
 }
@@ -191,6 +196,23 @@ void sbc(uint8_t* reg8) {
 	FLAG_C = result & 0x100 ? 1 : 0;
 	
 	A = (uint8_t) result;
+}
+
+void cp(uint8_t* reg8) {
+	uint16_t result = A - *reg8;
+	
+	FLAG_S = result < 0 ? 1 : 0;
+	FLAG_Z = result == 0 ? 1 : 0;
+	
+	FLAG_H = (((A & 0x0F) - (*reg8 & 0x0F)) & 0x10) > 0 ? 1 : 0;
+	
+	// Overflow pv
+	FLAG_PV = 0;
+	if ((A & 0x80) != (*reg8 & 0x80))
+		if ((A & 0x80) != (result & 0x80))
+			FLAG_PV = 1;
+	
+	FLAG_C = result & 0x100 ? 1 : 0;
 }
 
 void parity_check(uint8_t* reg8) {
