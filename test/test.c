@@ -12,6 +12,7 @@
 #include "adc_suite.h"
 #include "sub_suite.h"
 #include "sbc_suite.h"
+#include "bitwise_suite.h"
 
 int main(void) {
 	
@@ -25,6 +26,7 @@ int main(void) {
 	CU_pSuite adc_suite = NULL;
 	CU_pSuite sub_suite = NULL;
 	CU_pSuite sbc_suite = NULL;
+	CU_pSuite bitwise_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -211,16 +213,24 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	cpu_suite->fActive = CU_FALSE;
-	load_8bit_suite->fActive = CU_FALSE;
-	load_16bit_suite->fActive = CU_FALSE;
-	exchange_suite->fActive = CU_FALSE;
-	block_suite->fActive = CU_FALSE;
-	search_suite->fActive = CU_FALSE;
-	add_suite->fActive = CU_FALSE;
-	adc_suite->fActive = CU_FALSE;
-	sub_suite->fActive = CU_FALSE;
+	// BITWISE SUITE
+	bitwise_suite = CU_add_suite("Bitwise", init_bitwise_suite, clean_bitwise_suite);
+	if (NULL == bitwise_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	//cpu_suite->fActive = CU_FALSE;
+	//load_8bit_suite->fActive = CU_FALSE;
+	//load_16bit_suite->fActive = CU_FALSE;
+	//exchange_suite->fActive = CU_FALSE;
+	//block_suite->fActive = CU_FALSE;
+	//search_suite->fActive = CU_FALSE;
+	//add_suite->fActive = CU_FALSE;
+	//adc_suite->fActive = CU_FALSE;
+	//sub_suite->fActive = CU_FALSE;
 	//sbc_suite->fActive = CU_FALSE;
+	//bitwise_suite->fActive = CU_FALSE;
 	
 	// RUN TESTS
 	
