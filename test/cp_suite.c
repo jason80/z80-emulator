@@ -60,3 +60,34 @@ void cp_A_HL_ref_test(void) {
 	CU_ASSERT(FLAG_PV == 0); 
 	CU_ASSERT(FLAG_C == 1);	// A < (HL)
 }
+
+void cp_A_IX_IY_relative_test(void) {
+	cpu_reset();
+	
+	A = -80;
+	IX = 0x0030;
+	IY = 0x1030;
+	cpu->mem[0x0034] = 123;
+	cpu->mem[0x1034] = -100;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xBE;	// CP (IX + 4)
+	cpu->mem[2] = 4;
+	
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0xBE;	// CP (IY + 4)
+	cpu->mem[5] = 4;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_Z == 0); // A != (IX + 4)
+	CU_ASSERT(FLAG_PV != FLAG_S); // A < (IX + 4)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_Z == 0); // A != (IX + 4)
+	CU_ASSERT(FLAG_PV == FLAG_S); // A >= (IX + 4)
+	
+}

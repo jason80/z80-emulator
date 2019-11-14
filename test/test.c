@@ -237,9 +237,11 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(cp_suite, "CP r", cp_A_r_test))	||
-			(NULL == CU_add_test(cp_suite, "CP n", cp_A_n_test))	||
-			(NULL == CU_add_test(cp_suite, "CP (HL)", cp_A_HL_ref_test))
+	if (	(NULL == CU_add_test(cp_suite, "CP r", cp_A_r_test))			||
+			(NULL == CU_add_test(cp_suite, "CP n", cp_A_n_test))			||
+			(NULL == CU_add_test(cp_suite, "CP (HL)", cp_A_HL_ref_test))	||
+			(NULL == CU_add_test(cp_suite, "CP (IX + d) / CP (IY + d)", cp_A_IX_IY_relative_test))
+			
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();	

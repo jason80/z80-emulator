@@ -7,5 +7,6 @@ int clean_cp_suite(void);
 void cp_A_r_test(void);
 void cp_A_n_test(void);
 void cp_A_HL_ref_test(void);
+void cp_A_IX_IY_relative_test(void);
 
 #endif
