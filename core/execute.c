@@ -133,6 +133,11 @@ void execute_x0(opcode_t opcode) {
 				break;
 		}
 		break;
+		
+	case 4: // z = 4
+		inc(table_r(opcode.y));		// INC r
+		break;
+		
 	case 6: // z = 6
 		if (cpu->prefix == 0)
 			ld_8bit_n(table_r(opcode.y)); // LD r[y], n
