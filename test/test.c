@@ -14,6 +14,7 @@
 #include "sbc_suite.h"
 #include "bitwise_suite.h"
 #include "cp_suite.h"
+#include "inc_dec_suite.h"
 
 int main(void) {
 	
@@ -29,6 +30,7 @@ int main(void) {
 	CU_pSuite sbc_suite = NULL;
 	CU_pSuite bitwise_suite = NULL;
 	CU_pSuite cp_suite = NULL;
+	CU_pSuite inc_dec_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -247,7 +249,14 @@ int main(void) {
 		return CU_get_error();	
 	}
 	
-	cpu_suite->fActive = CU_FALSE;
+	// INC/DEC SUITE
+	inc_dec_suite = CU_add_suite("INC/DEC", init_inc_dec_suite, clean_inc_dec_suite);
+	if (NULL == inc_dec_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -258,7 +267,7 @@ int main(void) {
 	sub_suite->fActive = CU_FALSE;
 	sbc_suite->fActive = CU_FALSE;
 	bitwise_suite->fActive = CU_FALSE;
-	//cp_suite->fActive = CU_FALSE;
+	cp_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	

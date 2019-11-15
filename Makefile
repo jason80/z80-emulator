@@ -22,7 +22,8 @@ TEST_OBJ =		test/test.o \
 				test/sub_suite.o \
 				test/sbc_suite.o \
 				test/bitwise_suite.o \
-				test/cp_suite.o
+				test/cp_suite.o \
+				test/inc_dec_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
