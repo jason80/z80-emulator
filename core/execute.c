@@ -136,6 +136,7 @@ void execute_x0(opcode_t opcode) {
 		
 	case 4: // z = 4
 		inc(table_r(opcode.y));		// INC r
+		if (opcode.y == 6) cpu->ts = 11;	// for INC (HL)
 		break;
 		
 	case 6: // z = 6

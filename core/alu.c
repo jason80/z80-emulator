@@ -224,6 +224,7 @@ void inc(uint8_t* reg8) {
 	FLAG_PV = result == 0x80 ? 1 : 0;
 	FLAG_N = 0;
 	*reg8 = result;
+	cpu->ts = 4;
 }
 
 void parity_check(uint8_t* reg8) {
