@@ -4,4 +4,6 @@
 int init_inc_dec_suite(void);
 int clean_inc_dec_suite(void);
 
+void inc_r_test(void);
+
 #endif
