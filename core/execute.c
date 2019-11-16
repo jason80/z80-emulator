@@ -138,10 +138,10 @@ void execute_x0(opcode_t opcode) {
 	
 		if (cpu->prefix == 0xDD) {
 			if (opcode.y == 6)
-				inc_relative(IX);
+				inc_relative(IX);		// INC (IX + d)
 		} else if (cpu->prefix == 0xFD) {
 			if (opcode.y == 6)
-				inc_relative(IY);
+				inc_relative(IY);		// INC (IX + d)
 		} else {	
 			inc(table_r(opcode.y));		// INC r
 			if (opcode.y == 6) cpu->ts = 11;	// for INC (HL)

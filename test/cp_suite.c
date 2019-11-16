@@ -89,5 +89,5 @@ void cp_A_IX_IY_relative_test(void) {
 	
 	CU_ASSERT(FLAG_Z == 0); // A != (IX + 4)
 	CU_ASSERT(FLAG_PV == FLAG_S); // A >= (IX + 4)
-	
+
 }
