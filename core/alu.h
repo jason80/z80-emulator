@@ -8,7 +8,7 @@ void alu_n(uint8_t operation);
 void alu_indirect(uint8_t operation, uint16_t* reg16);
 
 void inc(uint8_t* reg8);
-void inc_relative(uint8_t reg8);
+void inc_relative(uint16_t reg16);
 
 #endif
 

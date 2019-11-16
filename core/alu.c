@@ -227,10 +227,10 @@ void inc(uint8_t* reg8) {
 	cpu->ts = 4;
 }
 
-void inc_relative(uint8_t reg8) {
+void inc_relative(uint16_t reg16) {
 	
 	cpu_fetch();
-	inc(&cpu->mem[reg8 + BRL]);
+	inc(&cpu->mem[reg16 + BRL]);
 	
 	cpu->ts = 23;
 	

@@ -59,10 +59,25 @@ void inc_hl_ref_test(void) {
 	HL = 0xAB00;
 	cpu->mem[0xAB00] = 4;
 	
-	cpu->mem[0] = 0x34;
+	cpu->mem[0] = 0x34;	// INC (HL)
 	
 	cpu_fetch();
 	cpu_execute();
 	
 	CU_ASSERT(cpu->mem[0xAB00] == 5);
+}
+
+void inc_IX_IY_relative_test(void) {
+	cpu_reset();
+	IX = 0x2020;
+	cpu->mem[0x2030] = 0x34;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x34;	// INC (IX + 10h)
+	cpu->mem[2] = 0x10;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x2030] == 0x35);
 }
