@@ -220,7 +220,7 @@ void inc(uint8_t* reg8) {
 	FLAG_S = result & 0x80 ? 1 : 0;
 	FLAG_Z = result == 0 ? 1 : 0;
 	
-	FLAG_H = (((A & 0x0F) - (*reg8 & 0x0F)) & 0x10) > 0 ? 1 : 0;
+	FLAG_H = (((A & 0x0F) + (*reg8 & 0x0F)) & 0x10) > 0 ? 1 : 0;
 	FLAG_PV = result == 0x80 ? 1 : 0;
 	FLAG_N = 0;
 	*reg8 = result;
