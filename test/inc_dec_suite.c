@@ -113,3 +113,21 @@ void dec_r_test(void) {
 	CU_ASSERT(FLAG_Z == 0);
 	CU_ASSERT(FLAG_PV == 1);
 }
+
+void dec_hl_ref_test(void) {
+	cpu_reset();
+	
+	HL = 0x0123;
+	cpu->mem[0x0123] = 1;
+	
+	cpu->mem[0] = 0x35; // DEC (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x0123] == 0);
+	CU_ASSERT(FLAG_Z == 1);
+	CU_ASSERT(FLAG_PV == 0);
+	
+}
+
