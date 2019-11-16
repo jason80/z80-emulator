@@ -248,6 +248,13 @@ void dec(uint8_t* reg8) {
 	cpu->ts = 4;
 }
 
+void dec_relative(uint16_t reg16) {
+	cpu_fetch();
+	dec(&cpu->mem[reg16 + BRL]);
+	
+	cpu->ts = 23;
+}
+
 void parity_check(uint8_t* reg8) {
 	uint16_t p;
 	uint8_t add = 0;

@@ -151,11 +151,11 @@ void execute_x0(opcode_t opcode) {
 	case 5: // z = 5
 	
 		if (cpu->prefix == 0xDD) {
-			//if (opcode.y == 6)
-				//dec_relative(IX);		// DEC (IX + d)
+			if (opcode.y == 6)
+				dec_relative(IX);		// DEC (IX + d)
 		} else if (cpu->prefix == 0xFD) {
-			//if (opcode.y == 6)
-				//dec_relative(IY);		// DEC (IX + d)
+			if (opcode.y == 6)
+				dec_relative(IY);		// DEC (IX + d)
 		} else {	
 			dec(table_r(opcode.y));		// DEC r
 			if (opcode.y == 6) cpu->ts = 11;	// for DEC (HL)
