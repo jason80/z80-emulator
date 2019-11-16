@@ -236,6 +236,18 @@ void inc_relative(uint16_t reg16) {
 	
 }
 
+void dec(uint8_t* reg8) {
+	uint8_t result = *reg8 - 1;
+	FLAG_S = result & 0x80 ? 1 : 0;
+	FLAG_Z = result == 0 ? 1 : 0;
+	
+	FLAG_H = (((A & 0x0F) - (*reg8 & 0x0F)) & 0x10) > 0 ? 1 : 0;
+	FLAG_PV = result == 0x7F ? 1 : 0;
+	FLAG_N = 0;
+	*reg8 = result;
+	cpu->ts = 4;
+}
+
 void parity_check(uint8_t* reg8) {
 	uint16_t p;
 	uint8_t add = 0;
