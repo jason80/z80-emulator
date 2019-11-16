@@ -70,14 +70,23 @@ void inc_hl_ref_test(void) {
 void inc_IX_IY_relative_test(void) {
 	cpu_reset();
 	IX = 0x2020;
+	IY = 0x3220;
 	cpu->mem[0x2030] = 0x34;
+	cpu->mem[0x3240] = 0x50;
 	
 	cpu->mem[0] = 0xDD;
 	cpu->mem[1] = 0x34;	// INC (IX + 10h)
 	cpu->mem[2] = 0x10;
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0x34;	// INC (IY + 20h)
+	cpu->mem[5] = 0x20;
+	
+	cpu_fetch();
+	cpu_execute();
 	
 	cpu_fetch();
 	cpu_execute();
 	
 	CU_ASSERT(cpu->mem[0x2030] == 0x35);
+	CU_ASSERT(cpu->mem[0x3240] == 0x51);
 }
