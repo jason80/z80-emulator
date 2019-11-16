@@ -135,8 +135,17 @@ void execute_x0(opcode_t opcode) {
 		break;
 		
 	case 4: // z = 4
-		inc(table_r(opcode.y));		// INC r
-		if (opcode.y == 6) cpu->ts = 11;	// for INC (HL)
+	
+		if (cpu->prefix == 0xDD) {
+			if (opcode.y == 6)
+				inc_relative(IX);
+		} else if (cpu->prefix == 0xFD) {
+			if (opcode.y == 6)
+				inc_relative(IY);
+		} else {	
+			inc(table_r(opcode.y));		// INC r
+			if (opcode.y == 6) cpu->ts = 11;	// for INC (HL)
+		}
 		break;
 		
 	case 6: // z = 6
