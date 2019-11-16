@@ -5,5 +5,6 @@ int init_inc_dec_suite(void);
 int clean_inc_dec_suite(void);
 
 void inc_r_test(void);
+void inc_hl_ref_test(void);
 
 #endif

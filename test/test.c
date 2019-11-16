@@ -256,7 +256,8 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(inc_dec_suite, "INC r", inc_r_test))
+	if (	(NULL == CU_add_test(inc_dec_suite, "INC r", inc_r_test))		||
+			(NULL == CU_add_test(inc_dec_suite, "INC (HL)", inc_hl_ref_test))
 	
 		) {
 		CU_cleanup_registry();

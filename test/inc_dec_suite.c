@@ -52,3 +52,17 @@ void inc_r_test(void) {
 	CU_ASSERT(FLAG_H == 1);
 	CU_ASSERT(FLAG_PV == 0);
 }
+
+void inc_hl_ref_test(void) {
+	cpu_reset();
+	
+	HL = 0xAB00;
+	cpu->mem[0xAB00] = 4;
+	
+	cpu->mem[0] = 0x34;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0xAB00] == 5);
+}
