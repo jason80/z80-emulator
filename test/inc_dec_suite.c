@@ -128,6 +128,31 @@ void dec_hl_ref_test(void) {
 	CU_ASSERT(cpu->mem[0x0123] == 0);
 	CU_ASSERT(FLAG_Z == 1);
 	CU_ASSERT(FLAG_PV == 0);
-	
 }
 
+void dec_IX_IY_relative_test(void) {
+	cpu_reset();
+	
+	cpu_reset();
+	IX = 0x2020;
+	IY = 0x3220;
+	cpu->mem[0x2030] = 0x34;
+	cpu->mem[0x3240] = 0x50;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x35;	// DEC (IX + 10h)
+	cpu->mem[2] = 0x10;
+	cpu->mem[3] = 0xFD;
+	cpu->mem[4] = 0x35;	// DEC (IY + 20h)
+	cpu->mem[5] = 0x20;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x2030] == 0x33);
+	CU_ASSERT(cpu->mem[0x3240] == 0x4F);
+	
+}

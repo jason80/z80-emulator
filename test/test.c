@@ -260,7 +260,8 @@ int main(void) {
 			(NULL == CU_add_test(inc_dec_suite, "INC (HL)", inc_hl_ref_test))	||
 			(NULL == CU_add_test(inc_dec_suite, "INC (IX + d) / INC (IY + d)", inc_IX_IY_relative_test)) ||
 			(NULL == CU_add_test(inc_dec_suite, "DEC r", dec_r_test))			||
-			(NULL == CU_add_test(inc_dec_suite, "DEC (HL)", dec_hl_ref_test))
+			(NULL == CU_add_test(inc_dec_suite, "DEC (HL)", dec_hl_ref_test))	||
+			(NULL == CU_add_test(inc_dec_suite, "DEC (IX + d) / DEC (IY + d)", dec_IX_IY_relative_test))
 	
 		) {
 		CU_cleanup_registry();
