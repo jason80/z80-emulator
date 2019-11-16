@@ -8,4 +8,6 @@ void inc_r_test(void);
 void inc_hl_ref_test(void);
 void inc_IX_IY_relative_test(void);
 
+void dec_r_test(void);
+
 #endif

@@ -90,3 +90,26 @@ void inc_IX_IY_relative_test(void) {
 	CU_ASSERT(cpu->mem[0x2030] == 0x35);
 	CU_ASSERT(cpu->mem[0x3240] == 0x51);
 }
+
+void dec_r_test(void) {
+	cpu_reset();
+	D = 0x2A;
+	E = 0x80;
+	
+	cpu->mem[0] = 0x15; // DEC D
+	cpu->mem[1] = 0x1D; // DEC E
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(D == 0x29);
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_PV == 0);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(E == 0x7F);
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_PV == 1);
+}
