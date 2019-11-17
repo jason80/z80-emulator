@@ -4,4 +4,6 @@
 int init_misc_suite(void);
 int clean_misc_suite(void);
 
+void daa_test(void);
+
 #endif
