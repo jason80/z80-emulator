@@ -268,7 +268,7 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	cpu_suite->fActive = CU_FALSE;
+	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -280,7 +280,7 @@ int main(void) {
 	sbc_suite->fActive = CU_FALSE;
 	bitwise_suite->fActive = CU_FALSE;
 	cp_suite->fActive = CU_FALSE;
-	//inc_dec_suite->fActive = CU_FALSE;
+	inc_dec_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	

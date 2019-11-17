@@ -7,6 +7,7 @@
 #include "block_transfer.h"
 #include "search.h"
 #include "alu.h"
+#include "misc.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -170,6 +171,14 @@ void execute_x0(opcode_t opcode) {
 		}
 		if (cpu->prefix == 0xFD) {
 			ld_indirect_relative_n(IY);	// LD (IY + d), n
+		}
+		break;
+		
+	case 7: // z = 7
+		switch (opcode.y) {
+		case 4: // y = 4
+			daa();			// DAA
+			break;
 		}
 		break;
 	}
