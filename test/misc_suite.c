@@ -45,3 +45,16 @@ void daa_test(void) {
 	
 	CU_ASSERT(A == 0x37); // 96 - 59 = 37
 }
+
+void cpl_test(void) {
+	cpu_reset();
+	
+	A = 0xB4; // 10110100
+	
+	cpu->mem[0] = 0x2F; // CPL
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x4B); // 01001011
+}
