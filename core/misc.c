@@ -22,3 +22,10 @@ void daa(void) {
 	
 	cpu->ts = 4;
 }
+
+void cpl(void) {
+	A = ~A;
+	FLAG_H = 1;
+	FLAG_N = 1;
+	cpu->ts = 4;
+}

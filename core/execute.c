@@ -179,6 +179,9 @@ void execute_x0(opcode_t opcode) {
 		case 4: // y = 4
 			daa();			// DAA
 			break;
+		case 5: // y = 5
+			cpl();			// CPL
+			break;
 		}
 		break;
 	}
