@@ -278,7 +278,8 @@ int main(void) {
 	}
 	
 	if (	(NULL == CU_add_test(misc_suite, "DAA", daa_test))		||
-			(NULL == CU_add_test(misc_suite, "CPL", cpl_test))
+			(NULL == CU_add_test(misc_suite, "CPL", cpl_test))		||
+			(NULL == CU_add_test(misc_suite, "NEG", neg_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();

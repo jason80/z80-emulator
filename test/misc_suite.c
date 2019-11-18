@@ -58,3 +58,17 @@ void cpl_test(void) {
 	
 	CU_ASSERT(A == 0x4B); // 01001011
 }
+
+void neg_test(void) {
+	cpu_reset();
+	
+	A = 0x98;
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x44;	// NEG
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x68);
+}

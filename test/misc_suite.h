@@ -6,5 +6,6 @@ int clean_misc_suite(void);
 
 void daa_test(void);
 void cpl_test(void);
+void neg_test(void);
 
 #endif
