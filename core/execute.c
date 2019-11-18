@@ -182,6 +182,9 @@ void execute_x0(opcode_t opcode) {
 		case 5: // y = 5
 			cpl();			// CPL
 			break;
+		case 6: // y = 6
+			scf();			// SCF
+			break;
 		case 7: // y = 7
 			ccf();			// CCF
 			break;

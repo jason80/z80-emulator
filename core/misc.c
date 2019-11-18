@@ -59,3 +59,10 @@ void ccf(void) {
 	FLAG_N = 0;
 	cpu->ts = 4;
 }
+
+void scf(void) {
+	FLAG_C = 1;
+	FLAG_H = 0;
+	FLAG_N = 0;
+	cpu->ts = 4;
+}
