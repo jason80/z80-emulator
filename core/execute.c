@@ -8,6 +8,7 @@
 #include "search.h"
 #include "alu.h"
 #include "misc.h"
+#include "arithm16.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -72,13 +73,14 @@ void execute_x0(opcode_t opcode) {
 		switch (opcode.q) {
 			case 0:
 				if (cpu->prefix == 0xDD)
-					ld_16bit_nn(&IX);
+					ld_16bit_nn(&IX);				// LD IX, nn
 				else if (cpu->prefix == 0xFD)
-					ld_16bit_nn(&IY);
+					ld_16bit_nn(&IY);				// LD IY, nn
 				else
 					ld_16bit_nn(table_rp(opcode.p)); // LD rp[p], nn
 				break;
-			case 1:		// ADD HL, rp[p]
+			case 1:
+				add16(&HL, table_rp(opcode.p));		// ADD HL, rp[p]
 				break;
 		}
 		break;

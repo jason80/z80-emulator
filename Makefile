@@ -9,7 +9,8 @@ CORE_OBJ =		core/cpu.o \
 				core/block_transfer.o \
 				core/search.o \
 				core/alu.o \
-				core/misc.o
+				core/misc.o \
+				core/arithm16.o
 
 TEST_OBJ =		test/test.o \
 				test/cpu_suite.o \
