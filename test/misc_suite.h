@@ -8,5 +8,6 @@ void daa_test(void);
 void cpl_test(void);
 void neg_test(void);
 void ccf_test(void);
+void scf_test(void);
 
 #endif
