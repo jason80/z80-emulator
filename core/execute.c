@@ -55,7 +55,7 @@ void execute_x0(opcode_t opcode) {
 	case 0: // z = 0
 		switch (opcode.y) {
 		case 0: // y = 0
-			// NOP
+			cpu->ts = 4;	// NOP
 			break;
 		case 1: // y = 1
 			ex_af_af();		// EX AF, AF'
@@ -195,8 +195,8 @@ void execute_x0(opcode_t opcode) {
 
 void execute_x1(opcode_t opcode) {
 	if (opcode.z == 6 && opcode.y == 6) {
-		/******** HALT *******/
-		cpu->halt = 1;
+		cpu->halt = 1;				// HALT
+		cpu->ts = 4;
 	}
 	else {
 		// LD r[y], r[z]
