@@ -331,6 +331,9 @@ void ed_prefixed(void) {
 			else // LD rp[p], (nn)
 				ld_16bit_indirect_nn(table_rp(opcode.p));
 			break;
+		case 4:		// z = 4
+			neg();				// NEG
+			break;
 		case 7:
 			switch(opcode.y) {
 			case 0: // y = 0
