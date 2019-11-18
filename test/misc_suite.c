@@ -72,3 +72,16 @@ void neg_test(void) {
 	
 	CU_ASSERT(A == 0x68);
 }
+
+void ccf_test(void) {
+	cpu_reset();
+	
+	cpu->mem[0] = 0x3F;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(FLAG_H == 1);
+	CU_ASSERT(FLAG_N == 0);
+}
