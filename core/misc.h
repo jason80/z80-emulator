@@ -4,5 +4,6 @@
 void daa(void);
 void cpl(void);
 void neg(void);
+void ccf(void);
 
 #endif

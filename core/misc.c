@@ -52,3 +52,10 @@ void neg(void) {
 	A = (uint8_t) result;
 	cpu->ts = 8;
 }
+
+void ccf(void) {
+	FLAG_C = !FLAG_C;
+	FLAG_H = !FLAG_H;
+	FLAG_N = 0;
+	cpu->ts = 4;
+}
