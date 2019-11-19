@@ -334,9 +334,8 @@ void ed_prefixed(void) {
 	if (opcode.x == 1) {		//	x = 1
 		switch (opcode.z) {
 		case 2:					// z = 2
-			if (opcode.q == 0) {
-														// SBC HL, rp[p]
-			}
+			if (opcode.q == 0)
+				sbc16(&HL, table_rp(opcode.p));			// SBC HL, rp[p]
 			else
 				adc16(&HL, table_rp(opcode.p));			// ADC HL, rp[p]
 			break;
