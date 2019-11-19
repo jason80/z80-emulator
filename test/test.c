@@ -16,6 +16,7 @@
 #include "cp_suite.h"
 #include "inc_dec_suite.h"
 #include "misc_suite.h"
+#include "arithm_16bit_suite.h"
 
 int main(void) {
 	
@@ -33,6 +34,7 @@ int main(void) {
 	CU_pSuite cp_suite = NULL;
 	CU_pSuite inc_dec_suite = NULL;
 	CU_pSuite misc_suite = NULL;
+	CU_pSuite arithm_16bit_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -287,6 +289,13 @@ int main(void) {
 		return CU_get_error();
 	}
 	
+	// MISC SUITE
+	arithm_16bit_suite = CU_add_suite("16bit ARITHMETIC", init_arithm_16bit_suite, clean_arithm_16bit_suite);
+	if (NULL == arithm_16bit_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
 	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
@@ -300,7 +309,8 @@ int main(void) {
 	bitwise_suite->fActive = CU_FALSE;
 	cp_suite->fActive = CU_FALSE;
 	inc_dec_suite->fActive = CU_FALSE;
-	misc_suite->fActive = CU_FALSE;*/
+	misc_suite->fActive = CU_FALSE;
+	arithm_16bit_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	

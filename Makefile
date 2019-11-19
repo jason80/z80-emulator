@@ -10,7 +10,7 @@ CORE_OBJ =		core/cpu.o \
 				core/search.o \
 				core/alu.o \
 				core/misc.o \
-				core/arithm16.o
+				core/arithm16.o \
 
 TEST_OBJ =		test/test.o \
 				test/cpu_suite.o \
@@ -26,7 +26,8 @@ TEST_OBJ =		test/test.o \
 				test/bitwise_suite.o \
 				test/cp_suite.o \
 				test/inc_dec_suite.o \
-				test/misc_suite.o
+				test/misc_suite.o \
+				test/arithm_16bit_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
