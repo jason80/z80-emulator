@@ -4,5 +4,6 @@
 #include <inttypes.h>
 
 void add16(uint16_t* result, uint16_t* reg16);
+void adc16(uint16_t* result, uint16_t* reg16);
 
 #endif

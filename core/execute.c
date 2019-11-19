@@ -333,11 +333,18 @@ void ed_prefixed(void) {
 	
 	if (opcode.x == 1) {		//	x = 1
 		switch (opcode.z) {
-		case 3:		// z = 3
-			if (opcode.q == 0) // LD (nn), rp[p]
-				ld_indirect_nn_16bit(table_rp(opcode.p));
-			else // LD rp[p], (nn)
-				ld_16bit_indirect_nn(table_rp(opcode.p));
+		case 2:					// z = 2
+			if (opcode.q == 0) {
+														// SBC HL, rp[p]
+			}
+			else
+				adc16(&HL, table_rp(opcode.p));			// ADC HL, rp[p]
+			break;
+		case 3:					// z = 3
+			if (opcode.q == 0)
+				ld_indirect_nn_16bit(table_rp(opcode.p));	// LD (nn), rp[p]
+			else
+				ld_16bit_indirect_nn(table_rp(opcode.p));	// LD rp[p], (nn)
 			break;
 		case 4:		// z = 4
 			neg();				// NEG
