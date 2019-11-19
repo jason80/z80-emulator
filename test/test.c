@@ -296,13 +296,14 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(arithm_16bit_suite, "ADD HL, rr", add16_hl_rr_test))
+	if (	(NULL == CU_add_test(arithm_16bit_suite, "ADD HL, rr", add16_hl_rr_test))		||
+			(NULL == CU_add_test(arithm_16bit_suite, "ADC HL, rr", adc16_hl_rr_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 	
-	/*cpu_suite->fActive = CU_FALSE;
+	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -316,7 +317,7 @@ int main(void) {
 	cp_suite->fActive = CU_FALSE;
 	inc_dec_suite->fActive = CU_FALSE;
 	misc_suite->fActive = CU_FALSE;
-	arithm_16bit_suite->fActive = CU_FALSE;*/
+	/*arithm_16bit_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	
