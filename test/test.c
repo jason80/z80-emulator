@@ -297,7 +297,8 @@ int main(void) {
 	}
 	
 	if (	(NULL == CU_add_test(arithm_16bit_suite, "ADD HL, rr", add16_hl_rr_test))		||
-			(NULL == CU_add_test(arithm_16bit_suite, "ADC HL, rr", adc16_hl_rr_test))
+			(NULL == CU_add_test(arithm_16bit_suite, "ADC HL, rr", adc16_hl_rr_test))		||
+			(NULL == CU_add_test(arithm_16bit_suite, "SBC HL, rr", sbc16_hl_rr_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();

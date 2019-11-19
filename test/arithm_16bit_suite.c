@@ -45,3 +45,19 @@ void adc16_hl_rr_test(void) {
 	CU_ASSERT(HL == 0x765A);
 	CU_ASSERT(FLAG_C == 0);
 }
+
+void sbc16_hl_rr_test(void) {
+	cpu_reset();
+	
+	HL = 0x9999;
+	DE = 0x1111;
+	FLAG_C = 1;
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x52;	// SBC HL, BC
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(HL == 0x8887);
+}

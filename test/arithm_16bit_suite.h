@@ -6,5 +6,6 @@ int clean_arithm_16bit_suite(void);
 
 void add16_hl_rr_test(void);
 void adc16_hl_rr_test(void);
+void sbc16_hl_rr_test(void);
 
 #endif
