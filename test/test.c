@@ -289,9 +289,15 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	// MISC SUITE
+	// 16bit ARITHMETIC SUITE
 	arithm_16bit_suite = CU_add_suite("16bit ARITHMETIC", init_arithm_16bit_suite, clean_arithm_16bit_suite);
 	if (NULL == arithm_16bit_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	if (	(NULL == CU_add_test(arithm_16bit_suite, "ADD HL, rr", add16_hl_rr_test))
+		) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
