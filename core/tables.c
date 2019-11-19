@@ -24,6 +24,26 @@ uint16_t* table_rp(int v) {
 	}
 }
 
+uint16_t* table_rp_IX(int v) {
+	switch (v) {
+		case 0: return &BC;
+		case 1: return &DE;
+		case 2: return &IX;
+		case 3: return &SP;
+		default: return 0;
+	}
+}
+
+uint16_t* table_rp_IY(int v) {
+	switch (v) {
+		case 0: return &BC;
+		case 1: return &DE;
+		case 2: return &IY;
+		case 3: return &SP;
+		default: return 0;
+	}
+}
+
 uint16_t* table_rp2(int v) {
 	switch(v) {
 		case 0: return &BC;

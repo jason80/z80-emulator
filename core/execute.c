@@ -80,7 +80,12 @@ void execute_x0(opcode_t opcode) {
 					ld_16bit_nn(table_rp(opcode.p)); // LD rp[p], nn
 				break;
 			case 1:
-				add16(&HL, table_rp(opcode.p));		// ADD HL, rp[p]
+				if (cpu->prefix == 0xDD)
+					add16(&IX, table_rp_IX(opcode.p));	// ADD IX, rpIX[p]
+				else if (cpu->prefix == 0xFD)
+					add16(&IY, table_rp_IY(opcode.p));	// ADD IY, rpIY[p]
+				else
+					add16(&HL, table_rp(opcode.p));		// ADD HL, rp[p]
 				break;
 		}
 		break;
@@ -196,39 +201,26 @@ void execute_x0(opcode_t opcode) {
 }
 
 void execute_x1(opcode_t opcode) {
-	if (opcode.z == 6 && opcode.y == 6) {
-		cpu->halt = 1;				// HALT
-		cpu->ts = 4;
-	}
-	else {
-		// LD r[y], r[z]
-		if (cpu->prefix == 0)
-			ld_8bit_8bit(table_r(opcode.y), table_r(opcode.z));
-		if (cpu->prefix == 0xDD) {
-			if (opcode.z == 6) // LD r[y], (IX + d)
-				ld_8bit_indirect_relative(table_r(opcode.y), IX);
-			else if (opcode.y == 6)
-				ld_indirect_relative_8bit(IX, table_r(opcode.z));
-		}
-		if (cpu->prefix == 0xFD) {
-			if (opcode.z == 6) // LD r[y], (IY + d)
-				ld_8bit_indirect_relative(table_r(opcode.y), IY);
-			else if (opcode.y == 6)
-				ld_indirect_relative_8bit(IY, table_r(opcode.z));
-		}
+	if (cpu->prefix == 0) {
+		if (opcode.z == 6 && opcode.y == 6) {
+			cpu->halt = 1;										// HALT
+			cpu->ts = 4;
+		} else
+			ld_8bit_8bit(table_r(opcode.y), table_r(opcode.z)); // LD r[y], r[z]
+	} else if (cpu->prefix == 0xDD) {
+		if (opcode.z == 6)
+			ld_8bit_indirect_relative(table_r(opcode.y), IX); // LD r[y], (IX + d)
+		else if (opcode.y == 6)
+			ld_indirect_relative_8bit(IX, table_r(opcode.z));	// LD (IX + d), r[z]
+	} else if (cpu->prefix == 0xFD) {
+		if (opcode.z == 6)
+			ld_8bit_indirect_relative(table_r(opcode.y), IY); // LD r[y], (IY + d)
+		else if (opcode.y == 6)
+			ld_indirect_relative_8bit(IY, table_r(opcode.z)); // LD (IY + d), r[z]
 	}
 }
 
 void execute_x2(opcode_t opcode) {
-	/*alu(opcode.y, table_r(opcode.z));	// ALU OPERATIONS
-	if (opcode.z == 6) {
-		if (cpu->prefix == 0xDD)
-			alu_indirect(opcode.y, &IX);	// ALU A, (IX + d)
-		else if (cpu->prefix == 0XFD)
-			alu_indirect(opcode.y, &IY);	// ALU A, (IY + d)
-		else
-			cpu->ts = 7; // for ALU A, (HL)
-	}*/
 	
 	if (cpu->prefix == 0xDD) {
 		if (opcode.z == 6)

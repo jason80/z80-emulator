@@ -13,7 +13,10 @@ void add16(uint16_t* result, uint16_t* reg16) {
 	
 	*result = (uint16_t) res;
 	
-	cpu->ts = 11;
+	if (result == &IX || result == &IY)
+		cpu->ts = 15;
+	else
+		cpu->ts = 11;
 }
 
 void adc16(uint16_t* result, uint16_t* reg16) {
