@@ -61,3 +61,26 @@ void sbc16_hl_rr_test(void) {
 	
 	CU_ASSERT(HL == 0x8887);
 }
+
+void add16_IX_IY_rr_test(void) {
+	cpu_reset();
+	IX = 0x3333;
+	IY = 0x2222;
+	BC = 0x5555;
+	DE = 0x1111;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0x09;	// ADD IX, BC
+	
+	cpu->mem[2] = 0xFD;
+	cpu->mem[3] = 0x19;	// ADD IY, DE
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(IX == 0x8888);
+	CU_ASSERT(IY == 0x3333);
+}
