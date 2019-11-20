@@ -9,4 +9,7 @@ void adc16_hl_rr_test(void);
 void sbc16_hl_rr_test(void);
 void add16_IX_IY_rr_test(void);
 
+void inc16_test(void);
+void dec16_test(void);
+
 #endif
