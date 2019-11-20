@@ -11,6 +11,7 @@ CORE_OBJ =		core/cpu.o \
 				core/alu.o \
 				core/misc.o \
 				core/arithm16.o \
+				core/rot_shift.o
 
 TEST_OBJ =		test/test.o \
 				test/cpu_suite.o \
