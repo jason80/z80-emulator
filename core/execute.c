@@ -142,6 +142,26 @@ void execute_x0(opcode_t opcode) {
 		}
 		break;
 		
+	case 3: // z = 3
+	
+		if (opcode.q == 0) {	// q = 0
+			if (cpu->prefix == 0)
+				inc_dec_16(table_rp(opcode.p), 1);	// INC rp[p]
+			else if (cpu->prefix == 0xDD)
+				inc_dec_16(&IX, 1);					// INC IX
+			else if (cpu->prefix == 0xFD)
+				inc_dec_16(&IY, 1);					// INC IY
+		} else {
+			if (cpu->prefix == 0) // q = 1
+				inc_dec_16(table_rp(opcode.p), -1);	// DEC rp[p]
+			else if (cpu->prefix == 0xDD)
+				inc_dec_16(&IX, -1);				// DEC IX
+			else if (cpu->prefix == 0xFD)
+				inc_dec_16(&IY, -1);				// DEC IY
+		}
+		
+		break;
+		
 	case 4: // z = 4
 	
 		if (cpu->prefix == 0xDD) {

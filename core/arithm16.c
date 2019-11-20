@@ -52,3 +52,9 @@ void sbc16(uint16_t* result, uint16_t* reg16) {
 	
 	cpu->ts = 15;
 }
+
+void inc_dec_16(uint16_t* reg16, int p) {
+	*reg16 += p;
+	if (reg16 == &IX || reg16 == &IY) cpu->ts = 10;
+	else cpu->ts = 6;
+}
