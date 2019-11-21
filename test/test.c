@@ -17,6 +17,7 @@
 #include "inc_dec_suite.h"
 #include "misc_suite.h"
 #include "arithm_16bit_suite.h"
+#include "rot_shift_suite.h"
 
 int main(void) {
 	
@@ -35,6 +36,7 @@ int main(void) {
 	CU_pSuite inc_dec_suite = NULL;
 	CU_pSuite misc_suite = NULL;
 	CU_pSuite arithm_16bit_suite = NULL;
+	CU_pSuite rot_shift_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -307,6 +309,13 @@ int main(void) {
 		return CU_get_error();
 	}
 	
+	// ROTATION AND SHIFT
+	rot_shift_suite = CU_add_suite("16bit ARITHMETIC", init_rot_shift_suite, clean_rot_shift_suite);
+	if (NULL == rot_shift_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
 	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
@@ -321,7 +330,8 @@ int main(void) {
 	cp_suite->fActive = CU_FALSE;
 	inc_dec_suite->fActive = CU_FALSE;
 	misc_suite->fActive = CU_FALSE;
-	/*arithm_16bit_suite->fActive = CU_FALSE;*/
+	arithm_16bit_suite->fActive = CU_FALSE;
+	rot_shift_suite->fActive = CU_FALSE;
 	
 	// RUN TESTS
 	

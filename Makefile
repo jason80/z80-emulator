@@ -28,7 +28,8 @@ TEST_OBJ =		test/test.o \
 				test/cp_suite.o \
 				test/inc_dec_suite.o \
 				test/misc_suite.o \
-				test/arithm_16bit_suite.o
+				test/arithm_16bit_suite.o \
+				test/rot_shift_suite.o
 
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
