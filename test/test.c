@@ -316,6 +316,12 @@ int main(void) {
 		return CU_get_error();
 	}
 	
+	if (	(NULL == CU_add_test(rot_shift_suite, "RLCA", rlca_test))
+		) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
 	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
@@ -331,7 +337,7 @@ int main(void) {
 	inc_dec_suite->fActive = CU_FALSE;
 	misc_suite->fActive = CU_FALSE;
 	arithm_16bit_suite->fActive = CU_FALSE;
-	rot_shift_suite->fActive = CU_FALSE;
+	/*rot_shift_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	
