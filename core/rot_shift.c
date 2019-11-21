@@ -46,3 +46,23 @@ void rotate_right_carry(uint8_t* reg8) {
 	FLAG_H = 0;
 	FLAG_N = 0;
 }
+
+void rlca(void) {
+	rotate_left_carry(&A);
+	cpu->ts = 4;
+}
+
+void rrca(void) {
+	rotate_right_carry(&A);
+	cpu->ts = 4;
+}
+
+void rla(void) {
+	rotate_left(&A);
+	cpu->ts = 4;
+}
+
+void rra(void) {
+	rotate_right(&A);
+	cpu->ts = 4;
+}

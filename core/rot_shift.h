@@ -3,4 +3,9 @@
 
 #include <inttypes.h>
 
+void rlca(void);
+void rrca(void);
+void rla(void);
+void rra(void);
+
 #endif

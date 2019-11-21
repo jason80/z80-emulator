@@ -9,6 +9,7 @@
 #include "alu.h"
 #include "misc.h"
 #include "arithm16.h"
+#include "rot_shift.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -203,6 +204,18 @@ void execute_x0(opcode_t opcode) {
 		
 	case 7: // z = 7
 		switch (opcode.y) {
+		case 0:
+			rlca();			// RLCA
+			break;
+		case 1:
+			rrca();			// RRCA
+			break;
+		case 2:
+			rla();			// RLA
+			break;
+		case 3:
+			rra();			// RRA
+			break;
 		case 4: // y = 4
 			daa();			// DAA
 			break;
