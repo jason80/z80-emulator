@@ -356,7 +356,15 @@ void ed_prefixed(void) {
 	
 	opcode.byte = IR;
 	
-	if (opcode.x == 1) {		//	x = 1
+	if (opcode.x == 0) {		// x = 0
+		
+		switch (opcode.y) {
+		case 0:		// y = 0
+			rlc(table_r(opcode.z));		// RLC r[z]
+			break;
+		}
+		
+	} else if (opcode.x == 1) {		//	x = 1
 		switch (opcode.z) {
 		case 2:					// z = 2
 			if (opcode.q == 0)

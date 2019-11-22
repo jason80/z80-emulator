@@ -13,5 +13,7 @@ void inc_relative(uint16_t reg16);
 void dec(uint8_t* reg8);
 void dec_relative(uint16_t reg16);
 
+void parity_check(uint8_t*);
+
 #endif
 

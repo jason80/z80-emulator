@@ -9,7 +9,7 @@ void sbc(uint8_t* reg8);
 
 void cp(uint8_t* reg8);
 
-void parity_check(uint8_t*);
+
 void logic_flag_check(uint8_t*);
 
 void alu(uint8_t operation, uint8_t* reg8) {

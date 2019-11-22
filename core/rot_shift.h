@@ -8,4 +8,6 @@ void rrca(void);
 void rla(void);
 void rra(void);
 
+void rlc(uint8_t* reg8);
+
 #endif
