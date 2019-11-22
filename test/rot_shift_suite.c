@@ -26,3 +26,41 @@ void rlca_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 	CU_ASSERT(A == 0x11);
 }
+
+void rla_test(void) {
+	cpu_reset();
+	A = 0x76; // 0111 0110
+	FLAG_C = 1;
+	cpu->mem[0] = 0x17;		// RLA
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 0);
+	CU_ASSERT(A == 0xED);
+}
+
+void rrca_test(void) {
+	cpu_reset();
+	A = 0x11; // 0001 0001
+	cpu->mem[0] = 0x0F;		// RRCA
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(A == 0x88);
+}
+
+void rra_test(void) {
+	cpu_reset();
+	A = 0xE1; // 1110 0001
+	cpu->mem[0] = 0x1F;		// RRCA
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(A == 0x70);
+}
+

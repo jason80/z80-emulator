@@ -316,7 +316,10 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(rot_shift_suite, "RLCA", rlca_test))
+	if (	(NULL == CU_add_test(rot_shift_suite, "RLCA", rlca_test))	||
+			(NULL == CU_add_test(rot_shift_suite, "RLA", rla_test))		||
+			(NULL == CU_add_test(rot_shift_suite, "RRCA", rrca_test))	||
+			(NULL == CU_add_test(rot_shift_suite, "RRA", rra_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
