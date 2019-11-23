@@ -361,6 +361,8 @@ void cb_prefixed(void) {
 		switch (opcode.y) {
 		case 0:		// y = 0
 			rlc(table_r(opcode.z));		// RLC r[z]
+			if (opcode.z == 6)
+				cpu->ts = 15;	// for RLC (HL)
 			break;
 		}
 		
