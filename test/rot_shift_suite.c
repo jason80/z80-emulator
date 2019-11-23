@@ -78,3 +78,17 @@ void rlc_r_test(void) {
 	CU_ASSERT(E == 0x11);
 }
 
+void rlc_hl_test(void) {
+	cpu_reset();
+	HL = 0x2828;
+	cpu->mem[0x2828] = 0x88;
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x06;	// RLC (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(cpu->mem[0x2828] == 0x11);
+}

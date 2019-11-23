@@ -10,5 +10,6 @@ void rrca_test(void);
 void rra_test(void);
 
 void rlc_r_test(void);
+void rlc_hl_test(void);
 
 #endif
