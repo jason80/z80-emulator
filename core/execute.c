@@ -17,6 +17,7 @@ void execute_x2(opcode_t); // alu
 void execute_x3(opcode_t);
 
 void ed_prefixed(void);
+void cb_prefixed(void);
 
 void cpu_execute(void) {
 	opcode_t opcode;
@@ -30,6 +31,7 @@ void cpu_execute(void) {
 	opcode.byte = IR;
 	
 	if (0xED == IR) ed_prefixed();
+	else if (0xCB == IR) cb_prefixed();
 	else {
 	
 		switch (opcode.x) {
@@ -345,10 +347,8 @@ void execute_x3(opcode_t opcode) {
 	}
 }
 
-
-/////////////// ED PREFIXED ////////////////////////
-void ed_prefixed(void) {
-	
+/////////////// CB PREFIXED ////////////////////////
+void cb_prefixed(void) {
 	opcode_t opcode;
 	
 	cpu->fetch_status = FETCH_INST;
@@ -364,7 +364,21 @@ void ed_prefixed(void) {
 			break;
 		}
 		
-	} else if (opcode.x == 1) {		//	x = 1
+	}
+}
+
+
+/////////////// ED PREFIXED ////////////////////////
+void ed_prefixed(void) {
+	
+	opcode_t opcode;
+	
+	cpu->fetch_status = FETCH_INST;
+	cpu_fetch();
+	
+	opcode.byte = IR;
+	
+	if (opcode.x == 1) {		//	x = 1
 		switch (opcode.z) {
 		case 2:					// z = 2
 			if (opcode.q == 0)
