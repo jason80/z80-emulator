@@ -64,3 +64,17 @@ void rra_test(void) {
 	CU_ASSERT(A == 0x70);
 }
 
+void rlc_r_test(void) {
+	cpu_reset();
+	
+	E = 0x88;
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x03;	// RLC E
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(E == 0x11);
+}
+

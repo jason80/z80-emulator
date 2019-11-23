@@ -9,4 +9,6 @@ void rla_test(void);
 void rrca_test(void);
 void rra_test(void);
 
+void rlc_r_test(void);
+
 #endif
