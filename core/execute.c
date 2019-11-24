@@ -356,13 +356,26 @@ void cb_prefixed(void) {
 	
 	opcode.byte = IR;
 	
+	if (cpu->prefix == 0xDD || cpu->prefix == 0xFD) {
+		cpu_fetch();
+		opcode.byte = BRL;
+		BRL = IR;
+	}
+	
 	if (opcode.x == 0) {		// x = 0
 		
 		switch (opcode.y) {
 		case 0:		// y = 0
-			rlc(table_r(opcode.z));		// RLC r[z]
-			if (opcode.z == 6)
-				cpu->ts = 15;	// for RLC (HL)
+		
+			if (cpu->prefix == 0xDD && opcode.z == 6) {
+				rlc_relative(IX);		// RLC (IX + d)
+			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
+				rlc_relative(IY);		// RLC (IX + d)
+			} else {
+				rlc(table_r(opcode.z));		// RLC r[z]
+				if (opcode.z == 6)
+					cpu->ts = 15;	// for RLC (HL)
+			}
 			break;
 		}
 		

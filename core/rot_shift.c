@@ -86,3 +86,8 @@ void rlc(uint8_t* reg8) {
 	
 	cpu->ts = 8;
 }
+
+void rlc_relative(uint16_t reg16) {
+	rlc(&cpu->mem[reg16 + BRL]);
+	cpu->ts = 23;
+}

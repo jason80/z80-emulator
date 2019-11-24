@@ -9,5 +9,6 @@ void rla(void);
 void rra(void);
 
 void rlc(uint8_t* reg8);
+void rlc_relative(uint16_t reg16);
 
 #endif
