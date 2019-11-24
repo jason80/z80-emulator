@@ -92,3 +92,34 @@ void rlc_hl_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 	CU_ASSERT(cpu->mem[0x2828] == 0x11);
 }
+
+void rlc_IX_IY_test(void) {
+	cpu_reset();
+	IX = 0x1000;
+	IY = 0x2000;
+	cpu->mem[0x1022] = 0x88;
+	cpu->mem[0x2002] = 0x44;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xCB;
+	cpu->mem[2] = 0x22;
+	cpu->mem[3] = 0x06;		// RLC (IX + 22h)
+	
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0xCB;
+	cpu->mem[6] = 0x02;
+	cpu->mem[7] = 0x06;		// RLC (IY + 02h)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(cpu->mem[0x1022] == 0x11);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 0);
+	CU_ASSERT(cpu->mem[0x2002] == 0x88);
+}
+
