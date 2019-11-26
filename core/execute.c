@@ -377,6 +377,17 @@ void cb_prefixed(void) {
 					cpu->ts = 15;	// for RLC (HL)
 			}
 			break;
+		case 2:		// y = 2
+			if (cpu->prefix == 0xDD && opcode.z == 6) {
+				rl_relative(IX);		// RL (IX + d)
+			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
+				rl_relative(IY);		// RL (IX + d)
+			} else {
+				rl(table_r(opcode.z));		// RL r[z]
+				if (opcode.z == 6)
+					cpu->ts = 15;	// for RL (HL)
+			}
+			break;
 		}
 		
 	}
