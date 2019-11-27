@@ -19,4 +19,6 @@ void rl_IX_IY_test(void);
 void rrc_r_test(void);
 void rrc_hl_test(void);
 
+void rr_IX_IY_test(void);
+
 #endif

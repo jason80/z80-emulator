@@ -199,3 +199,34 @@ void rrc_hl_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 }
 
+void rr_IX_IY_test(void) {
+	cpu_reset();
+	IX = 0x4340;
+	IY = 0x3420;
+	
+	cpu->mem[0x4343] = 0xDD;
+	cpu->mem[0x3427] = 0xAF; // 1010 1111
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xCB;
+	cpu->mem[2] = 0x03;
+	cpu->mem[3] = 0x1E; // RR (IX + 03h)
+	
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0xCB;
+	cpu->mem[6] = 0x07;
+	cpu->mem[7] = 0x1E; // RR (IY + 07h)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x4343] == 0x6E);
+	CU_ASSERT(FLAG_C == 1);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x3427] == 0xD7);	// 1 1101 0111
+	CU_ASSERT(FLAG_C == 1);
+}
+
