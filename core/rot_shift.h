@@ -17,4 +17,7 @@ void rl_relative(uint16_t reg16);
 void rrc(uint8_t* reg8);
 void rrc_relative(uint16_t reg16);
 
+void rr(uint8_t* reg8);
+void rr_relative(uint16_t reg16);
+
 #endif

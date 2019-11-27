@@ -399,6 +399,17 @@ void cb_prefixed(void) {
 					cpu->ts = 15;	// for RL (HL)
 			}
 			break;
+		case 3:		// y = 3
+			if (cpu->prefix == 0xDD && opcode.z == 6) {
+				rr_relative(IX);		// RR (IX + d)
+			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
+				rr_relative(IY);		// RR (IX + d)
+			} else {
+				rr(table_r(opcode.z));		// RR r[z]
+				if (opcode.z == 6)
+					cpu->ts = 15;	// for RR (HL)
+			}
+			break;
 		}
 		
 	}

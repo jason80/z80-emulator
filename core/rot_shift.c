@@ -112,3 +112,14 @@ void rrc_relative(uint16_t reg16) {
 	rrc(&cpu->mem[reg16 + BRL]);
 	cpu->ts = 23;
 }
+
+void rr(uint8_t* reg8) {
+	rotate_right(reg8);
+	rotate_flag_check(reg8);
+	cpu->ts = 8;
+}
+
+void rr_relative(uint16_t reg16) {
+	rr(&cpu->mem[reg16 + BRL]);
+	cpu->ts = 23;
+}
