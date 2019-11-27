@@ -168,3 +168,17 @@ void rl_IX_IY_test(void) {
 	CU_ASSERT(cpu->mem[0x2002] == 0x89);	// 0 10001001
 }
 
+void rrc_r_test(void) {
+	cpu_reset();
+	
+	A = 0x31;
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x0F;	// RRC A
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(A == 0x98);
+}
+

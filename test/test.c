@@ -325,7 +325,9 @@ int main(void) {
 			(NULL == CU_add_test(rot_shift_suite, "RLC (IX + d) / RLC (IY + d)", rlc_IX_IY_test)) ||
 			
 			(NULL == CU_add_test(rot_shift_suite, "RL r", rl_r_test)) ||
-			(NULL == CU_add_test(rot_shift_suite, "RL (IX + d) / RL (IY + d)", rl_IX_IY_test))
+			(NULL == CU_add_test(rot_shift_suite, "RL (IX + d) / RL (IY + d)", rl_IX_IY_test))	||
+			
+			(NULL == CU_add_test(rot_shift_suite, "RRC r", rrc_r_test))
 			
 		) {
 		CU_cleanup_registry();
