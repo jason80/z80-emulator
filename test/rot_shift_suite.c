@@ -182,3 +182,20 @@ void rrc_r_test(void) {
 	CU_ASSERT(A == 0x98);
 }
 
+void rrc_hl_test(void) {
+	cpu_reset();
+	
+	HL = 0x45AA;
+	
+	cpu->mem[0x45AA] = 0x75; // 01110101
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x0E;	// RRC (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x45AA] == 0xBA); // 10111010
+	CU_ASSERT(FLAG_C == 1);
+}
+
