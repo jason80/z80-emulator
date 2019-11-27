@@ -138,3 +138,33 @@ void rl_r_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 }
 
+void rl_IX_IY_test(void) {
+	cpu_reset();
+	IX = 0x1000;
+	IY = 0x2000;
+	cpu->mem[0x1022] = 0x88;	// 10001000
+	cpu->mem[0x2002] = 0x44;	// 01000100
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xCB;
+	cpu->mem[2] = 0x22;
+	cpu->mem[3] = 0x16;		// RL (IX + 22h)
+	
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0xCB;
+	cpu->mem[6] = 0x02;
+	cpu->mem[7] = 0x16;		// RL (IY + 02h)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 1);
+	CU_ASSERT(cpu->mem[0x1022] == 0x10);	// 1 00010000
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_C == 0);
+	CU_ASSERT(cpu->mem[0x2002] == 0x89);	// 0 10001001
+}
+
