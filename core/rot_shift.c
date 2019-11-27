@@ -83,7 +83,6 @@ void rra(void) {
 void rlc(uint8_t* reg8) {
 	rotate_left_carry(reg8);
 	rotate_flag_check(reg8);
-	
 	cpu->ts = 8;
 }
 
@@ -95,11 +94,21 @@ void rlc_relative(uint16_t reg16) {
 void rl(uint8_t* reg8) {
 	rotate_left(reg8);
 	rotate_flag_check(reg8);
-	
 	cpu->ts = 8;
 }
 
 void rl_relative(uint16_t reg16) {
 	rl(&cpu->mem[reg16 + BRL]);
+	cpu->ts = 23;
+}
+
+void rrc(uint8_t* reg8) {
+	rotate_right_carry(reg8);
+	rotate_flag_check(reg8);
+	cpu->ts = 8;
+}
+
+void rrc_relative(uint16_t reg16) {
+	rrc(&cpu->mem[reg16 + BRL]);
 	cpu->ts = 23;
 }
