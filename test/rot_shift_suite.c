@@ -123,3 +123,18 @@ void rlc_IX_IY_test(void) {
 	CU_ASSERT(cpu->mem[0x2002] == 0x88);
 }
 
+void rl_r_test(void) {
+	cpu_reset();
+	
+	D = 0x8F;
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x12;	// RL D
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(D == 0x1E);
+	CU_ASSERT(FLAG_C == 1);
+}
+
