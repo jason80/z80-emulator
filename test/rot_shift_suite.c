@@ -245,3 +245,20 @@ void sla_r_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 	
 }
+
+void sra_IX_test(void) {
+	cpu_reset();
+	IX = 0x1000;
+	cpu->mem[0x1003] = 0xB8; // 1011 1000
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xCB;
+	cpu->mem[2] = 0x03;
+	cpu->mem[3] = 0x2E; // SRA (IX + 3h)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x1003] == 0xDC); // 1101 1100 0
+	CU_ASSERT(FLAG_C == 0);
+}

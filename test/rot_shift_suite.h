@@ -23,4 +23,6 @@ void rr_IX_IY_test(void);
 
 void sla_r_test(void);
 
+void sra_IX_test(void);
+
 #endif

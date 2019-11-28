@@ -332,7 +332,8 @@ int main(void) {
 			
 			(NULL == CU_add_test(rot_shift_suite, "RR (IX + d) / RR (IY + d)", rr_IX_IY_test)) ||
 			
-			(NULL == CU_add_test(rot_shift_suite, "SLA r", sla_r_test)) 
+			(NULL == CU_add_test(rot_shift_suite, "SLA r", sla_r_test)) ||
+			(NULL == CU_add_test(rot_shift_suite, "SRA (IX + d)", sra_IX_test))
 			
 		) {
 		CU_cleanup_registry();
