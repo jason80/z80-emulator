@@ -230,3 +230,18 @@ void rr_IX_IY_test(void) {
 	CU_ASSERT(FLAG_C == 1);
 }
 
+void sla_r_test(void) {
+	cpu_reset();
+	
+	D = 0xB1; // 1011 0001
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x22; // SLA D
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(D == 0x62);	// 1 0110 0010
+	CU_ASSERT(FLAG_C == 1);
+	
+}
