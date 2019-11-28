@@ -410,8 +410,18 @@ void cb_prefixed(void) {
 					cpu->ts = 15;	// for RR (HL)
 			}
 			break;
+		case 4:		// y = 4
+			if (cpu->prefix == 0xDD && opcode.z == 6) {
+				sla_relative(IX);		// SLA (IX + d)
+			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
+				sla_relative(IY);		// SLA (IX + d)
+			} else {
+				sla(table_r(opcode.z));		// SLA r[z]
+				if (opcode.z == 6)
+					cpu->ts = 15;	// for SLA (HL)
+			}
+			break;
 		}
-		
 	}
 }
 
