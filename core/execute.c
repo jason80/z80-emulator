@@ -370,7 +370,7 @@ void cb_prefixed(void) {
 			if (cpu->prefix == 0xDD && opcode.z == 6) {
 				rlc_relative(IX);		// RLC (IX + d)
 			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
-				rlc_relative(IY);		// RLC (IX + d)
+				rlc_relative(IY);		// RLC (IY + d)
 			} else {
 				rlc(table_r(opcode.z));		// RLC r[z]
 				if (opcode.z == 6)
@@ -381,7 +381,7 @@ void cb_prefixed(void) {
 			if (cpu->prefix == 0xDD && opcode.z == 6) {
 				rrc_relative(IX);		// RRC (IX + d)
 			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
-				rrc_relative(IY);		// RRC (IX + d)
+				rrc_relative(IY);		// RRC (IY + d)
 			} else {
 				rrc(table_r(opcode.z));		// RRC r[z]
 				if (opcode.z == 6)
@@ -392,7 +392,7 @@ void cb_prefixed(void) {
 			if (cpu->prefix == 0xDD && opcode.z == 6) {
 				rl_relative(IX);		// RL (IX + d)
 			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
-				rl_relative(IY);		// RL (IX + d)
+				rl_relative(IY);		// RL (IY + d)
 			} else {
 				rl(table_r(opcode.z));		// RL r[z]
 				if (opcode.z == 6)
@@ -403,7 +403,7 @@ void cb_prefixed(void) {
 			if (cpu->prefix == 0xDD && opcode.z == 6) {
 				rr_relative(IX);		// RR (IX + d)
 			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
-				rr_relative(IY);		// RR (IX + d)
+				rr_relative(IY);		// RR (IY + d)
 			} else {
 				rr(table_r(opcode.z));		// RR r[z]
 				if (opcode.z == 6)
@@ -414,11 +414,22 @@ void cb_prefixed(void) {
 			if (cpu->prefix == 0xDD && opcode.z == 6) {
 				sla_relative(IX);		// SLA (IX + d)
 			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
-				sla_relative(IY);		// SLA (IX + d)
+				sla_relative(IY);		// SLA (IY + d)
 			} else {
 				sla(table_r(opcode.z));		// SLA r[z]
 				if (opcode.z == 6)
 					cpu->ts = 15;	// for SLA (HL)
+			}
+			break;
+		case 5:		// y = 5
+			if (cpu->prefix == 0xDD && opcode.z == 6) {
+				sra_relative(IX);		// SRA (IX + d)
+			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
+				sra_relative(IY);		// SRA (IY + d)
+			} else {
+				sra(table_r(opcode.z));		// SRA r[z]
+				if (opcode.z == 6)
+					cpu->ts = 15;	// for SRA (HL)
 			}
 			break;
 		}

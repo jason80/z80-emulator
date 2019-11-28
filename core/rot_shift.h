@@ -23,4 +23,7 @@ void rr_relative(uint16_t reg16);
 void sla(uint8_t* reg8);
 void sla_relative(uint16_t reg16);
 
+void sra(uint8_t* reg8);
+void sra_relative(uint16_t reg16);
+
 #endif

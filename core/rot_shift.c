@@ -135,3 +135,17 @@ void sla_relative(uint16_t reg16) {
 	sla(&cpu->mem[reg16 + BRL]);
 	cpu->ts = 23;
 }
+
+void sra(uint8_t* reg8) {
+	uint8_t tmp = *reg8 & 0x80;
+	FLAG_C = (*reg8 & 1) ? 1 : 0;
+	*reg8 >>= 1;
+	*reg8 |= tmp;
+	rotate_flag_check(reg8);
+	cpu->ts = 8;
+}
+
+void sra_relative(uint16_t reg16) {
+	sra(&cpu->mem[reg16 + BRL]);
+	cpu->ts = 23;
+}
