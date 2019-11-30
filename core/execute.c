@@ -494,6 +494,9 @@ void ed_prefixed(void) {
 				// LD A, R
 				ld_8bit_8bit(&A, &R);
 				break;
+			case 5: // y = 5
+				rld();			// RLD
+				break;
 			}
 		}
 	} else if (opcode.x == 2) { //  x = 2

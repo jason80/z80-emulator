@@ -162,3 +162,18 @@ void srl_relative(uint16_t reg16) {
 	cpu->ts = 23;
 }
 
+void rld(void) {
+	uint8_t new_a;
+	uint8_t hl = cpu->mem[HL];
+	
+	new_a = hl >> 4;
+	hl <<= 4;
+	hl |= A & 0x0F;
+	
+	A = new_a;
+	cpu->mem[HL] = hl;
+	
+	rotate_flag_check(&A);
+	cpu->ts = 18;
+}
+

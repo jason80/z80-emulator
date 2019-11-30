@@ -3,6 +3,7 @@
 
 #include <inttypes.h>
 
+// Rotate
 void rlca(void);
 void rrca(void);
 void rla(void);
@@ -20,6 +21,7 @@ void rrc_relative(uint16_t reg16);
 void rr(uint8_t* reg8);
 void rr_relative(uint16_t reg16);
 
+// Shift
 void sla(uint8_t* reg8);
 void sla_relative(uint16_t reg16);
 
@@ -28,5 +30,8 @@ void sra_relative(uint16_t reg16);
 
 void srl(uint8_t* reg8);
 void srl_relative(uint16_t reg16);
+
+// BCD rotate
+void rld(void);
 
 #endif
