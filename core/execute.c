@@ -432,6 +432,18 @@ void cb_prefixed(void) {
 					cpu->ts = 15;	// for SRA (HL)
 			}
 			break;
+		
+		case 7:		// y = 7
+			if (cpu->prefix == 0xDD && opcode.z == 6) {
+				srl_relative(IX);		// SRL (IX + d)
+			} else if (cpu->prefix == 0xFD && opcode.z == 6) {
+				srl_relative(IY);		// SRL (IY + d)
+			} else {
+				srl(table_r(opcode.z));		// SRL r[z]
+				if (opcode.z == 6)
+					cpu->ts = 15;	// for SRL (HL)
+			}
+			break;	
 		}
 	}
 }

@@ -149,3 +149,16 @@ void sra_relative(uint16_t reg16) {
 	sra(&cpu->mem[reg16 + BRL]);
 	cpu->ts = 23;
 }
+
+void srl(uint8_t* reg8) {
+	FLAG_C = (*reg8 & 1) ? 1 : 0;
+	*reg8 >>= 1;
+	rotate_flag_check(reg8);
+	cpu->ts = 8;
+}
+
+void srl_relative(uint16_t reg16) {
+	srl(&cpu->mem[reg16 + BRL]);
+	cpu->ts = 23;
+}
+
