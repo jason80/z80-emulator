@@ -277,3 +277,37 @@ void srl_hl_test(void) {
 	CU_ASSERT(cpu->mem[0x5050] == 0x47); // 0100 0111 1
 	CU_ASSERT(FLAG_C == 1);
 }
+
+void rld_test(void) {
+	cpu_reset();
+	
+	A = 0x7A;					// 0111 1010
+	HL = 0x5000;
+	cpu->mem[0x5000] = 0x31;	// 0011 0001
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x6F; // RLD
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x73);					// 0111 0011
+	CU_ASSERT(cpu->mem[0x5000] == 0x1A);	// 0001 1010
+}
+
+void rrd_test(void) {
+	cpu_reset();
+	
+	A = 0x84;					// 1000 0100
+	HL = 0x5000;
+	cpu->mem[0x5000] = 0x20;	// 0010 0000
+	
+	cpu->mem[0] = 0xED;
+	cpu->mem[1] = 0x67; // RRD
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x80);					// 1000 0000
+	CU_ASSERT(cpu->mem[0x5000] == 0x42);	// 0100 0010
+}

@@ -334,7 +334,10 @@ int main(void) {
 			
 			(NULL == CU_add_test(rot_shift_suite, "SLA r", sla_r_test)) 		||
 			(NULL == CU_add_test(rot_shift_suite, "SRA (IX + d)", sra_IX_test))	||
-			(NULL == CU_add_test(rot_shift_suite, "SRL (IX + d)", srl_hl_test))
+			(NULL == CU_add_test(rot_shift_suite, "SRL (IX + d)", srl_hl_test))	||
+			
+			(NULL == CU_add_test(rot_shift_suite, "RLD", rld_test))				||
+			(NULL == CU_add_test(rot_shift_suite, "RRD", rrd_test))
 			
 		) {
 		CU_cleanup_registry();
