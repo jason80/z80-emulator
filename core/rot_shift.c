@@ -171,7 +171,8 @@ void rld(void) {
 	hl <<= 4;
 	hl |= A & 0x0F;
 	
-	A = new_a;
+	A &= 0xF0;
+	A |= new_a;
 	cpu->mem[HL] = hl;
 	
 	rotate_flag_check(&A);
