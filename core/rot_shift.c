@@ -51,7 +51,8 @@ void rotate_right_carry(uint8_t* reg8) {
 }
 
 void rotate_flag_check(uint8_t* reg8) {
-	FLAG_Z = (*reg8 & 0x80) ? 1 : 0;
+	FLAG_S = (*reg8 & 0x80) ? 1 : 0;
+	FLAG_Z = (*reg8 == 0) ? 1 : 0;
 	
 	// FLAG_PV (alu.h)
 	parity_check(reg8);
