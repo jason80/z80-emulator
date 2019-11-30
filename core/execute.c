@@ -476,7 +476,7 @@ void ed_prefixed(void) {
 		case 4:		// z = 4
 			neg();				// NEG
 			break;
-		case 7:
+		case 7:					// z = 7
 			switch(opcode.y) {
 			case 0: // y = 0
 				// LD I, A
@@ -493,6 +493,9 @@ void ed_prefixed(void) {
 			case 3: // y = 3
 				// LD A, R
 				ld_8bit_8bit(&A, &R);
+				break;
+			case 4:	// y = 4
+				rrd();			// RRD
 				break;
 			case 5: // y = 5
 				rld();			// RLD

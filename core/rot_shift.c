@@ -179,3 +179,21 @@ void rld(void) {
 	cpu->ts = 18;
 }
 
+void rrd(void) {
+	uint8_t new_a = A;
+	uint8_t hl = cpu->mem[HL];
+	
+	new_a &= 0xF0;
+	new_a |= hl & 0x0F;
+	
+	hl >>= 4;
+	
+	hl |= (A << 4);
+	
+	A = new_a;
+	cpu->mem[HL] = hl;
+	
+	rotate_flag_check(&A);
+	cpu->ts = 18;
+}
+

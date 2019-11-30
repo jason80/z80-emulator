@@ -33,5 +33,6 @@ void srl_relative(uint16_t reg16);
 
 // BCD rotate
 void rld(void);
+void rrd(void);
 
 #endif
