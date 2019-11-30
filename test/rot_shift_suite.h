@@ -25,4 +25,6 @@ void sla_r_test(void);
 
 void sra_IX_test(void);
 
+void srl_hl_test(void);
+
 #endif

@@ -321,19 +321,20 @@ int main(void) {
 			(NULL == CU_add_test(rot_shift_suite, "RRCA", rrca_test))	||
 			(NULL == CU_add_test(rot_shift_suite, "RRA", rra_test))		||
 			(NULL == CU_add_test(rot_shift_suite, "RLC r", rlc_r_test))	||
-			(NULL == CU_add_test(rot_shift_suite, "RLC (HL)", rlc_hl_test))	||
+			(NULL == CU_add_test(rot_shift_suite, "RLC (HL)", rlc_hl_test))		||
 			(NULL == CU_add_test(rot_shift_suite, "RLC (IX + d) / RLC (IY + d)", rlc_IX_IY_test)) ||
 			
 			(NULL == CU_add_test(rot_shift_suite, "RL r", rl_r_test)) ||
 			(NULL == CU_add_test(rot_shift_suite, "RL (IX + d) / RL (IY + d)", rl_IX_IY_test))	||
 			
-			(NULL == CU_add_test(rot_shift_suite, "RRC r", rrc_r_test)) ||
-			(NULL == CU_add_test(rot_shift_suite, "RRC (HL)", rrc_hl_test)) ||
+			(NULL == CU_add_test(rot_shift_suite, "RRC r", rrc_r_test)) 		||
+			(NULL == CU_add_test(rot_shift_suite, "RRC (HL)", rrc_hl_test)) 	||
 			
 			(NULL == CU_add_test(rot_shift_suite, "RR (IX + d) / RR (IY + d)", rr_IX_IY_test)) ||
 			
-			(NULL == CU_add_test(rot_shift_suite, "SLA r", sla_r_test)) ||
-			(NULL == CU_add_test(rot_shift_suite, "SRA (IX + d)", sra_IX_test))
+			(NULL == CU_add_test(rot_shift_suite, "SLA r", sla_r_test)) 		||
+			(NULL == CU_add_test(rot_shift_suite, "SRA (IX + d)", sra_IX_test))	||
+			(NULL == CU_add_test(rot_shift_suite, "SRL (IX + d)", srl_hl_test))
 			
 		) {
 		CU_cleanup_registry();
