@@ -60,3 +60,7 @@ clean-test:
 
 .PHONY: clean
 clean: clean-test clean-core
+
+.PHONY: distclean
+distclean:
+	rm -rf $(BUILDDIR)
