@@ -2,6 +2,7 @@ CFLAGS := -Wall -g
 
 BUILDDIR := build
 OBJDIR := $(BUILDDIR)/obj
+DEPDIR := $(BUILDDIR)/dep
 BINDIR := $(BUILDDIR)/bin
 
 CORE_SRC := core/cpu.c \
@@ -17,6 +18,7 @@ CORE_SRC := core/cpu.c \
 			core/arithm16.c \
 			core/rot_shift.c
 CORE_OBJ := $(CORE_SRC:%.c=$(OBJDIR)/%.o)
+CORE_DEP:= $(CORE_SRC:%.c=$(DEPDIR)/%.d)
 
 TEST_SRC := test/test.c \
 			test/cpu_suite.c \
@@ -36,8 +38,10 @@ TEST_SRC := test/test.c \
 			test/arithm_16bit_suite.c \
 			test/rot_shift_suite.c
 TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)/%.o)
+TEST_DEP:= $(TEST_SRC:%.c=$(DEPDIR)/%.d)
 
 TEST_LFLAGS =	-lcunit
+DEPFLAGS = -MMD -MP -MF $(@:$(OBJDIR)/%.o=$(DEPDIR)/%.d)
 
 .PHONY: all
 all: $(BINDIR)/test
@@ -48,7 +52,8 @@ $(BINDIR)/test: $(TEST_OBJ) $(CORE_OBJ)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@mkdir -p $(DEPDIR)/$(<D)
+	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 .PHONY: clean-core
 clean-core:
@@ -64,3 +69,6 @@ clean: clean-test clean-core
 .PHONY: distclean
 distclean:
 	rm -rf $(BUILDDIR)
+
+-include $(CORE_DEP)
+-include $(TEST_DEP)
