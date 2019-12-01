@@ -34,6 +34,7 @@ TEST_OBJ =		test/test.o \
 TEST_LFLAGS =	-lcunit
 TEST_BIN =		test/test
 
+.PHONY: all
 all: test
 
 test: $(TEST_OBJ) $(CORE_OBJ)
@@ -42,10 +43,13 @@ test: $(TEST_OBJ) $(CORE_OBJ)
 %.o: %.c
 	gcc $(CFLAGS) -c $< -o $@
 
+.PHONY: clean-core
 clean-core:
 	rm -f $(CORE_OBJ)
 
+.PHONY: clean-test
 clean-test:
 	rm -f $(TEST_OBJ) $(TEST_BIN)
-		
+
+.PHONY: clean
 clean: clean-test clean-core
