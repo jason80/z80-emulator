@@ -38,10 +38,10 @@ TEST_BIN =		test/test
 all: test
 
 test: $(TEST_OBJ) $(CORE_OBJ)
-	gcc $(CFLAGS) $(TEST_OBJ) $(CORE_OBJ) -o $(TEST_BIN) $(TEST_LFLAGS)
+	$(CC) $(CFLAGS) $(TEST_OBJ) $(CORE_OBJ) -o $(TEST_BIN) $(TEST_LFLAGS)
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean-core
 clean-core:
