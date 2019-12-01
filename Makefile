@@ -1,46 +1,53 @@
-CFLAGS = -Wall -g
+CFLAGS := -Wall -g
 
-CORE_OBJ =		core/cpu.o \
-				core/tables.o \
-				core/execute.o \
-				core/mem_loader.o \
-				core/load.o \
-				core/exchange.o \
-				core/block_transfer.o \
-				core/search.o \
-				core/alu.o \
-				core/misc.o \
-				core/arithm16.o \
-				core/rot_shift.o
+BUILDDIR := build
+OBJDIR := $(BUILDDIR)/obj
+BINDIR := $(BUILDDIR)/bin
 
-TEST_OBJ =		test/test.o \
-				test/cpu_suite.o \
-				test/load_8bit_suite.o \
-				test/load_16bit_suite.o \
-				test/exchange_suite.o \
-				test/block_suite.o \
-				test/search_suite.o \
-				test/add_suite.o \
-				test/adc_suite.o \
-				test/sub_suite.o \
-				test/sbc_suite.o \
-				test/bitwise_suite.o \
-				test/cp_suite.o \
-				test/inc_dec_suite.o \
-				test/misc_suite.o \
-				test/arithm_16bit_suite.o \
-				test/rot_shift_suite.o
+CORE_SRC := core/cpu.c \
+			core/tables.c \
+			core/execute.c \
+			core/mem_loader.c \
+			core/load.c \
+			core/exchange.c \
+			core/block_transfer.c \
+			core/search.c \
+			core/alu.c \
+			core/misc.c \
+			core/arithm16.c \
+			core/rot_shift.c
+CORE_OBJ := $(CORE_SRC:%.c=$(OBJDIR)/%.o)
+
+TEST_SRC := test/test.c \
+			test/cpu_suite.c \
+			test/load_8bit_suite.c \
+			test/load_16bit_suite.c \
+			test/exchange_suite.c \
+			test/block_suite.c \
+			test/search_suite.c \
+			test/add_suite.c \
+			test/adc_suite.c \
+			test/sub_suite.c \
+			test/sbc_suite.c \
+			test/bitwise_suite.c \
+			test/cp_suite.c \
+			test/inc_dec_suite.c \
+			test/misc_suite.c \
+			test/arithm_16bit_suite.c \
+			test/rot_shift_suite.c
+TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)/%.o)
 
 TEST_LFLAGS =	-lcunit
-TEST_BIN =		test/test
 
 .PHONY: all
-all: test
+all: $(BINDIR)/test
 
-test: $(TEST_OBJ) $(CORE_OBJ)
-	$(CC) $(CFLAGS) $(TEST_OBJ) $(CORE_OBJ) -o $(TEST_BIN) $(TEST_LFLAGS)
+$(BINDIR)/test: $(TEST_OBJ) $(CORE_OBJ)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(TEST_OBJ) $(CORE_OBJ) -o $@ $(TEST_LFLAGS)
 
-%.o: %.c
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean-core
@@ -49,7 +56,7 @@ clean-core:
 
 .PHONY: clean-test
 clean-test:
-	rm -f $(TEST_OBJ) $(TEST_BIN)
+	rm -f $(TEST_OBJ) $(BINDIR)/test
 
 .PHONY: clean
 clean: clean-test clean-core
