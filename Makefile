@@ -16,7 +16,8 @@ CORE_SRC := core/cpu.c \
 			core/alu.c \
 			core/misc.c \
 			core/arithm16.c \
-			core/rot_shift.c
+			core/rot_shift.c \
+			core/bit.c
 CORE_OBJ := $(CORE_SRC:%.c=$(OBJDIR)/%.o)
 CORE_DEP:= $(CORE_SRC:%.c=$(DEPDIR)/%.d)
 
