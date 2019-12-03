@@ -10,6 +10,7 @@
 #include "misc.h"
 #include "arithm16.h"
 #include "rot_shift.h"
+#include "bit.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -444,6 +445,36 @@ void cb_prefixed(void) {
 					cpu->ts = 15;	// for SRL (HL)
 			}
 			break;	
+		}
+	} else if (opcode.x == 1) { // x = 1
+		if (cpu->prefix == 0xDD && opcode.z == 6)
+			bit_test_relative(IX, opcode.y);			// BIT b, (IX + d)
+		else if (cpu->prefix == 0xFD && opcode.z == 6)
+			bit_test_relative(IY, opcode.y);			// BIT b, (IY + d)
+		else {
+			bit_test(table_r(opcode.z), opcode.y);		// BIT b, r
+			if (opcode.z == 6)							// BIT b, (HL)
+				cpu->ts = 12;
+		}
+	} else if (opcode.x == 2) { // x = 2
+		if (cpu->prefix == 0xDD && opcode.z == 6)
+			bit_reset_relative(IX, opcode.y);			// RES b, (IX + d)
+		else if (cpu->prefix == 0xFD && opcode.z == 6)
+			bit_reset_relative(IY, opcode.y);			// RES b, (IY + d)
+		else {
+			bit_reset(table_r(opcode.z), opcode.y);		// RES b, r
+			if (opcode.z == 6)							// RES b, (HL)
+				cpu->ts = 15;
+		}
+	} else if (opcode.x == 3) { // x = 3
+		if (cpu->prefix == 0xDD && opcode.z == 6)
+			bit_set_relative(IX, opcode.y);				// SET b, (IX + d)
+		else if (cpu->prefix == 0xFD && opcode.z == 6)
+			bit_set_relative(IY, opcode.y);				// SET b, (IY + d)
+		else {
+			bit_set(table_r(opcode.z), opcode.y);		// SET b, r
+			if (opcode.z == 6)							// SET b, (HL)
+				cpu->ts = 15;
 		}
 	}
 }
