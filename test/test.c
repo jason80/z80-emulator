@@ -18,6 +18,7 @@
 #include "misc_suite.h"
 #include "arithm_16bit_suite.h"
 #include "rot_shift_suite.h"
+#include "bit_suite.h"
 
 int main(void) {
 	
@@ -37,6 +38,7 @@ int main(void) {
 	CU_pSuite misc_suite = NULL;
 	CU_pSuite arithm_16bit_suite = NULL;
 	CU_pSuite rot_shift_suite = NULL;
+	CU_pSuite bit_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -344,7 +346,20 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	cpu_suite->fActive = CU_FALSE;
+	// BIT SUITE
+	bit_suite = CU_add_suite("BIT", init_bit_suite, clean_bit_suite);
+	if (NULL == bit_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	/*if (	
+		) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}*/
+	
+	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -359,7 +374,8 @@ int main(void) {
 	inc_dec_suite->fActive = CU_FALSE;
 	misc_suite->fActive = CU_FALSE;
 	arithm_16bit_suite->fActive = CU_FALSE;
-	/*rot_shift_suite->fActive = CU_FALSE;*/
+	rot_shift_suite->fActive = CU_FALSE;
+	bit_suite->fActive = CU_FALSE;*/
 	
 	// RUN TESTS
 	
