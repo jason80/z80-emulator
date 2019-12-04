@@ -353,11 +353,11 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	/*if (	
+	if (	(NULL == CU_add_test(bit_suite, "BIT b, r", bit_b_r_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
-	}*/
+	}
 	
 	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
