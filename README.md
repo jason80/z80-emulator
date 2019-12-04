@@ -11,5 +11,5 @@ make
 - Run:
 
 ```sh
-./test/test
+./build/bin/test
 ```
