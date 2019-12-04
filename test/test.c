@@ -353,7 +353,8 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(bit_suite, "BIT b, r", bit_b_r_test))
+	if (	(NULL == CU_add_test(bit_suite, "BIT b, r", bit_b_r_test))		||
+			(NULL == CU_add_test(bit_suite, "BIT b, (HL)", bit_b_hl_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();

@@ -28,3 +28,19 @@ void bit_b_r_test(void) {
 	CU_ASSERT(FLAG_H == 1);
 	CU_ASSERT(FLAG_N == 0);
 }
+
+void bit_b_hl_test(void) {
+	cpu_reset();
+	HL = 0x4444;
+	cpu->mem[0x4444] = 0x10; // 0001 0000
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0x66;	// BIT 2, (HL)  (01 100 110)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_H == 1);
+	CU_ASSERT(FLAG_N == 0);
+}
