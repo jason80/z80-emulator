@@ -78,3 +78,17 @@ void bit_b_IX_IY_relative_test(void) {
 	CU_ASSERT(FLAG_H == 1);
 	CU_ASSERT(FLAG_N == 0);
 }
+
+void set_b_r_test(void) {
+	cpu_reset();
+	A = 0;
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0xE7;	// SET 4, A		(11 100 111)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(A == 0x10);	
+}
+
