@@ -92,3 +92,16 @@ void set_b_r_test(void) {
 	CU_ASSERT(A == 0x10);	
 }
 
+void set_b_hl_test(void) {
+	cpu_reset();
+	HL = 0x3000;
+	cpu->mem[0x3000] = 0x00;
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0xE6;	// SET 4, (HL)      (11 100 110)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x3000] == 0x10);
+}
