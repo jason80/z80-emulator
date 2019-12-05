@@ -44,3 +44,37 @@ void bit_b_hl_test(void) {
 	CU_ASSERT(FLAG_H == 1);
 	CU_ASSERT(FLAG_N == 0);
 }
+
+void bit_b_IX_IY_relative_test(void) {
+	cpu_reset();
+	
+	IX = 0x2000;
+	IY = 0x3000;
+	
+	cpu->mem[0x2004] = 0x40; // 0100 0000
+	cpu->mem[0x3002] = 0xFE; // 1111 1110
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xCB;
+	cpu->mem[2] = 0x04;
+	cpu->mem[3] = 0x76; // BIT 6, (IX + 4h)		(01 110 110)
+	
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0xCB;
+	cpu->mem[6] = 0x02;
+	cpu->mem[7] = 0x46; // BIT 0, (IY + 2h)		(01 000 110)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_Z == 0);
+	CU_ASSERT(FLAG_H == 1);
+	CU_ASSERT(FLAG_N == 0);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(FLAG_Z == 1);
+	CU_ASSERT(FLAG_H == 1);
+	CU_ASSERT(FLAG_N == 0);
+}
