@@ -10,7 +10,7 @@ void bit_b_IX_IY_relative_test(void);
 
 void set_b_r_test(void);
 void set_b_hl_test(void);
-
+void set_b_IX_IY_relative_test(void);
 
 #endif
 

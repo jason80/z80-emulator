@@ -105,3 +105,30 @@ void set_b_hl_test(void) {
 	
 	CU_ASSERT(cpu->mem[0x3000] == 0x10);
 }
+
+void set_b_IX_IY_relative_test(void) {
+	cpu_reset();
+	IX = 0x2000;
+	IY = 0x3400;
+	cpu->mem[0x2003] = 0;
+	cpu->mem[0x340A] = 0;
+	
+	cpu->mem[0] = 0xDD;
+	cpu->mem[1] = 0xCB;
+	cpu->mem[2] = 0x03;
+	cpu->mem[3] = 0xC6;	// SET 0, (IX + 3h)
+	
+	cpu->mem[4] = 0xFD;
+	cpu->mem[5] = 0xCB;
+	cpu->mem[6] = 0x0A;
+	cpu->mem[7] = 0xC6;	// SET 0, (IY + Ah)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[0x2003] == 1);
+	CU_ASSERT(cpu->mem[0x340A] == 1);
+}
