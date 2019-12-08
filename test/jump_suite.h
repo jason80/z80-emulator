@@ -4,4 +4,6 @@
 int init_jump_suite(void);
 int clean_jump_suite(void);
 
+void jp_nn_test(void);
+
 #endif
