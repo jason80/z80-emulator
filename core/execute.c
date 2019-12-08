@@ -11,6 +11,7 @@
 #include "arithm16.h"
 #include "rot_shift.h"
 #include "bit.h"
+#include "jump.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -306,6 +307,7 @@ void execute_x3(opcode_t opcode) {
 	case 3: // z = 3
 		switch (opcode.y) {
 		case 0: // y = 0
+			jump();			// JP nn
 			break;
 		case 1: // y = 1
 			break;
