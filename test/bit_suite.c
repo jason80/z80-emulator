@@ -132,3 +132,18 @@ void set_b_IX_IY_relative_test(void) {
 	CU_ASSERT(cpu->mem[0x2003] == 1);
 	CU_ASSERT(cpu->mem[0x340A] == 1);
 }
+
+void reset_b_r_test(void) {
+	cpu_reset();
+	
+	B = 0xFF;	// (1111 1111)
+	
+	cpu->mem[0] = 0xCB;
+	cpu->mem[1] = 0xB0;	// RES 6, B
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(B == 0xBF);	// (1011 1111)
+	
+}

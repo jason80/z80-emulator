@@ -359,7 +359,9 @@ int main(void) {
 			
 			(NULL == CU_add_test(bit_suite, "SET b, r", set_b_r_test))		||
 			(NULL == CU_add_test(bit_suite, "SET b, (HL)", set_b_hl_test))	||
-			(NULL == CU_add_test(bit_suite, "SET b, (IX + d) / SET b, (IY + d)", set_b_IX_IY_relative_test))
+			(NULL == CU_add_test(bit_suite, "SET b, (IX + d) / SET b, (IY + d)", set_b_IX_IY_relative_test)) ||
+			
+			(NULL == CU_add_test(bit_suite, "RES b, r", reset_b_r_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
