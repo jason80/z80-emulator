@@ -39,7 +39,8 @@ TEST_SRC := test/test.c \
 			test/misc_suite.c \
 			test/arithm_16bit_suite.c \
 			test/rot_shift_suite.c \
-			test/bit_suite.c
+			test/bit_suite.c \
+			test/jump_suite.c
 TEST_OBJ := $(TEST_SRC:%.c=$(OBJDIR)/%.o)
 TEST_DEP:= $(TEST_SRC:%.c=$(DEPDIR)/%.d)
 
