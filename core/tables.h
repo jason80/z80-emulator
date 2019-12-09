@@ -11,4 +11,6 @@ uint16_t* table_rp_IY(int);
 
 uint16_t* table_rp2(int);
 
+int table_cc(int);
+
 #endif

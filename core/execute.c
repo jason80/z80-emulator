@@ -304,6 +304,10 @@ void execute_x3(opcode_t opcode) {
 			}
 		}
 		break;
+		
+	case 2: // z = 2
+		jump_conditional(table_cc(opcode.y));		// JP cc, nn
+		break;
 	case 3: // z = 3
 		switch (opcode.y) {
 		case 0: // y = 0
