@@ -32,3 +32,18 @@ void jp_nn_test(void) {
 	
 	CU_ASSERT(A == 0x44);
 }
+
+void jp_cc_nn_test(void) {
+	cpu_reset();
+	FLAG_C = 1;
+	cpu->mem[0x1520] = 0x03;
+	
+	cpu->mem[0] = 0xDA;
+	cpu->mem[1] = 0x20;
+	cpu->mem[2] = 0x15;	// JP C, 1520h
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(cpu->mem[PC] == 0x03);
+}

@@ -376,13 +376,14 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(jump_suite, "JP nn", jp_nn_test))
+	if (	(NULL == CU_add_test(jump_suite, "JP nn", jp_nn_test))	||
+			(NULL == CU_add_test(jump_suite, "JP cc, nn", jp_cc_nn_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
 	
-	/*cpu_suite->fActive = CU_FALSE;
+	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -399,7 +400,7 @@ int main(void) {
 	arithm_16bit_suite->fActive = CU_FALSE;
 	rot_shift_suite->fActive = CU_FALSE;
 	bit_suite->fActive = CU_FALSE;
-	jump_suite->fActive = CU_FALSE*/
+	/*jump_suite->fActive = CU_FALSE*/
 	
 	// RUN TESTS
 	
