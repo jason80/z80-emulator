@@ -47,3 +47,26 @@ void jp_cc_nn_test(void) {
 	
 	CU_ASSERT(cpu->mem[PC] == 0x03);
 }
+
+void jr_e_test(void) {
+	cpu_reset();
+	
+	PC = 480;
+	
+	cpu->mem[480] = 0x18;	// JR +5
+	cpu->mem[481] = 0x03;
+	
+	cpu->mem[485] = 0x18;	// JR -10
+	cpu->mem[486] = 0xF4;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 485);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 475);
+	
+}

@@ -7,4 +7,6 @@ int clean_jump_suite(void);
 void jp_nn_test(void);
 void jp_cc_nn_test(void);
 
+void jr_e_test(void);
+
 #endif
