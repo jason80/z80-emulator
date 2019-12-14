@@ -12,3 +12,18 @@ void jump(void) {
 void jump_conditional(int c) {
 	if (c) jump();
 }
+
+void jump_relative(void) {
+	
+	union {
+		uint8_t u;
+		int8_t s;
+	} val;
+	
+	cpu_fetch();
+	val.u = BRL;
+	
+	PC += val.s;
+	
+	cpu->ts = 12;
+}

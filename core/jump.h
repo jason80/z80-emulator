@@ -4,5 +4,7 @@
 void jump(void);
 void jump_conditional(int);
 
+void jump_relative(void);
+
 #endif
 

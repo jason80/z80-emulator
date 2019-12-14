@@ -61,14 +61,15 @@ void execute_x0(opcode_t opcode) {
 	case 0: // z = 0
 		switch (opcode.y) {
 		case 0: // y = 0
-			cpu->ts = 4;	// NOP
+			cpu->ts = 4;		// NOP
 			break;
 		case 1: // y = 1
-			ex_af_af();		// EX AF, AF'
+			ex_af_af();			// EX AF, AF'
 			break;
 		case 2: // y = 2
 			break;
 		case 3: // y = 3
+			jump_relative();	// JR e
 			break;
 		default: // y = 4 .. 7
 			break;
