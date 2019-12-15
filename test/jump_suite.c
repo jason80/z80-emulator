@@ -68,5 +68,18 @@ void jr_e_test(void) {
 	cpu_execute();
 	
 	CU_ASSERT(PC == 475);
+}
+
+void jr_C_e_test(void) {
+	cpu_reset();
+	FLAG_C = 1;
+	PC = 0x480;
 	
+	cpu->mem[0x480] = 0x38; // JR C, -4
+	cpu->mem[0x481] = 0xFA; // -6
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 0x47C);
 }
