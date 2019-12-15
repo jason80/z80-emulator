@@ -71,7 +71,8 @@ void execute_x0(opcode_t opcode) {
 		case 3: // y = 3
 			jump_relative();	// JR e
 			break;
-		default: // y = 4 .. 7
+		case 7: // y = 7
+			jr_c_rel();			// JR C, e
 			break;
 		}
 		break;

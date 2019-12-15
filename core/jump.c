@@ -27,3 +27,12 @@ void jump_relative(void) {
 	
 	cpu->ts = 12;
 }
+
+void jr_c_rel(void) {
+	if (FLAG_C) {
+		jump_relative();
+	} else {
+		cpu_fetch();
+		cpu->ts = 7;
+	}
+}
