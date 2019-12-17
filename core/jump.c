@@ -36,3 +36,12 @@ void jr_c_rel(void) {
 		cpu->ts = 7;
 	}
 }
+
+void jr_nc_rel(void) {
+	if (!FLAG_C) {
+		jump_relative();
+	} else {
+		cpu_fetch();
+		cpu->ts = 7;
+	}
+}
