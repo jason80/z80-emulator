@@ -9,5 +9,6 @@ void jp_cc_nn_test(void);
 
 void jr_e_test(void);
 void jr_C_e_test(void);
+void jr_NC_e_test(void);
 
 #endif

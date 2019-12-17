@@ -379,7 +379,8 @@ int main(void) {
 	if (	(NULL == CU_add_test(jump_suite, "JP nn", jp_nn_test))			||
 			(NULL == CU_add_test(jump_suite, "JP cc, nn", jp_cc_nn_test))	||
 			(NULL == CU_add_test(jump_suite, "JR e", jr_e_test))			||
-			(NULL == CU_add_test(jump_suite, "JR C, e", jr_C_e_test))
+			(NULL == CU_add_test(jump_suite, "JR C, e", jr_C_e_test))		||
+			(NULL == CU_add_test(jump_suite, "JR NC, e", jr_NC_e_test))
 			
 		) {
 		CU_cleanup_registry();
