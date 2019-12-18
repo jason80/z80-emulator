@@ -98,3 +98,33 @@ void jr_NC_e_test(void) {
 	
 	CU_ASSERT(PC == 0x47C);
 }
+
+void jr_Z_e_test(void) {
+	cpu_reset();
+	
+	FLAG_Z = 1;
+	PC = 0x300;
+	
+	cpu->mem[0x300] = 0x28; // JR Z, +5
+	cpu->mem[0x301] = 0x03; // 3
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 0x305);
+}
+
+void jr_NZ_e_test(void) {
+	cpu_reset();
+	
+	FLAG_Z = 0;
+	PC = 0x480;
+	
+	cpu->mem[0x480] = 0x20; // JR NZ, +4
+	cpu->mem[0x481] = 0xFA; // -6
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 0x47C);
+}
