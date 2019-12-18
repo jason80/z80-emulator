@@ -128,3 +128,17 @@ void jr_NZ_e_test(void) {
 	
 	CU_ASSERT(PC == 0x47C);
 }
+
+void jp_HL_test(void) {
+	cpu_reset();
+	
+	PC = 0x1000;
+	HL = 0x4800;
+	
+	cpu->mem[0x1000] = 0xE9; // JP (HL)
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 0x4800);
+}

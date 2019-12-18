@@ -13,4 +13,6 @@ void jr_NC_e_test(void);
 void jr_Z_e_test(void);
 void jr_NZ_e_test(void);
 
+void jp_HL_test(void);
+
 #endif
