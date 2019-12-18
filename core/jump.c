@@ -63,3 +63,9 @@ void jr_nz_rel(void) {
 		cpu->ts = 7;
 	}
 }
+
+void jump_reg(uint16_t* reg16) {
+	PC = *reg16;
+	if (reg16 == &HL) cpu->ts = 4;
+	else if (reg16 == &IX || reg16 == &IY) cpu->ts = 8;
+}

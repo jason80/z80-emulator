@@ -303,6 +303,12 @@ void execute_x3(opcode_t opcode) {
 				exx();			// EXX
 				break;
 			case 2: // p = 2
+				if (cpu->prefix == 0xDD)
+					jump_reg(&IX);			// JP (IX)
+				else if (cpu->prefix == 0xFD)
+					jump_reg(&IY);			// JP (IY)
+				else
+					jump_reg(&HL);			// JP (HL)
 				break;
 			case 3: // p = 3
 				if (cpu->prefix == 0xDD)
