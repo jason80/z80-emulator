@@ -142,3 +142,27 @@ void jp_HL_test(void) {
 	
 	CU_ASSERT(PC == 0x4800);
 }
+
+void jp_IX_IY_test(void) {
+	cpu_reset();
+	
+	PC = 0x2000;
+	IX = 0x2200;
+	IY = 0x4400;
+	
+	cpu->mem[0x2000] = 0xDD; // JP (IX)
+	cpu->mem[0x2001] = 0xE9;
+	
+	cpu->mem[0x2200] = 0xFD; // JP (IY)
+	cpu->mem[0x2201] = 0xE9;
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 0x2200);
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(PC == 0x4400);
+}
