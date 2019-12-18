@@ -71,6 +71,12 @@ void execute_x0(opcode_t opcode) {
 		case 3: // y = 3
 			jump_relative();	// JR e
 			break;
+		case 4: // y = 4
+			jr_nz_rel();		// JR NZ, e
+			break;
+		case 5: // y = 5
+			jr_z_rel();			// JR Z, e
+			break;
 		case 6: // y = 6
 			jr_nc_rel();		// JR NC, e
 			break;

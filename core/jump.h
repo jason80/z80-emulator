@@ -8,6 +8,8 @@ void jump_relative(void);
 
 void jr_c_rel(void);
 void jr_nc_rel(void);
+void jr_z_rel(void);
+void jr_nz_rel(void);
 
 #endif
 

@@ -45,3 +45,21 @@ void jr_nc_rel(void) {
 		cpu->ts = 7;
 	}
 }
+
+void jr_z_rel(void) {
+	if (FLAG_Z) {
+		jump_relative();
+	} else {
+		cpu_fetch();
+		cpu->ts = 7;
+	}
+}
+
+void jr_nz_rel(void) {
+	if (!FLAG_Z) {
+		jump_relative();
+	} else {
+		cpu_fetch();
+		cpu->ts = 7;
+	}
+}
