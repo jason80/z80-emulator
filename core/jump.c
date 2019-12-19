@@ -69,3 +69,20 @@ void jump_reg(uint16_t* reg16) {
 	if (reg16 == &HL) cpu->ts = 4;
 	else if (reg16 == &IX || reg16 == &IY) cpu->ts = 8;
 }
+
+void djnz(void) {
+	union {
+		uint8_t u;
+		int8_t s;
+	} val;
+	
+	cpu_fetch();
+	
+	B --;
+	if (B != 0) {
+		val.u = BRL;
+		PC += val.s;		
+		cpu->ts = 13;
+	} else
+		cpu->ts = 8;
+}

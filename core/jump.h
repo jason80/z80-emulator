@@ -15,5 +15,7 @@ void jr_nz_rel(void);
 
 void jump_reg(uint16_t*);
 
+void djnz(void);
+
 #endif
 

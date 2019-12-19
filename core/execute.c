@@ -67,6 +67,7 @@ void execute_x0(opcode_t opcode) {
 			ex_af_af();			// EX AF, AF'
 			break;
 		case 2: // y = 2
+			djnz();				// DJNZ e
 			break;
 		case 3: // y = 3
 			jump_relative();	// JR e
