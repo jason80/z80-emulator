@@ -7,4 +7,6 @@ int clean_call_ret_suite(void);
 void call_nn_test(void);
 void call_cc_nn_test(void);
 
+void ret_test(void);
+
 #endif

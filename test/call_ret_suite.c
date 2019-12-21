@@ -57,3 +57,20 @@ void call_cc_nn_test(void) {
 	CU_ASSERT(SP == 0x3000);
 	CU_ASSERT(PC == 0x2135);
 }
+
+void ret_test(void) {
+	cpu_reset();
+	
+	PC = 0x3535;
+	SP = 0x2000;
+	cpu->mem[0x2000] = 0xB5;
+	cpu->mem[0x2001] = 0x18;
+	
+	cpu->mem[0x3535] = 0xC9; // RET
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(SP == 0x2002);
+	CU_ASSERT(PC == 0x18B5);
+}

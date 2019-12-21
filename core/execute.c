@@ -300,9 +300,10 @@ void execute_x3(opcode_t opcode) {
 		else {				// q = 1
 			switch (opcode.p) {
 			case 0: // p = 0
+				ret();					// RET
 				break;
 			case 1: // p = 1
-				exx();			// EXX
+				exx();					// EXX
 				break;
 			case 2: // p = 2
 				if (cpu->prefix == 0xDD)
