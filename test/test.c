@@ -20,6 +20,7 @@
 #include "rot_shift_suite.h"
 #include "bit_suite.h"
 #include "jump_suite.h"
+#include "call_ret_suite.h"
 
 int main(void) {
 	
@@ -41,6 +42,7 @@ int main(void) {
 	CU_pSuite rot_shift_suite = NULL;
 	CU_pSuite bit_suite = NULL;
 	CU_pSuite jump_suite = NULL;
+	CU_pSuite call_ret_suite = NULL;
 	
 	if (CUE_SUCCESS != CU_initialize_registry())
 		return CU_get_error();
@@ -391,7 +393,20 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	/*cpu_suite->fActive = CU_FALSE;
+	// CALL AND RETURN SUITE
+	call_ret_suite = CU_add_suite("CALL/RETURN", init_call_ret_suite, clean_call_ret_suite);
+	if (NULL == call_ret_suite) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	if (	(NULL == CU_add_test(call_ret_suite, "CALL nn", call_nn_test))
+		) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	
+	cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -408,7 +423,8 @@ int main(void) {
 	arithm_16bit_suite->fActive = CU_FALSE;
 	rot_shift_suite->fActive = CU_FALSE;
 	bit_suite->fActive = CU_FALSE;
-	jump_suite->fActive = CU_FALSE*/
+	jump_suite->fActive = CU_FALSE;
+	/*call_ret_suite->fActive = CU_FALSE*/
 	
 	// RUN TESTS
 	
