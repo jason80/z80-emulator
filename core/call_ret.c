@@ -25,3 +25,7 @@ void call_cc(int cc) {
 	} else cpu->ts = 10;
 }
 
+void ret(void) {
+	PC = pop_word(); cpu->ts = 10;
+}
+

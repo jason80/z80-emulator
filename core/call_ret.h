@@ -3,5 +3,6 @@
 
 void call(void);
 void call_cc(int cc);
+void ret(void);
 
 #endif
