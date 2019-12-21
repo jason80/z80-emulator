@@ -400,7 +400,8 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	if (	(NULL == CU_add_test(call_ret_suite, "CALL nn", call_nn_test))
+	if (	(NULL == CU_add_test(call_ret_suite, "CALL nn", call_nn_test))		||
+			(NULL == CU_add_test(call_ret_suite, "CALL cc, nn", call_cc_nn_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();
