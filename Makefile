@@ -7,6 +7,7 @@ BINDIR := $(BUILDDIR)/bin
 
 CORE_SRC := core/cpu.c \
 			core/tables.c \
+			core/stack.c \
 			core/execute.c \
 			core/mem_loader.c \
 			core/load.c \
@@ -18,7 +19,8 @@ CORE_SRC := core/cpu.c \
 			core/arithm16.c \
 			core/rot_shift.c \
 			core/bit.c \
-			core/jump.c
+			core/jump.c \
+			core/call_ret.c
 CORE_OBJ := $(CORE_SRC:%.c=$(OBJDIR)/%.o)
 CORE_DEP:= $(CORE_SRC:%.c=$(DEPDIR)/%.d)
 

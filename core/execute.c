@@ -12,6 +12,7 @@
 #include "rot_shift.h"
 #include "bit.h"
 #include "jump.h"
+#include "call_ret.h"
 
 void execute_x0(opcode_t);
 void execute_x1(opcode_t);
@@ -363,7 +364,9 @@ void execute_x3(opcode_t opcode) {
 			else
 				push(table_rp2(opcode.p)); // PUSH rp2[p]
 		} else {				// q = 1
-			// CALL
+			if (opcode.p == 0) {	// p = 0
+				call();							// CALL
+			}
 		}
 		break;
 	case 6: // z = 6
