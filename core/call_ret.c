@@ -13,3 +13,15 @@ void call(void) {
 	
 	cpu->ts = 17;
 }
+
+void call_cc(int cc) {
+	cpu_fetch();
+	cpu_fetch();
+	
+	if (cc) {
+		push_word(PC);
+		PC = BR;
+		cpu->ts = 17;
+	} else cpu->ts = 10;
+}
+

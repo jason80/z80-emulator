@@ -355,6 +355,9 @@ void execute_x3(opcode_t opcode) {
 			break;
 		}
 		break;
+	case 4: // z = 4
+		call_cc(table_cc(opcode.y));		// CALL cc[y], nn
+		break;
 	case 5: // z = 5
 		if (opcode.q == 0)	{	// q = 0
 			if (cpu->prefix == 0xDD)
