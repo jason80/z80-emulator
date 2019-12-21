@@ -288,6 +288,9 @@ void execute_x2(opcode_t opcode) {
 void execute_x3(opcode_t opcode) {
 	
 	switch (opcode.z) {
+	case 0: // z = 0
+		ret_cc(table_cc(opcode.y));				// RET cc
+		break;
 	case 1: // z = 1
 		if (opcode.q == 0) { // q = 0
 			if (cpu->prefix == 0xDD)

@@ -402,7 +402,8 @@ int main(void) {
 	
 	if (	(NULL == CU_add_test(call_ret_suite, "CALL nn", call_nn_test))			||
 			(NULL == CU_add_test(call_ret_suite, "CALL cc, nn", call_cc_nn_test))	||
-			(NULL == CU_add_test(call_ret_suite, "RET", ret_test))
+			(NULL == CU_add_test(call_ret_suite, "RET", ret_test))					||
+			(NULL == CU_add_test(call_ret_suite, "RET cc", ret_cc_test))
 		) {
 		CU_cleanup_registry();
 		return CU_get_error();

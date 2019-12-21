@@ -29,3 +29,9 @@ void ret(void) {
 	PC = pop_word(); cpu->ts = 10;
 }
 
+void ret_cc(int cc) {
+	if (cc) {
+		PC = pop_word(); cpu->ts = 11;
+	} else cpu->ts = 5;
+}
+

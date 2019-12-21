@@ -74,3 +74,22 @@ void ret_test(void) {
 	CU_ASSERT(SP == 0x2002);
 	CU_ASSERT(PC == 0x18B5);
 }
+
+void ret_cc_test(void) {
+	cpu_reset();
+	
+	FLAG_S = 1;
+	
+	PC = 0x3535;
+	SP = 0x2000;
+	cpu->mem[0x2000] = 0xB5;
+	cpu->mem[0x2001] = 0x18;
+	
+	cpu->mem[0x3535] = 0xF8; // RET M
+	
+	cpu_fetch();
+	cpu_execute();
+	
+	CU_ASSERT(SP == 0x2002);
+	CU_ASSERT(PC == 0x18B5);
+}

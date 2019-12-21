@@ -8,5 +8,6 @@ void call_nn_test(void);
 void call_cc_nn_test(void);
 
 void ret_test(void);
+void ret_cc_test(void);
 
 #endif
