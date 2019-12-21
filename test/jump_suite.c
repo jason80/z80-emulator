@@ -4,6 +4,8 @@
 #include "../core/cpu.h"
 #include "../core/execute.h"
 
+#include "../core/mem_loader.h"
+
 int init_jump_suite(void) {
 	cpu_init();
 	return 0;
@@ -165,4 +167,22 @@ void jp_IX_IY_test(void) {
 	cpu_execute();
 	
 	CU_ASSERT(PC == 0x4400);
+}
+
+void djnz_test(void) {
+	cpu_reset();
+	
+	load_memory(0, "./test/asm/djnz.bin");
+	
+	while (!cpu->halt) {
+		cpu_fetch();
+		cpu_execute();
+	}
+	
+	CU_ASSERT(cpu->mem[0x2000] == 'H');
+	CU_ASSERT(cpu->mem[0x2001] == 'e');
+	CU_ASSERT(cpu->mem[0x2002] == 'l');
+	CU_ASSERT(cpu->mem[0x2003] == 'l');
+	CU_ASSERT(cpu->mem[0x2004] == 'o');
+	CU_ASSERT(cpu->mem[0x2005] == 0x0D);
 }

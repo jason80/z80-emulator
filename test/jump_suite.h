@@ -16,4 +16,6 @@ void jr_NZ_e_test(void);
 void jp_HL_test(void);
 void jp_IX_IY_test(void);
 
+void djnz_test(void);
+
 #endif
