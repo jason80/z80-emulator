@@ -9,6 +9,7 @@ CUnit1 test unit lib.
 mkdir bin
 cd bin
 cmake ..
+make
 ```
 - Run:
 
