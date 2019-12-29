@@ -11,11 +11,16 @@ cd bin
 cmake ..
 make
 ```
-- Run:
-
+- Run tests:
 ```sh
 ./test/z80test
 ```
+
+- Run emulator
+```sh
+./cp-emu/cp-emu
+```
+
 - Test Assembly
 Install z80asm assembler package.
 
