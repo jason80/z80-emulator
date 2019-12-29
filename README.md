@@ -1,17 +1,19 @@
 # z80-emulator
 
 - Requirements:
-gcc compiler, make.
+gcc compiler, CMake.
 CUnit1 test unit lib.
 
 - Compile:
 ```sh
-make
+mkdir bin
+cd bin
+cmake ..
 ```
 - Run:
 
 ```sh
-./build/bin/test
+./test/z80test
 ```
 - Test Assembly
 Install z80asm assembler package.
