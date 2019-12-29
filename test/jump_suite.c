@@ -172,7 +172,7 @@ void jp_IX_IY_test(void) {
 void djnz_test(void) {
 	cpu_reset();
 	
-	load_memory(0, "./test/asm/djnz.bin");
+	load_memory(0, "../test/asm/djnz.bin");
 	
 	while (!cpu->halt) {
 		cpu_fetch();

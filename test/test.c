@@ -409,7 +409,7 @@ int main(void) {
 		return CU_get_error();
 	}
 	
-	cpu_suite->fActive = CU_FALSE;
+	/*cpu_suite->fActive = CU_FALSE;
 	load_8bit_suite->fActive = CU_FALSE;
 	load_16bit_suite->fActive = CU_FALSE;
 	exchange_suite->fActive = CU_FALSE;
@@ -427,7 +427,7 @@ int main(void) {
 	rot_shift_suite->fActive = CU_FALSE;
 	bit_suite->fActive = CU_FALSE;
 	jump_suite->fActive = CU_FALSE;
-	/*call_ret_suite->fActive = CU_FALSE*/
+	call_ret_suite->fActive = CU_FALSE*/
 	
 	// RUN TESTS
 	
