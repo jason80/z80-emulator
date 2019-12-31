@@ -70,6 +70,8 @@ uint16_t disassemble(uint8_t mem[], uint16_t address, char* code) {
 			return dis_x3(opcode, mem, &address, code);
 		}
 	}
+	
+	return address;
 }
 
 uint16_t dis_x0(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code)  {
@@ -88,22 +90,26 @@ uint16_t dis_x0(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code)  
 		case 2: // y = 2
 			byte = mem[*address]; (*address) ++;
 			sprintf(code, "DJNZ %.4Xh", get_absolute_address(byte, *address));
-			//djnz();				// DJNZ e
 			break;
 		case 3: // y = 3
-			//jump_relative();	// JR e
+			byte = mem[*address]; (*address) ++;
+			sprintf(code, "JR %.4Xh", get_absolute_address(byte, *address));
 			break;
 		case 4: // y = 4
-			//jr_nz_rel();		// JR NZ, e
+			byte = mem[*address]; (*address) ++;
+			sprintf(code, "JR NZ, %.4Xh", get_absolute_address(byte, *address));
 			break;
 		case 5: // y = 5
-			//jr_z_rel();			// JR Z, e
+			byte = mem[*address]; (*address) ++;
+			sprintf(code, "JR Z, %.4Xh", get_absolute_address(byte, *address));
 			break;
 		case 6: // y = 6
-			//jr_nc_rel();		// JR NC, e
+			byte = mem[*address]; (*address) ++;
+			sprintf(code, "JR NC, %.4Xh", get_absolute_address(byte, *address));
 			break;
 		case 7: // y = 7
-			//jr_c_rel();			// JR C, e
+			byte = mem[*address]; (*address) ++;
+			sprintf(code, "JR C, %.4Xh", get_absolute_address(byte, *address));
 			break;
 		}
 		break;
