@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "dis_tables.h"
+
 typedef union {
 	uint8_t byte;
 	struct {
@@ -34,10 +36,10 @@ typedef union {
 // For relative jumps, gets the absolute from a relative value
 uint16_t get_absolute_address(uint8_t relative, uint16_t address);
 
-uint16_t dis_x0(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code);
-uint16_t dis_x1(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code);
-uint16_t dis_x2(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code);
-uint16_t dis_x3(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code);
+uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code);
+uint16_t dis_x1(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code);
+uint16_t dis_x2(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code);
+uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code);
 
 uint16_t disassemble(uint8_t mem[], uint16_t address, char* code) {
 	opcode_t opcode;
@@ -61,20 +63,20 @@ uint16_t disassemble(uint8_t mem[], uint16_t address, char* code) {
 	} else {
 		switch (opcode.x) {
 		case 0:	// x = 0
-			return dis_x0(opcode, mem, &address, code);
+			return dis_x0(opcode, prefix, mem, &address, code);
 		case 1: // x = 1
-			return dis_x1(opcode, mem, &address, code);
+			return dis_x1(opcode, prefix, mem, &address, code);
 		case 2: // x = 2
-			return dis_x2(opcode, mem, &address, code);
+			return dis_x2(opcode, prefix, mem, &address, code);
 		case 3: // x = 3
-			return dis_x3(opcode, mem, &address, code);
+			return dis_x3(opcode, prefix, mem, &address, code);
 		}
 	}
 	
 	return address;
 }
 
-uint16_t dis_x0(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code)  {
+uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code)  {
 	
 	uint8_t byte;
 	
@@ -113,20 +115,52 @@ uint16_t dis_x0(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code)  
 			break;
 		}
 		break;
+	case 1: { // z = 1
+		char reg[3];
+		switch (opcode.q) {
+			case 0: {	// q = 0
+				
+				uint8_t n0, n1;	// Fetch 16 word
+				n0 = mem[*address]; (*address) ++;
+				n1 = mem[*address]; (*address) ++;
+				
+				if (prefix == 0xDD)
+					sprintf(code, "LD IX, %.2X%.2Xh", n1, n0);
+				else if (prefix == 0xFD)
+					sprintf(code, "LD IY, %.2X%.2Xh", n1, n0);
+				else {
+					table_rp(opcode.p, reg);
+					sprintf(code, "LD %s, %.2X%.2Xh", reg,  n1, n0);
+				} }
+				break;
+			case 1:
+				if (prefix == 0xDD) {
+					table_rp_IX(opcode.p, reg);
+					sprintf(code, "ADD IX, %s", reg);
+				} else if (prefix == 0xFD) {
+					table_rp_IY(opcode.p, reg);
+					sprintf(code, "ADD IY, %s", reg);
+				} else {
+					table_rp(opcode.p, reg);
+					sprintf(code, "ADD HL, %s", reg);
+				}
+				break;
+		} }
+		break;
 	}
 	
 	return *address;
 }
 
-uint16_t dis_x1(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code) {
+uint16_t dis_x1(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code) {
 	return *address;
 }
 
-uint16_t dis_x2(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code) {
+uint16_t dis_x2(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code) {
 	return *address;
 }
 
-uint16_t dis_x3(opcode_t opcode, uint8_t mem[], uint16_t* address, char* code) {
+uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code) {
 	return *address;
 }
 
