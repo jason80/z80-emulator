@@ -147,6 +147,71 @@ uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 				break;
 		} }
 		break;
+
+	case 2: // z = 2 
+		switch (opcode.q) {
+			case 0: // q = 0
+				switch (opcode.p) {
+				case 0: // p = 0
+					strcpy(code, "LD (BC), A");
+					break;
+				case 1: // p = 1
+					strcpy(code, "LD (DE), A");
+					break;
+				case 2: { // p = 2
+					uint8_t n0, n1;	// Fetch 16 word
+					n0 = mem[*address]; (*address) ++;
+					n1 = mem[*address]; (*address) ++;
+
+					if (prefix == 0xDD)
+						sprintf(code, "LD (%.2X%.2Xh), IX", n1, n0);
+					else if (prefix == 0xFD)
+						sprintf(code, "LD (%.2X%.2Xh), IY", n1, n0);
+					else
+						sprintf(code, "LD (%.2X%.2Xh), HL", n1, n0);
+					}
+					break;
+				case 3: { // p = 3
+					uint8_t n0, n1;	// Fetch 16 word
+					n0 = mem[*address]; (*address) ++;
+					n1 = mem[*address]; (*address) ++;
+					sprintf(code, "LD (%.2X%.2Xh), A", n1, n0);
+					}
+					break;
+				}
+				break;
+			case 1: // q = 1
+				switch (opcode.p) {
+				case 0: // p = 0
+					strcpy(code, "LD A, (BC)");
+					break;
+				case 1: // p = 1
+					strcpy(code, "LD A, (DE)");
+					break;
+				case 2: { // p = 2
+					uint8_t n0, n1;	// Fetch 16 word
+					n0 = mem[*address]; (*address) ++;
+					n1 = mem[*address]; (*address) ++;
+					if (prefix == 0xDD)
+						sprintf(code, "LD IX, (%.2X%.2Xh)", n1, n0);
+					else if (prefix == 0xFD)
+						sprintf(code, "LD IY, (%.2X%.2Xh)", n1, n0);
+					else
+						sprintf(code, "LD HL, (%.2X%.2Xh)", n1, n0);
+					}
+					break;
+				case 3: { // p = 3
+					uint8_t n0, n1;	// Fetch 16 word
+					n0 = mem[*address]; (*address) ++;
+					n1 = mem[*address]; (*address) ++;
+					sprintf(code, "LD A, (%.2X%.2Xh)", n1, n0);
+					}
+					break;
+				}
+				break;
+		}
+		break;
+		
 	}
 	
 	return *address;
