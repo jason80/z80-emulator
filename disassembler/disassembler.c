@@ -211,6 +211,29 @@ uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 				break;
 		}
 		break;
+
+	case 3: { // z = 3
+		char reg[3];
+
+		if (opcode.q == 0) {	// q = 0
+			if (prefix == 0) {
+				table_rp(opcode.p, reg);
+				sprintf(code, "INC %s", reg);
+			} else if (prefix == 0xDD)
+				strcpy(code, "INC IX");
+			else if (prefix == 0xFD)
+				strcpy(code, "INC IY");
+		} else {
+			if (prefix == 0) { // q = 1
+				table_rp(opcode.p, reg);
+				sprintf(code, "DEC %s", reg);
+			} else if (prefix == 0xDD)
+				strcpy(code, "DEC IX");
+			else if (prefix == 0xFD)
+				strcpy(code, "DEC IY");
+		}
+		}
+		break;
 		
 	}
 	
