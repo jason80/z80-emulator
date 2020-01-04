@@ -279,8 +279,27 @@ uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 		}
 		break;
 
-	}
+	case 6: { // z = 6
+		if (prefix == 0) {
+			uint8_t n = mem[*address]; (*address) ++;
+			char r[5];
+			table_r(opcode.y, r);
+			sprintf(code, "LD %s, %.2Xh", r, n);
+		} else if (prefix == 0xDD) {
+			uint8_t d, n;
+			d = mem[*address]; (*address) ++;
+			n = mem[*address]; (*address) ++;
+			sprintf(code, "LD (IX + %.2Xh), %.2Xh", d, n);
+		} else if (prefix == 0xFD) {
+			uint8_t d, n;
+			d = mem[*address]; (*address) ++;
+			n = mem[*address]; (*address) ++;
+			sprintf(code, "LD (IY + %.2Xh), %.2Xh", d, n);
+		}
+		}
+		break;
 	
+	}
 	return *address;
 }
 
