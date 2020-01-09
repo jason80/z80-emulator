@@ -299,6 +299,37 @@ uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 		}
 		break;
 	
+	case 7: // z = 7
+
+		switch (opcode.y) {
+		case 0:
+			strcpy(code, "RLCA");			// RLCA
+			break;
+		case 1:
+			strcpy(code, "RRCA");			// RRCA
+			break;
+		case 2:
+			strcpy(code, "RLA");			// RLA
+			break;
+		case 3:
+			strcpy(code, "RRA");			// RRA
+			break;
+		case 4: // y = 4
+			strcpy(code, "DAA");			// DAA
+			break;
+		case 5: // y = 5
+			strcpy(code, "CPL");			// CPL
+			break;
+		case 6: // y = 6
+			strcpy(code, "SCF");			// SCF
+			break;
+		case 7: // y = 7
+			strcpy(code, "CCF");			// CCF
+			break;
+		}
+
+		break;
+
 	}
 	return *address;
 }
