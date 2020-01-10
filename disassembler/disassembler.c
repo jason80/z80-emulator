@@ -335,6 +335,43 @@ uint16_t dis_x0(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 }
 
 uint16_t dis_x1(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code) {
+
+	char reg1[5], reg2[5];
+
+
+	if (prefix == 0) {
+		if (opcode.z == 6 && opcode.y == 6) {
+			strcpy(code, "HALT");
+		} else {
+			table_r(opcode.y, reg1);
+			table_r(opcode.z, reg2);
+			sprintf(code, "LD %s, %s", reg1, reg2);
+		}
+	} else if (prefix == 0xDD) {
+
+		uint8_t d = mem[*address]; (*address) ++;
+		if (opcode.z == 6) {
+			table_r(opcode.y, reg1);
+			sprintf(code, "LD %s, (IX + %.2Xh)", reg1, d);
+		}
+
+		else if (opcode.y == 6) {
+			table_r(opcode.z, reg1);
+			sprintf(code, "LD (IX + %.2Xh), %s", d, reg1);
+		}
+	} else if (prefix == 0xFD) {
+
+		uint8_t d = mem[*address]; (*address) ++;
+		if (opcode.z == 6) {
+			table_r(opcode.y, reg1);
+			sprintf(code, "LD %s, (IY + %.2Xh)", reg1, d);
+		}
+		else if (opcode.y == 6) {
+			table_r(opcode.z, reg1);
+			sprintf(code, "LD (IY + %.2Xh), %s", d, reg1);
+		}
+	}
+
 	return *address;
 }
 
