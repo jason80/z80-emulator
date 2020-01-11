@@ -8,4 +8,6 @@ void table_rp_IY(int op, char* reg);
 
 void table_r(int op, char* reg);
 
+void table_alu_op(int op, char* str);
+
 #endif

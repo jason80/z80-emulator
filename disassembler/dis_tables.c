@@ -50,3 +50,32 @@ void table_r(int op, char* reg) {
 			break;
 	}
 }
+
+void table_alu_op(int op, char* str) {
+	switch(op) {
+	case 0:		// ADD
+		strcpy(str, "ADD A,");
+		break;
+	case 1:		// ADC
+		strcpy(str, "ADC A,");
+		break;
+	case 2:		// SUB
+		strcpy(str, "SUB");	
+		break;
+	case 3:		// SBC
+		strcpy(str, "SBC A,");
+		break;
+	case 4:		// AND
+		strcpy(str, "AND");
+		break;
+	case 5:		// XOR
+		strcpy(str, "XOR");
+		break;
+	case 6:		// OR
+		strcpy(str, "OR");
+		break;
+	case 7:		// CP
+		strcpy(str, "CP");
+		break;
+	}
+}

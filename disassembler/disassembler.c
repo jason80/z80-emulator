@@ -376,6 +376,26 @@ uint16_t dis_x1(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 }
 
 uint16_t dis_x2(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code) {
+
+	char oper[7];
+	table_alu_op(opcode.y, oper);
+
+	if (prefix == 0xDD) {
+		if (opcode.z == 6) {
+			uint8_t d = mem[*address]; (*address) ++;
+			sprintf(code, "%s (IX + %.2Xh)", oper, d);	// ALU A, (IX + d)
+		}
+	} else if (prefix == 0xFD) {
+		if (opcode.z == 6) {
+			uint8_t d = mem[*address]; (*address) ++;
+			sprintf(code, "%s (IY + %.2Xh)", oper, d);	// ALU A, (IX + d)	
+		}
+	} else {
+		char reg[5];
+		table_r(opcode.z, reg);
+		sprintf(code, "%s %s", oper, reg);	// ALU A, table[opcode.z]
+	}
+
 	return *address;
 }
 
