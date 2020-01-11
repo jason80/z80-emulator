@@ -79,3 +79,32 @@ void table_alu_op(int op, char* str) {
 		break;
 	}
 }
+
+void table_cc(int op, char* str) {
+	switch (op) {
+		case 0:
+			strcpy(str, "NZ");
+			break;
+		case 1:
+			strcpy(str, "Z");
+			break;
+		case 2:
+			strcpy(str, "NC");
+			break;
+		case 3:
+			strcpy(str, "C");
+			break;
+		case 4:
+			strcpy(str, "PO");
+			break;
+		case 5:
+			strcpy(str, "PE");
+			break;
+		case 6:
+			strcpy(str, "P");
+			break;
+		case 7:
+			strcpy(str, "M");
+			break;
+	}
+}

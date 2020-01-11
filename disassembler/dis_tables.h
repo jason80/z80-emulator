@@ -10,4 +10,6 @@ void table_r(int op, char* reg);
 
 void table_alu_op(int op, char* str);
 
+void table_cc(int op, char* str);
+
 #endif

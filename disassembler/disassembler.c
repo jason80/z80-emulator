@@ -400,6 +400,16 @@ uint16_t dis_x2(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 }
 
 uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* address, char* code) {
+
+	switch (opcode.z) {
+	case 0: { // z = 0
+		char cond[3];
+		table_cc(opcode.y, cond);
+		sprintf(code, "RET %s", cond);	// RET cc
+		}
+		break;
+	}
+
 	return *address;
 }
 
