@@ -29,6 +29,22 @@ void table_rp_IY(int op, char* reg) {
 	if (op == 2) strcpy(reg, "IY");
 }
 
+void table_rp2(int op, char* reg) {
+	switch (op) {
+		case 0:
+			strcpy(reg, "BC");
+			break;
+		case 1:
+			strcpy(reg, "DE");
+			break;
+		case 2:
+			strcpy(reg, "HL");
+			break;
+		case 3:
+			strcpy(reg, "AF");
+			break;
+	}
+}
 
 void table_r(int op, char* reg) {
 	switch (op) {

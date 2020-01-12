@@ -408,6 +408,47 @@ uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 		sprintf(code, "RET %s", cond);	// RET cc
 		}
 		break;
+
+	case 1: // z = 1
+		if (opcode.q == 0) { // q = 0
+			if (prefix == 0xDD)
+				strcpy(code, "POP IX");
+			else if (prefix == 0xFD)
+				strcpy(code, "POP IY");
+			else {
+				char reg[3];
+				table_rp2(opcode.p, reg);
+				sprintf(code, "POP %s", reg);		// POP rp2[p]
+			}
+		}
+		else {				// q = 1
+			switch (opcode.p) {
+			case 0: // p = 0
+				strcpy(code, "RET");				// RET
+				break;
+			case 1: // p = 1
+				strcpy(code, "EXX");				// EXX
+				break;
+			case 2: // p = 2
+				if (prefix == 0xDD)
+					strcpy(code, "JP (IX)");		// JP (IX)
+				else if (prefix == 0xFD)
+					strcpy(code, "JP (IY)");		// JP (IY)
+				else
+					strcpy(code, "JP (HL)");		// JP (HL)
+				break;
+			case 3: // p = 3
+				if (prefix == 0xDD)
+					strcpy(code, "LD SP, IX");		// LD SP, IX
+				else if (prefix == 0xFD)
+					strcpy(code, "LD SP, IY");		// LD SP, IY
+				else
+					strcpy(code, "LD SP, HL");		// LD SP, HL
+				break;
+			}
+		}
+		break;
+
 	}
 
 	return *address;
