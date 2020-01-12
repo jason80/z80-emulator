@@ -449,6 +449,20 @@ uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 		}
 		break;
 
+	case 2: {	// z = 2
+
+		uint8_t n0, n1;	// Fetch 16 word
+		char cc[3];
+		n0 = mem[*address]; (*address) ++;
+		n1 = mem[*address]; (*address) ++;
+
+		table_cc(opcode.y, cc);
+		sprintf(code, "JP %s, %.2X%.2Xh", cc, n1, n0);		// JP cc, nn
+
+		}
+		break;
+
+
 	}
 
 	return *address;
