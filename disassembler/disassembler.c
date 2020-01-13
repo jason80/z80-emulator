@@ -462,7 +462,38 @@ uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 		}
 		break;
 
-
+	case 3: // z = 3
+		switch (opcode.y) {
+		case 0: { // y = 0
+			uint8_t n0, n1;	// Fetch 16 word
+			n0 = mem[*address]; (*address) ++;
+			n1 = mem[*address]; (*address) ++;
+			sprintf(code, "JP %.2X%.2Xh", n1, n0);			// JP nn
+			}
+			break;
+		case 1: // y = 1
+			break;
+		case 2: // y = 2
+			break;
+		case 3: // y = 3
+			break;
+		case 4: // y = 4
+			if (prefix == 0xDD)
+				strcpy(code, "EX (SP), IX");		// EX (SP), IX
+			else if (prefix == 0xFD)
+				strcpy(code, "EX (SP), IY");		// EX (SP), IY
+			else
+				strcpy(code, "EX (SP), HL");		// EX (SP), HL
+			break;
+		case 5: // y = 5
+			strcpy(code, "EX DE, HL");		// EX DE, HL
+			break;
+		case 6: // y = 6
+			break;
+		case 7: // y = 7
+			break;
+		}
+		break;
 	}
 
 	return *address;
