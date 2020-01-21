@@ -524,6 +524,17 @@ uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 			}
 		}
 		break;
+	case 6: {// z = 6
+
+		char op[4];
+		uint8_t n;
+
+		n = mem[*address]; (*address) ++;
+		table_alu_op(opcode.y, op);
+
+		sprintf(code, "%s %.2Xh", op, n);		// ALU n OPERATIONS
+		}
+		break;
 	}
 
 	return *address;
