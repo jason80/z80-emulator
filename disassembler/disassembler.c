@@ -504,6 +504,26 @@ uint16_t dis_x3(opcode_t opcode, uint8_t prefix, uint8_t mem[], uint16_t* addres
 		sprintf(code, "CALL %s, %.2X%.2Xh", cc, n1, n0);		// CALL cc, nn
 		}
 		break;
+	case 5: // z = 5
+		if (opcode.q == 0)	{	// q = 0
+			if (prefix == 0xDD)
+				strcpy(code, "PUSH IX");			// PUSH IX
+			else if (prefix == 0xFD)
+				strcpy(code, "PUSH IY");			// PUSH IY
+			else {
+				char reg[3];
+				table_rp2(opcode.p, reg);
+				sprintf(code, "PUSH %s", reg);		// PUSH rp2[p]
+			}
+		} else {				// q = 1
+			if (opcode.p == 0) {	// p = 0
+				uint8_t n0, n1;	// Fetch 16 word
+				n0 = mem[*address]; (*address) ++;
+				n1 = mem[*address]; (*address) ++;
+				sprintf(code, "CALL %.2X%.2Xh", n1, n0);	// CALL nn
+			}
+		}
+		break;
 	}
 
 	return *address;
