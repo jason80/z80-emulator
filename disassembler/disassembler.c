@@ -580,6 +580,28 @@ uint16_t cb_prefixed(opcode_t opcode, uint8_t prefix, uint8_t mem[],
 				sprintf(code, "RRC %s", reg);			// RRC r[z]	
 			}
 			break;
+		case 2:	// y = 2
+			if (prefix == 0xDD && opcode.z == 6) {
+				sprintf(code, "RL (IX + %.2Xh)", data);	// RL (IX + d)
+			} else if (prefix == 0xFD && opcode.z == 6) {
+				sprintf(code, "RL (IY + %.2Xh)", data);	// RL (IY + d)
+			} else {
+				char reg[5];
+				table_r(opcode.z, reg);
+				sprintf(code, "RL %s", reg);			// RL r[z]	
+			}
+			break;
+		case 3:	// y = 3
+			if (prefix == 0xDD && opcode.z == 6) {
+				sprintf(code, "RR (IX + %.2Xh)", data);	// RR (IX + d)
+			} else if (prefix == 0xFD && opcode.z == 6) {
+				sprintf(code, "RR (IY + %.2Xh)", data);	// RR (IY + d)
+			} else {
+				char reg[5];
+				table_r(opcode.z, reg);
+				sprintf(code, "RR %s", reg);			// RR r[z]	
+			}
+			break;
 		}
 	}
 
