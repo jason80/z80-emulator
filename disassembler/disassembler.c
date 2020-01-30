@@ -560,15 +560,24 @@ uint16_t cb_prefixed(opcode_t opcode, uint8_t prefix, uint8_t mem[],
 		switch (opcode.y) {
 		case 0:	// y = 0
 			if (prefix == 0xDD && opcode.z == 6) {
-				//uint8_t d = mem[*address]; (*address) ++;
 				sprintf(code, "RLC (IX + %.2Xh)", data);	// RLC (IX + d)
 			} else if (prefix == 0xFD && opcode.z == 6) {
-				//uint8_t d = mem[*address]; (*address) ++;
 				sprintf(code, "RLC (IY + %.2Xh)", data);	// RLC (IY + d)
 			} else {
 				char reg[5];
 				table_r(opcode.z, reg);
 				sprintf(code, "RLC %s", reg);			// RLC r[z]	
+			}
+			break;
+		case 1:	// y = 1
+			if (prefix == 0xDD && opcode.z == 6) {
+				sprintf(code, "RRC (IX + %.2Xh)", data);	// RRC (IX + d)
+			} else if (prefix == 0xFD && opcode.z == 6) {
+				sprintf(code, "RRC (IY + %.2Xh)", data);	// RRC (IY + d)
+			} else {
+				char reg[5];
+				table_r(opcode.z, reg);
+				sprintf(code, "RRC %s", reg);			// RRC r[z]	
 			}
 			break;
 		}
